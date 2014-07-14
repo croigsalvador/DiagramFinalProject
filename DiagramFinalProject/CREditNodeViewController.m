@@ -27,26 +27,23 @@
     [self setupDefaultValues];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.node addObserver:self forKeyPath:kTitlePropertyName options:0 context:NULL];
-    [self.node addObserver:self forKeyPath:kTextPropertyName options:0 context:NULL];
-    [self.node addObserver:self forKeyPath:kShapeTypePropertyName options:0 context:NULL];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    [self.node removeObserver:self forKeyPath:kTitlePropertyName];
-    [self.node removeObserver:self forKeyPath:kTextPropertyName];
-    [self.node removeObserver:self forKeyPath:kShapeTypePropertyName];
-}
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    [self.node addObserver:self forKeyPath:kTitlePropertyName options:0 context:NULL];
+//    [self.node addObserver:self forKeyPath:kTextPropertyName options:0 context:NULL];
+//    [self.node addObserver:self forKeyPath:kShapeTypePropertyName options:0 context:NULL];
+//}
+//
+//- (void)viewDidDisappear:(BOOL)animated {
+//    [super viewDidDisappear:animated];
+//    [self.node removeObserver:self forKeyPath:kTitlePropertyName];
+//    [self.node removeObserver:self forKeyPath:kTextPropertyName];
+//    [self.node removeObserver:self forKeyPath:kShapeTypePropertyName];
+//}
 
 #pragma mark - Setup Methods
 
 - (void)setupDefaultValues {
-    Node *parent = self.node.parent;
-    NSLog(@"Parent %@", parent.title);
-    NSLog(@"Child %@", self.node.title);
     self.titleTextField.text = self.node.title;
     self.nodeTextView.text = self.node.text;
 }

@@ -23,10 +23,10 @@
 		1D890A671973DB330038D983 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D890A651973DB330038D983 /* InfoPlist.strings */; };
 		1D890A691973DB330038D983 /* DiagramFinalProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A681973DB330038D983 /* DiagramFinalProjectTests.m */; };
 		1D890A751973DB510038D983 /* DiagramModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A731973DB510038D983 /* DiagramModel.xcdatamodeld */; };
-		1D890A7B1973DD6A0038D983 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A7A1973DD6A0038D983 /* Node.m */; };
 		1D890A8419740BB00038D983 /* Node+Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A8319740BB00038D983 /* Node+Model.m */; };
 		1D890A871974143C0038D983 /* CRNodeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A861974143C0038D983 /* CRNodeTableViewCell.m */; };
 		1D890A8A19741DAB0038D983 /* CREditNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A8919741DAB0038D983 /* CREditNodeViewController.m */; };
+		1D890A91197461740038D983 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A90197461740038D983 /* Node.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,14 +60,14 @@
 		1D890A661973DB330038D983 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1D890A681973DB330038D983 /* DiagramFinalProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiagramFinalProjectTests.m; sourceTree = "<group>"; };
 		1D890A741973DB510038D983 /* DiagramModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DiagramModel.xcdatamodel; sourceTree = "<group>"; };
-		1D890A791973DD6A0038D983 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
-		1D890A7A1973DD6A0038D983 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		1D890A8219740BB00038D983 /* Node+Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Node+Model.h"; sourceTree = "<group>"; };
 		1D890A8319740BB00038D983 /* Node+Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Node+Model.m"; sourceTree = "<group>"; };
 		1D890A851974143C0038D983 /* CRNodeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRNodeTableViewCell.h; sourceTree = "<group>"; };
 		1D890A861974143C0038D983 /* CRNodeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRNodeTableViewCell.m; sourceTree = "<group>"; };
 		1D890A8819741DAB0038D983 /* CREditNodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CREditNodeViewController.h; sourceTree = "<group>"; };
 		1D890A8919741DAB0038D983 /* CREditNodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREditNodeViewController.m; sourceTree = "<group>"; };
+		1D890A8F197461740038D983 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		1D890A90197461740038D983 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		805FFD02800E48C4BE5CFD72 /* libPods-DiagramFinalProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DiagramFinalProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5FEA23DF9C940BBAAC2A673 /* Pods-DiagramFinalProject.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiagramFinalProject.xcconfig"; path = "Pods/Pods-DiagramFinalProject.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,10 +173,10 @@
 			isa = PBXGroup;
 			children = (
 				1D890A731973DB510038D983 /* DiagramModel.xcdatamodeld */,
+				1D890A8F197461740038D983 /* Node.h */,
+				1D890A90197461740038D983 /* Node.m */,
 				1D890A8219740BB00038D983 /* Node+Model.h */,
 				1D890A8319740BB00038D983 /* Node+Model.m */,
-				1D890A791973DD6A0038D983 /* Node.h */,
-				1D890A7A1973DD6A0038D983 /* Node.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -394,7 +394,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D890A7B1973DD6A0038D983 /* Node.m in Sources */,
 				1D890A4A1973DB320038D983 /* main.m in Sources */,
 				1D890A4E1973DB320038D983 /* CRAppDelegate.m in Sources */,
 				1D890A541973DB320038D983 /* CRNodeListViewController.m in Sources */,
@@ -402,6 +401,7 @@
 				1D890A8A19741DAB0038D983 /* CREditNodeViewController.m in Sources */,
 				1D890A751973DB510038D983 /* DiagramModel.xcdatamodeld in Sources */,
 				1D890A8419740BB00038D983 /* Node+Model.m in Sources */,
+				1D890A91197461740038D983 /* Node.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

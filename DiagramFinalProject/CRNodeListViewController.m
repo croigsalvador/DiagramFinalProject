@@ -56,12 +56,15 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
     node.parent = parentNode;
     
     [self prepareViewControllerFromStoryBoardWithNewNode:node];
-    
 }
 
 - (void)deleteItemAtIndexPath:(NSIndexPath *)indexPath {
     Node * node = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    NSManagedObjectContext *context = self.managedDocument.managedObjectContext;
+
+    for (Node *childNode in node.childs) {
+        [context deleteObject:childNode];
+    }
     [context deleteObject:node];
 }
 
@@ -91,8 +94,6 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
     editNodetViewController.delegate = self;
 }
 
-#pragma mark - IBAction Methods
-
 
 #pragma mark - TableView Datasource Methods
 
@@ -109,17 +110,21 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
 
 - (void)configureCell:(CRNodeTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Node * node = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    Node *parent = node.parent;
+    if (parent) {
+       cell.nodeTitleLabel.text = [NSString stringWithFormat:@"%@ Hijo de: %@", node.title, parent.title];
+    }else {
+        cell.nodeTitleLabel.text = node.title;
+    }
     cell.rightUtilityButtons = [self rightButtons];
-    cell.nodeTitleLabel.text = node.title;
     cell.nodeTextLabel.text = node.text;
     cell.delegate = self;
 }
 
 #pragma mark - UIElements Setup
 
-- (NSArray *)rightButtons
-{
-    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+- (NSArray *)rightButtons {
+    NSMutableArray *rightUtilityButtons = [[NSMutableArray alloc]init];
     [rightUtilityButtons sw_addUtilityButtonWithColor:
      [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
                                                 title:@"Add Child"];
@@ -178,8 +183,7 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
     return _fetchedResultsController;
 }
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
 }
 
@@ -199,10 +203,8 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath
-{
+      newIndexPath:(NSIndexPath *)newIndexPath {
     UITableView *tableView = self.tableView;
-    
     switch(type) {
         case NSFetchedResultsChangeInsert:
             [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];

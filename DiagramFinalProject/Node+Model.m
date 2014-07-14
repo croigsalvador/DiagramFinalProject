@@ -15,6 +15,8 @@ NSString * const kShapeTypePropertyName             = @"shapeType";
 
 @implementation Node (Model)
 
+#pragma mark - Creating Node
+
 + (Node *)createNodeInManagedObjectContext:(NSManagedObjectContext *)context {
     Node *node = [NSEntityDescription insertNewObjectForEntityForName:kNodeEntityName inManagedObjectContext:context];
     node.shapeType = @(CRNodeTypeShapeSquare);
@@ -25,8 +27,7 @@ NSString * const kShapeTypePropertyName             = @"shapeType";
 #pragma mark - Fetch requests
 
 + (NSFetchRequest *) fetchAllNodesByTitle {
-    NSSortDescriptor *nameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:kTitlePropertyName
-                                                                       ascending:YES];
+    NSSortDescriptor *nameSortDescriptor = [NSSortDescriptor  sortDescriptorWithKey:kTitlePropertyName ascending:YES];
     NSFetchRequest *fetchRequest = [Node fetchAllNodesWithSortDescriptors:@[nameSortDescriptor]];
     
     return fetchRequest;
