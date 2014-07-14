@@ -27,7 +27,13 @@
                             <outlet property="delegate" destination="Z4o-7E-8ke" id="YNR-d0-rxf"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="xc1-5e-U5T"/>
+                    <navigationItem key="navigationItem" id="xc1-5e-U5T">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="BZM-2G-XWT">
+                            <connections>
+                                <action selector="addNewNode:" destination="Z4o-7E-8ke" id="Rdr-To-bd5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iog-Wp-xGb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -23,6 +23,7 @@
 		1D890A691973DB330038D983 /* DiagramFinalProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A681973DB330038D983 /* DiagramFinalProjectTests.m */; };
 		1D890A751973DB510038D983 /* DiagramModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A731973DB510038D983 /* DiagramModel.xcdatamodeld */; };
 		1D890A7B1973DD6A0038D983 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A7A1973DD6A0038D983 /* Node.m */; };
+		1D890A8419740BB00038D983 /* Node+Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A8319740BB00038D983 /* Node+Model.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		1D890A741973DB510038D983 /* DiagramModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DiagramModel.xcdatamodel; sourceTree = "<group>"; };
 		1D890A791973DD6A0038D983 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		1D890A7A1973DD6A0038D983 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
+		1D890A8219740BB00038D983 /* Node+Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Node+Model.h"; sourceTree = "<group>"; };
+		1D890A8319740BB00038D983 /* Node+Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Node+Model.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,11 +120,8 @@
 		1D890A431973DB320038D983 /* DiagramFinalProject */ = {
 			isa = PBXGroup;
 			children = (
-				1D890A721973DB3A0038D983 /* Model */,
-				1D890A7C1973DD860038D983 /* AppDelegate */,
-				1D890A7E1973E5010038D983 /* View */,
-				1D890A7D1973DE310038D983 /* Controller */,
-				1D890A551973DB320038D983 /* Images.xcassets */,
+				1D890A8119740AE70038D983 /* Classes */,
+				1D890A7F19740AC20038D983 /* Resources */,
 				1D890A441973DB320038D983 /* Supporting Files */,
 			);
 			path = DiagramFinalProject;
@@ -159,9 +159,11 @@
 		1D890A721973DB3A0038D983 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1D890A731973DB510038D983 /* DiagramModel.xcdatamodeld */,
+				1D890A8219740BB00038D983 /* Node+Model.h */,
+				1D890A8319740BB00038D983 /* Node+Model.m */,
 				1D890A791973DD6A0038D983 /* Node.h */,
 				1D890A7A1973DD6A0038D983 /* Node.m */,
-				1D890A731973DB510038D983 /* DiagramModel.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -190,6 +192,25 @@
 				1D890A4F1973DB320038D983 /* Main.storyboard */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		1D890A7F19740AC20038D983 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1D890A551973DB320038D983 /* Images.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		1D890A8119740AE70038D983 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1D890A721973DB3A0038D983 /* Model */,
+				1D890A7C1973DD860038D983 /* AppDelegate */,
+				1D890A7E1973E5010038D983 /* View */,
+				1D890A7D1973DE310038D983 /* Controller */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,6 +316,7 @@
 				1D890A4E1973DB320038D983 /* CRAppDelegate.m in Sources */,
 				1D890A541973DB320038D983 /* CRNodeListViewController.m in Sources */,
 				1D890A751973DB510038D983 /* DiagramModel.xcdatamodeld in Sources */,
+				1D890A8419740BB00038D983 /* Node+Model.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
