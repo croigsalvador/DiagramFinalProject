@@ -10,11 +10,14 @@
 
 NSString * const kNodeEntityName                    = @"Node";
 NSString * const kTitlePropertyName                 = @"title";
+NSString * const kTextPropertyName                  = @"text";
+NSString * const kShapeTypePropertyName             = @"shapeType";
 
 @implementation Node (Model)
 
 + (Node *)createNodeInManagedObjectContext:(NSManagedObjectContext *)context {
     Node *node = [NSEntityDescription insertNewObjectForEntityForName:kNodeEntityName inManagedObjectContext:context];
+    node.shapeType = @(CRNodeTypeShapeSquare);
     
     return node;
 }

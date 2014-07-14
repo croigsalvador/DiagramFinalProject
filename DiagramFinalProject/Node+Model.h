@@ -11,6 +11,17 @@
 extern NSString * const kNodeEntityName;
 extern NSString * const kTitlePropertyName;
 
+extern NSString * const kTextPropertyName;
+extern NSString * const kShapeTypePropertyName;
+
+
+typedef NS_ENUM(NSUInteger, CRNodeTypeShape) {
+    CRNodeTypeShapeSquare,
+    CRNodeTypeShapeCircle,
+    CRNodeTypeShapeTriangle,
+    CRNodeTypeShapePolygon,
+};
+
 @interface Node (Model)
 
 + (Node *)createNodeInManagedObjectContext:(NSManagedObjectContext *)context;
