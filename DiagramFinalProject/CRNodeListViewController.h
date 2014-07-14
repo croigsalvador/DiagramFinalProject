@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CRViewController : UIViewController
+@interface CRNodeListViewController : UITableViewController
+
+@property (strong,nonatomic) UIManagedDocument *managedDocument;
 
 @end

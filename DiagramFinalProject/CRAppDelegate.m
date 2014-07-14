@@ -7,12 +7,28 @@
 //
 
 #import "CRAppDelegate.h"
+#import "CRNodeListViewController.h"
+
 
 @implementation CRAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    NSURL *fileURL =[self urlForUIManagedDocument];
+    UIManagedDocument *managedDocument = [[UIManagedDocument alloc] initWithFileURL:fileURL];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[fileURL path]]) {
+        [managedDocument openWithCompletionHandler:^(BOOL success) {
+            
+        }];
+    } else {
+        [managedDocument saveToURL:fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
+        }];
+    }
+    
+    UINavigationController *navViewController =(UINavigationController *)self.window.rootViewController;
+    CRNodeListViewController *nodeListViewController =(CRNodeListViewController *) [navViewController topViewController];
+    nodeListViewController.managedDocument = managedDocument;
+    
     return YES;
 }
 							
@@ -42,5 +58,15 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+- (NSURL *)urlForUIManagedDocument{
+    NSArray *paths = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSURL *documentsURL = [paths lastObject];
+    NSURL *fileURL = [documentsURL URLByAppendingPathComponent:@"map.mapa"];
+    return fileURL;
+}
+
+
 
 @end

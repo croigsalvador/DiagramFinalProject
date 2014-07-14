@@ -14,7 +14,7 @@
 		1D890A4A1973DB320038D983 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A491973DB320038D983 /* main.m */; };
 		1D890A4E1973DB320038D983 /* CRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A4D1973DB320038D983 /* CRAppDelegate.m */; };
 		1D890A511973DB320038D983 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D890A4F1973DB320038D983 /* Main.storyboard */; };
-		1D890A541973DB320038D983 /* CRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A531973DB320038D983 /* CRViewController.m */; };
+		1D890A541973DB320038D983 /* CRNodeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A531973DB320038D983 /* CRNodeListViewController.m */; };
 		1D890A561973DB320038D983 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D890A551973DB320038D983 /* Images.xcassets */; };
 		1D890A5D1973DB330038D983 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A5C1973DB330038D983 /* XCTest.framework */; };
 		1D890A5E1973DB330038D983 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A3D1973DB320038D983 /* Foundation.framework */; };
@@ -47,8 +47,8 @@
 		1D890A4C1973DB320038D983 /* CRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRAppDelegate.h; sourceTree = "<group>"; };
 		1D890A4D1973DB320038D983 /* CRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRAppDelegate.m; sourceTree = "<group>"; };
 		1D890A501973DB320038D983 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1D890A521973DB320038D983 /* CRViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRViewController.h; sourceTree = "<group>"; };
-		1D890A531973DB320038D983 /* CRViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRViewController.m; sourceTree = "<group>"; };
+		1D890A521973DB320038D983 /* CRNodeListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRNodeListViewController.h; sourceTree = "<group>"; };
+		1D890A531973DB320038D983 /* CRNodeListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRNodeListViewController.m; sourceTree = "<group>"; };
 		1D890A551973DB320038D983 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1D890A5B1973DB330038D983 /* DiagramFinalProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiagramFinalProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D890A5C1973DB330038D983 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -119,9 +119,8 @@
 			children = (
 				1D890A721973DB3A0038D983 /* Model */,
 				1D890A7C1973DD860038D983 /* AppDelegate */,
-				1D890A4F1973DB320038D983 /* Main.storyboard */,
-				1D890A521973DB320038D983 /* CRViewController.h */,
-				1D890A531973DB320038D983 /* CRViewController.m */,
+				1D890A7E1973E5010038D983 /* View */,
+				1D890A7D1973DE310038D983 /* Controller */,
 				1D890A551973DB320038D983 /* Images.xcassets */,
 				1D890A441973DB320038D983 /* Supporting Files */,
 			);
@@ -174,6 +173,23 @@
 				1D890A4D1973DB320038D983 /* CRAppDelegate.m */,
 			);
 			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		1D890A7D1973DE310038D983 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1D890A521973DB320038D983 /* CRNodeListViewController.h */,
+				1D890A531973DB320038D983 /* CRNodeListViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		1D890A7E1973E5010038D983 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1D890A4F1973DB320038D983 /* Main.storyboard */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,7 +293,7 @@
 				1D890A7B1973DD6A0038D983 /* Node.m in Sources */,
 				1D890A4A1973DB320038D983 /* main.m in Sources */,
 				1D890A4E1973DB320038D983 /* CRAppDelegate.m in Sources */,
-				1D890A541973DB320038D983 /* CRViewController.m in Sources */,
+				1D890A541973DB320038D983 /* CRNodeListViewController.m in Sources */,
 				1D890A751973DB510038D983 /* DiagramModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
