@@ -11,6 +11,8 @@
 #import "CRNodeTableViewCell.h"
 #import "SWTableViewCell.h"
 
+#import "CRNodeMap.h"
+
 #import "Node+Model.h"
 
 static NSString * const NodeCellIdentifier               = @"NodeCellIdentifier";
@@ -160,10 +162,23 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
             [self addChildNodeToParentAtIndexPath:cellIndexPath];
             [cell hideUtilityButtonsAnimated:YES];
             break;
-        case 1:
-            [self deleteItemAtIndexPath:cellIndexPath];
+        case 1:{
+//            [self deleteItemAtIndexPath:cellIndexPath];
+            NSDictionary *arrayDict = [self dictionaryAtIndexPath:cellIndexPath];
+            NSArray *array = [arrayDict allValues];
+            NSArray *second = [arrayDict valueForKey:@"childs"];
+            NSLog(@"array %@", [second[0] valueForKey:@"title"]);
             break;
+    
+        }
     }
+}
+
+- (NSDictionary *)dictionaryAtIndexPath:(NSIndexPath *)indexPath {
+    CRNodeMap *map = [[CRNodeMap alloc] init];
+    Node *n = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    return [map serializedDictionaryWithParentNode:n];
 }
 
 
