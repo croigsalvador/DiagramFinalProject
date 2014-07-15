@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E0051317D4A48C9858C0EE8 /* libPods-DiagramFinalProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 805FFD02800E48C4BE5CFD72 /* libPods-DiagramFinalProject.a */; };
+		1D5EA81119753267006C9650 /* CRAppDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5EA81019753267006C9650 /* CRAppDelegateTests.m */; };
 		1D890A3E1973DB320038D983 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A3D1973DB320038D983 /* Foundation.framework */; };
 		1D890A401973DB320038D983 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A3F1973DB320038D983 /* CoreGraphics.framework */; };
 		1D890A421973DB320038D983 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A411973DB320038D983 /* UIKit.framework */; };
@@ -21,12 +22,14 @@
 		1D890A5E1973DB330038D983 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A3D1973DB320038D983 /* Foundation.framework */; };
 		1D890A5F1973DB330038D983 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A411973DB320038D983 /* UIKit.framework */; };
 		1D890A671973DB330038D983 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D890A651973DB330038D983 /* InfoPlist.strings */; };
-		1D890A691973DB330038D983 /* DiagramFinalProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A681973DB330038D983 /* DiagramFinalProjectTests.m */; };
 		1D890A751973DB510038D983 /* DiagramModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A731973DB510038D983 /* DiagramModel.xcdatamodeld */; };
 		1D890A8419740BB00038D983 /* Node+Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A8319740BB00038D983 /* Node+Model.m */; };
 		1D890A871974143C0038D983 /* CRNodeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A861974143C0038D983 /* CRNodeTableViewCell.m */; };
 		1D890A8A19741DAB0038D983 /* CREditNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A8919741DAB0038D983 /* CREditNodeViewController.m */; };
 		1D890A91197461740038D983 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A90197461740038D983 /* Node.m */; };
+		1D8B2CFA19753EDB00C67FB1 /* NodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8B2CF919753EDB00C67FB1 /* NodeTests.m */; };
+		1D8B2CFB197540DD00C67FB1 /* DiagramModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A731973DB510038D983 /* DiagramModel.xcdatamodeld */; };
+		D6F117AE57B7483BA7067F00 /* libPods-DiagramFinalProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C17D554B018F4A15BBE93B0F /* libPods-DiagramFinalProjectTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D5EA81019753267006C9650 /* CRAppDelegateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAppDelegateTests.m; sourceTree = "<group>"; };
 		1D890A3A1973DB320038D983 /* DiagramFinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiagramFinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D890A3D1973DB320038D983 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D890A3F1973DB320038D983 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -58,7 +62,6 @@
 		1D890A5C1973DB330038D983 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		1D890A641973DB330038D983 /* DiagramFinalProjectTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DiagramFinalProjectTests-Info.plist"; sourceTree = "<group>"; };
 		1D890A661973DB330038D983 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1D890A681973DB330038D983 /* DiagramFinalProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiagramFinalProjectTests.m; sourceTree = "<group>"; };
 		1D890A741973DB510038D983 /* DiagramModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DiagramModel.xcdatamodel; sourceTree = "<group>"; };
 		1D890A8219740BB00038D983 /* Node+Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Node+Model.h"; sourceTree = "<group>"; };
 		1D890A8319740BB00038D983 /* Node+Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Node+Model.m"; sourceTree = "<group>"; };
@@ -68,7 +71,10 @@
 		1D890A8919741DAB0038D983 /* CREditNodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREditNodeViewController.m; sourceTree = "<group>"; };
 		1D890A8F197461740038D983 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		1D890A90197461740038D983 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
+		1D8B2CF919753EDB00C67FB1 /* NodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTests.m; sourceTree = "<group>"; };
+		64C3103266D240ECA62CEA71 /* Pods-DiagramFinalProjectTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiagramFinalProjectTests.xcconfig"; path = "Pods/Pods-DiagramFinalProjectTests.xcconfig"; sourceTree = "<group>"; };
 		805FFD02800E48C4BE5CFD72 /* libPods-DiagramFinalProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DiagramFinalProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C17D554B018F4A15BBE93B0F /* libPods-DiagramFinalProjectTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DiagramFinalProjectTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5FEA23DF9C940BBAAC2A673 /* Pods-DiagramFinalProject.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiagramFinalProject.xcconfig"; path = "Pods/Pods-DiagramFinalProject.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +97,7 @@
 				1D890A5D1973DB330038D983 /* XCTest.framework in Frameworks */,
 				1D890A5F1973DB330038D983 /* UIKit.framework in Frameworks */,
 				1D890A5E1973DB330038D983 /* Foundation.framework in Frameworks */,
+				D6F117AE57B7483BA7067F00 /* libPods-DiagramFinalProjectTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +112,7 @@
 				1D890A3C1973DB320038D983 /* Frameworks */,
 				1D890A3B1973DB320038D983 /* Products */,
 				C5FEA23DF9C940BBAAC2A673 /* Pods-DiagramFinalProject.xcconfig */,
+				64C3103266D240ECA62CEA71 /* Pods-DiagramFinalProjectTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +133,7 @@
 				1D890A411973DB320038D983 /* UIKit.framework */,
 				1D890A5C1973DB330038D983 /* XCTest.framework */,
 				805FFD02800E48C4BE5CFD72 /* libPods-DiagramFinalProject.a */,
+				C17D554B018F4A15BBE93B0F /* libPods-DiagramFinalProjectTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -154,8 +163,9 @@
 		1D890A621973DB330038D983 /* DiagramFinalProjectTests */ = {
 			isa = PBXGroup;
 			children = (
-				1D890A681973DB330038D983 /* DiagramFinalProjectTests.m */,
+				1D8B2CF719753DAB00C67FB1 /* Model */,
 				1D890A631973DB330038D983 /* Supporting Files */,
+				1D8B2CF819753DB200C67FB1 /* AppDelegate */,
 			);
 			path = DiagramFinalProjectTests;
 			sourceTree = "<group>";
@@ -261,6 +271,22 @@
 			name = StoryBoard;
 			sourceTree = "<group>";
 		};
+		1D8B2CF719753DAB00C67FB1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1D8B2CF919753EDB00C67FB1 /* NodeTests.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		1D8B2CF819753DB200C67FB1 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				1D5EA81019753267006C9650 /* CRAppDelegateTests.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -287,9 +313,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D890A6F1973DB330038D983 /* Build configuration list for PBXNativeTarget "DiagramFinalProjectTests" */;
 			buildPhases = (
+				1266E68CA99A4332A1DD876B /* Check Pods Manifest.lock */,
 				1D890A571973DB330038D983 /* Sources */,
 				1D890A581973DB330038D983 /* Frameworks */,
 				1D890A591973DB330038D983 /* Resources */,
+				BA5EE97B21E846C1AE84E207 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -357,6 +385,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1266E68CA99A4332A1DD876B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		4BA279DCABD0483B9F3F53A0 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -387,6 +430,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		BA5EE97B21E846C1AE84E207 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-DiagramFinalProjectTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -409,7 +467,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D890A691973DB330038D983 /* DiagramFinalProjectTests.m in Sources */,
+				1D5EA81119753267006C9650 /* CRAppDelegateTests.m in Sources */,
+				1D8B2CFA19753EDB00C67FB1 /* NodeTests.m in Sources */,
+				1D8B2CFB197540DD00C67FB1 /* DiagramModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,6 +613,7 @@
 		};
 		1D890A701973DB330038D983 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 64C3103266D240ECA62CEA71 /* Pods-DiagramFinalProjectTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DiagramFinalProject.app/DiagramFinalProject";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -575,6 +636,7 @@
 		};
 		1D890A711973DB330038D983 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 64C3103266D240ECA62CEA71 /* Pods-DiagramFinalProjectTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DiagramFinalProject.app/DiagramFinalProject";
 				FRAMEWORK_SEARCH_PATHS = (

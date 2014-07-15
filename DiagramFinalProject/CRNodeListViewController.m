@@ -52,8 +52,7 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
     [self.managedDocument.managedObjectContext.undoManager beginUndoGrouping];
     
     Node *parentNode = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    Node *node = [Node createNodeInManagedObjectContext:self.managedDocument.managedObjectContext];
-    node.parent = parentNode;
+    Node *node = [Node createNodeInManagedObjectContext:self.managedDocument.managedObjectContext withParent:parentNode];
     
     [self prepareViewControllerFromStoryBoardWithNewNode:node];
 }

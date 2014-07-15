@@ -17,13 +17,19 @@ NSString * const kShapeTypePropertyName             = @"shapeType";
 
 #pragma mark - Creating Node
 
-+ (Node *)createNodeInManagedObjectContext:(NSManagedObjectContext *)context {
++ (instancetype)createNodeInManagedObjectContext:(NSManagedObjectContext *)context {
     Node *node = [NSEntityDescription insertNewObjectForEntityForName:kNodeEntityName inManagedObjectContext:context];
     node.shapeType = @(CRNodeTypeShapeSquare);
     
     return node;
 }
 
++ (instancetype)createNodeInManagedObjectContext:(NSManagedObjectContext *)context withParent:(Node *)parentNode {
+    Node *node = [self createNodeInManagedObjectContext:context];
+    node.parent = parentNode;
+    
+    return node;
+}
 #pragma mark - Fetch requests
 
 + (NSFetchRequest *) fetchAllNodesByTitle {

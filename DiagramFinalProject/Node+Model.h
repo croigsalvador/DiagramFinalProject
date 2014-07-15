@@ -25,6 +25,7 @@ typedef NS_ENUM(NSUInteger, CRNodeTypeShape) {
 @interface Node (Model)
 
 + (Node *)createNodeInManagedObjectContext:(NSManagedObjectContext *)context;
++ (Node *)createNodeInManagedObjectContext:(NSManagedObjectContext *)context withParent:(Node *)parentNode;
 
 + (NSFetchRequest *) fetchAllNodesByTitle;
 + (NSFetchRequest *) fetchAllNodesWithSortDescriptors:(NSArray *)sortDescriptors;
