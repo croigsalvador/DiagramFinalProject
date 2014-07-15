@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>118AD38B-8FBB-4A12-A2AC-2596794C5746</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DiagramFinalProject</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>DE5D30C5-2B49-4285-ADD1-F184AC14C75F</key>
+		<string>https://github.com/croigsalvador/DiagramFinalProject.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DiagramFinalProject.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>DE5D30C5-2B49-4285-ADD1-F184AC14C75F</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/croigsalvador/DiagramFinalProject.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>DE5D30C5-2B49-4285-ADD1-F184AC14C75F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DE5D30C5-2B49-4285-ADD1-F184AC14C75F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DiagramFinalProject</string>
+		</dict>
+	</array>
+</dict>
+</plist>
