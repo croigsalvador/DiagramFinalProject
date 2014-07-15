@@ -7,5 +7,7 @@ end
 
 target "DiagramFinalProjectTests" do
 
+pod 'OCMockito', '~> 1.3.0'
+
 end
 
