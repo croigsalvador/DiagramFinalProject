@@ -7,12 +7,14 @@
 //
 
 #import "Node.h"
+#import "Node.h"
+
 
 @implementation Node
 
-@dynamic title;
-@dynamic text;
 @dynamic shapeType;
+@dynamic text;
+@dynamic title;
 @dynamic childs;
 @dynamic parent;
 

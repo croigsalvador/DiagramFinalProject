@@ -14,24 +14,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    NSURL *fileURL =[self urlForUIManagedDocument];
-    UIManagedDocument *managedDocument = [[UIManagedDocument alloc] initWithFileURL:fileURL];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[fileURL path]]) {
-        [managedDocument openWithCompletionHandler:^(BOOL success) {
-            
-        }];
-    } else {
-        [managedDocument saveToURL:fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
-        }];
-    }
-    
-    UINavigationController *navViewController =(UINavigationController *)self.window.rootViewController;
-    CRNodeListViewController *nodeListViewController =(CRNodeListViewController *) [navViewController topViewController];
-    nodeListViewController.managedDocument = managedDocument;
-    
+    [self setupDependencyInjection];
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -40,7 +26,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
@@ -60,12 +46,46 @@
 }
 
 
+#pragma mark - Setup ViewController Dependencies
+
+- (void)setupDependencyInjection {
+    UIManagedDocument *managedDocument = [self setupManagedDocument];
+    
+    UINavigationController *navViewController =(UINavigationController *)self.window.rootViewController;
+    CRNodeListViewController *nodeListViewController =(CRNodeListViewController *) [navViewController topViewController];
+    nodeListViewController.managedDocument = managedDocument;
+}
+
+#pragma mark - Initialize UIManagedDocument
+
+- (UIManagedDocument *)setupManagedDocument {
+    NSURL *fileURL =[self urlForUIManagedDocument];
+    
+    UIManagedDocument *managedDocument = [[UIManagedDocument alloc] initWithFileURL:fileURL];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[fileURL path]]) {
+        [managedDocument openWithCompletionHandler:^(BOOL success) {
+            if (!success) {
+                NSLog(@"No se pudo abrir %@", managedDocument);
+            }
+        }];
+    } else {
+        [managedDocument saveToURL:fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
+            NSLog(@"No se pudo abrir %@", managedDocument);
+        }];
+    }
+    return managedDocument;
+}
+
+#pragma mark - Document Path
+
 - (NSURL *)urlForUIManagedDocument{
     NSArray *paths = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
     NSURL *documentsURL = [paths lastObject];
     NSURL *fileURL = [documentsURL URLByAppendingPathComponent:@"map.mapa"];
     return fileURL;
 }
+
+
 
 
 

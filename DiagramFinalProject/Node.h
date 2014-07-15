@@ -13,9 +13,9 @@
 
 @interface Node : NSManagedObject
 
-@property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSString * text;
 @property (nonatomic, retain) NSNumber * shapeType;
+@property (nonatomic, retain) NSString * text;
+@property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSSet *childs;
 @property (nonatomic, retain) Node *parent;
 @end
