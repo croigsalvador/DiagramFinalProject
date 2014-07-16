@@ -8,6 +8,8 @@
 
 #import "CRAppDelegate.h"
 #import "CRNodeListViewController.h"
+#import "CRNodeMap.h"
+#import "Node+Model.h"
 
 
 @implementation CRAppDelegate
@@ -45,15 +47,34 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-
 #pragma mark - Setup ViewController Dependencies
 
 - (void)setupDependencyInjection {
     UIManagedDocument *managedDocument = [self setupManagedDocument];
+    CRNodeMap *nodeMap = [[CRNodeMap alloc] init];
     
     UINavigationController *navViewController =(UINavigationController *)self.window.rootViewController;
     CRNodeListViewController *nodeListViewController =(CRNodeListViewController *) [navViewController topViewController];
     nodeListViewController.managedDocument = managedDocument;
+    nodeListViewController.nodeMap = nodeMap;
+    //   nodeListViewController.rootNode = [self rootNodeInManagedContext:managedDocument.managedObjectContext];
+    
+}
+
+- (Node *)rootNodeInManagedContext:(NSManagedObjectContext *)managedObjectContext {
+    [managedObjectContext.undoManager beginUndoGrouping];
+    Node *rootNode = [Node rootNodeInContext:managedObjectContext];
+    if (!rootNode) {
+        rootNode = [Node createNodeInManagedObjectContext:managedObjectContext];
+        rootNode.title = @"Map name";
+    }
+    [managedObjectContext.undoManager setActionName:@"Bad Action"];
+    [managedObjectContext.undoManager endUndoGrouping];
+    return rootNode;
+}
+
+- (NSDictionary *)rootDictionaryInManagedObjectContext:(NSManagedObjectContext *)contex {
+    return @{@"node": [self rootNodeInManagedContext:contex]};
 }
 
 #pragma mark - Initialize UIManagedDocument
@@ -65,11 +86,16 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:[fileURL path]]) {
         [managedDocument openWithCompletionHandler:^(BOOL success) {
             if (!success) {
-                NSLog(@"No se pudo abrir %@", managedDocument);
+                NSLog(@"No se pudo abrir aq%@", managedDocument);
+            } else {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"nodeNotification" object:self userInfo:[self rootDictionaryInManagedObjectContext:managedDocument.managedObjectContext ]];
             }
         }];
     } else {
         [managedDocument saveToURL:fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
+            if (success) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"nodeNotification" object:self userInfo:[self rootDictionaryInManagedObjectContext:managedDocument.managedObjectContext ]];
+            }
             NSLog(@"No se pudo abrir %@", managedDocument);
         }];
     }
@@ -81,7 +107,7 @@
 - (NSURL *)urlForUIManagedDocument{
     NSArray *paths = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
     NSURL *documentsURL = [paths lastObject];
-    NSURL *fileURL = [documentsURL URLByAppendingPathComponent:@"map.mapa"];
+    NSURL *fileURL = [documentsURL URLByAppendingPathComponent:@"map.sqlite"];
     return fileURL;
 }
 

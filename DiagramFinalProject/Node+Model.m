@@ -12,6 +12,7 @@ NSString * const kNodeEntityName                    = @"Node";
 NSString * const kTitlePropertyName                 = @"title";
 NSString * const kTextPropertyName                  = @"text";
 NSString * const kShapeTypePropertyName             = @"shapeType";
+NSString * const kLevelPropertyName                 = @"level";
 
 @implementation Node (Model)
 
@@ -27,12 +28,31 @@ NSString * const kShapeTypePropertyName             = @"shapeType";
 + (instancetype)createNodeInManagedObjectContext:(NSManagedObjectContext *)context withParent:(Node *)parentNode {
     Node *node = [self createNodeInManagedObjectContext:context];
     node.parent = parentNode;
+    node.level = @([parentNode.level intValue] + 1);
     
     return node;
 }
+
++ (Node *)rootNodeInContext:(NSManagedObjectContext *)context {
+    Node *rootNode;
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title == %@", @"Map name"];
+    NSFetchRequest *fetchRequest = [Node fetchAllNodesByNameWithPredicate:predicate];
+    
+    NSError *error;
+    NSArray *matches = [context executeFetchRequest:fetchRequest error:&error];
+    NSLog(@"%@", matches);
+    if ([matches count]== 1) {
+        rootNode = [matches lastObject];
+    } else {
+        //TO DO ERROR
+    }
+    return rootNode;    
+}
+
 #pragma mark - Fetch requests
 
-+ (NSFetchRequest *) fetchAllNodesByTitle {
++ (NSFetchRequest *) fetchAllNodes {
     NSSortDescriptor *nameSortDescriptor = [NSSortDescriptor  sortDescriptorWithKey:kTitlePropertyName ascending:YES];
     NSFetchRequest *fetchRequest = [Node fetchAllNodesWithSortDescriptors:@[nameSortDescriptor]];
     
@@ -46,8 +66,8 @@ NSString * const kShapeTypePropertyName             = @"shapeType";
     return fetchRequest;
 }
 
-+ (NSFetchRequest *) fetchAllAgentsByNameWithPredicate:(NSPredicate *)predicate {
-    NSFetchRequest *fetchRequest = [Node fetchAllNodesByTitle];
++ (NSFetchRequest *) fetchAllNodesByNameWithPredicate:(NSPredicate *)predicate {
+    NSFetchRequest *fetchRequest = [Node fetchAllNodes];
     fetchRequest.predicate = predicate;
     
     return fetchRequest;

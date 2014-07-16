@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class CRNodeMap, Node;
+
 @interface CRNodeListViewController : UITableViewController
 
 @property (strong,nonatomic) UIManagedDocument *managedDocument;
+@property (strong,nonatomic) CRNodeMap *nodeMap;
+@property (strong,nonatomic) Node *rootNode;
+
 
 @end

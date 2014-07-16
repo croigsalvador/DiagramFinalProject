@@ -9,23 +9,19 @@
 #import "CRNodeMap.h"
 #import "Node+Model.h"
 
+NSString * const kNodeIDKey             = @"nodeID";
+
 @interface CRNodeMap ()
-@property (strong,nonatomic) NSMutableDictionary *mutableMapDictionary;
-@property (strong,nonatomic) NSMutableArray *mutableMapArray;
-@property (strong,nonatomic) NSDictionary *mappings;
+
+@property (copy,nonatomic) NSMutableDictionary *mutableMapDictionary;
+@property (copy,nonatomic) NSMutableArray *mutableMapArray;
+@property (copy,nonatomic) NSDictionary *mappings;
 
 @end
 
 @implementation CRNodeMap
 
 #pragma mark - Lazy Getters
-
-- (NSMutableDictionary *)mutableMapDictionary {
-    if (!_mutableMapDictionary) {
-        _mutableMapDictionary = [[NSMutableDictionary alloc] init];
-    }
-    return _mutableMapDictionary;
-}
 
 - (NSMutableArray *)mutableMapArray {
     if (!_mutableMapArray) {
@@ -34,19 +30,63 @@
     return _mutableMapArray;
 }
 
-- (NSDictionary *)mapDictionary {
-    return [self.mutableMapDictionary copy];
+- (NSArray *)mapList {
+    return self.mutableMapArray;
 }
 
 #pragma mark - Public Methods
 
-- (void)addChild:(Node *)node toParent:(Node *)parentNode {
+- (void)addChild:(Node *)node atIndex:(NSUInteger)index {
+    NSDictionary *nodeDictionary = @{kLevelPropertyName : node.level,
+                                     kTitlePropertyName : @"Prueba" ,
+                                             kNodeIDKey : [node objectID]};
     
+    [self.mutableMapArray insertObject:nodeDictionary atIndex:index];
 }
 
-- (void)removeChild:(Node *)node fromParent:(Node *)parentNode {
-    
+- (void)removeChildAtIndex:(NSUInteger)index{
+    [self.mutableMapArray removeObjectAtIndex:index];
 }
+
+
+/**
+ *  Launch listeArrayOfNodes
+ *
+ *  @param node Root Node
+ */
+- (void)populateMapListForRootNode:(Node *)node; {
+    [self listedArrayOfNodesWithParentNode:node];
+}
+
+
+#pragma mark - Private Methods
+
+- (NSDictionary *)listedArrayOfNodesWithParentNode:(Node *)node {
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setValue:node.level forKey:kLevelPropertyName];
+    [dict setValue:node.title forKey:kTitlePropertyName];
+    [dict setValue:[node objectID] forKey:kNodeIDKey];
+    
+    [self.mutableMapArray addObject:dict];
+    
+    if ([node.childs count] <= 0) {
+        return dict;
+    } else {
+        for (Node *childNode in node.childs) {
+            [self listedArrayOfNodesWithParentNode:childNode];
+        }
+        return  dict;
+    }
+}
+
+/**
+ *  Serialize MAP Into NSDictionary
+ *
+ *  @param node Nodo
+ *
+ *  @return Node Dictionary
+ */
 
 - (NSDictionary *)serializedDictionaryWithParentNode:(Node *)node {
     
@@ -68,29 +108,4 @@
         return  dict;
     }
 }
-
-- (void)lanzaderaParaElmetodo:(Node *)node {
-    [self listedArrayOfNodesWithParentNode:node];
-    NSLog(@"%@", self.mutableMapArray);
-}
-
-- (NSDictionary *)listedArrayOfNodesWithParentNode:(Node *)node {
-    
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setValue:node.title forKey:kTitlePropertyName];
-    [dict setValue:[node objectID]   forKey:@"idNode"];
-    
-    [self.mutableMapArray addObject:dict];
-    
-    if ([node.childs count] <= 0) {
-        return dict;
-    } else {
-        for (Node *childNode in node.childs) {
-            [self listedArrayOfNodesWithParentNode:childNode];
-        }
-        return  dict;
-    }
-}
-
-
 @end

@@ -13,6 +13,7 @@ extern NSString * const kTitlePropertyName;
 
 extern NSString * const kTextPropertyName;
 extern NSString * const kShapeTypePropertyName;
+extern NSString * const kLevelPropertyName;
 
 
 typedef NS_ENUM(NSUInteger, CRNodeTypeShape) {
@@ -26,10 +27,11 @@ typedef NS_ENUM(NSUInteger, CRNodeTypeShape) {
 
 + (Node *)createNodeInManagedObjectContext:(NSManagedObjectContext *)context;
 + (Node *)createNodeInManagedObjectContext:(NSManagedObjectContext *)context withParent:(Node *)parentNode;
++ (Node *)rootNodeInContext:(NSManagedObjectContext *)context;
 
-+ (NSFetchRequest *) fetchAllNodesByTitle;
++ (NSFetchRequest *) fetchAllNodes;
 + (NSFetchRequest *) fetchAllNodesWithSortDescriptors:(NSArray *)sortDescriptors;
-+ (NSFetchRequest *) fetchAllAgentsByNameWithPredicate:(NSPredicate *)predicate;
++ (NSFetchRequest *) fetchAllNodesByNameWithPredicate:(NSPredicate *)predicate;
 + (NSFetchRequest *) baseFetchRequest;
 
 @end
