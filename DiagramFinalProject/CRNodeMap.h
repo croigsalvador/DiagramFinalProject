@@ -13,9 +13,11 @@
 @interface CRNodeMap : NSObject
 
 @property (strong,nonatomic,readonly) NSDictionary *mapDictionary;
+@property (strong,nonatomic,readonly) NSArray  *mapList;
 
 - (void)addChild:(Node *)node toParent:(Node *)parentNode;
 - (void)removeChild:(Node *)node fromParent:(Node *)parentNode;
 - (NSDictionary *)serializedDictionaryWithParentNode:(Node *)node;
+- (void)lanzaderaParaElmetodo:(Node *)node;
 
 @end

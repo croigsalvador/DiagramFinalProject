@@ -164,10 +164,9 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
             break;
         case 1:{
 //            [self deleteItemAtIndexPath:cellIndexPath];
-            NSDictionary *arrayDict = [self dictionaryAtIndexPath:cellIndexPath];
-            NSArray *array = [arrayDict allValues];
-            NSArray *second = [arrayDict valueForKey:@"childs"];
-            NSLog(@"array %@", [second[0] valueForKey:@"title"]);
+            [self listAtIndexPath:cellIndexPath];
+     
+
             break;
     
         }
@@ -179,6 +178,11 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
     Node *n = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     return [map serializedDictionaryWithParentNode:n];
+}
+- (void)listAtIndexPath:(NSIndexPath *)indexPath {
+    CRNodeMap *map = [[CRNodeMap alloc] init];
+    Node *n = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [map lanzaderaParaElmetodo:n];
 }
 
 

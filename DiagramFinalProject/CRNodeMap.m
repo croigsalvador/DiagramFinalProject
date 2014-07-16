@@ -11,6 +11,7 @@
 
 @interface CRNodeMap ()
 @property (strong,nonatomic) NSMutableDictionary *mutableMapDictionary;
+@property (strong,nonatomic) NSMutableArray *mutableMapArray;
 @property (strong,nonatomic) NSDictionary *mappings;
 
 @end
@@ -24,6 +25,13 @@
         _mutableMapDictionary = [[NSMutableDictionary alloc] init];
     }
     return _mutableMapDictionary;
+}
+
+- (NSMutableArray *)mutableMapArray {
+    if (!_mutableMapArray) {
+        _mutableMapArray = [[NSMutableArray alloc] init];
+    }
+    return _mutableMapArray;
 }
 
 - (NSDictionary *)mapDictionary {
@@ -57,6 +65,29 @@
             [childArray addObject:childDict];
         }
         [dict setValue:childArray forKey:@"childs"];
+        return  dict;
+    }
+}
+
+- (void)lanzaderaParaElmetodo:(Node *)node {
+    [self listedArrayOfNodesWithParentNode:node];
+    NSLog(@"%@", self.mutableMapArray);
+}
+
+- (NSDictionary *)listedArrayOfNodesWithParentNode:(Node *)node {
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setValue:node.title forKey:kTitlePropertyName];
+    [dict setValue:[node objectID]   forKey:@"idNode"];
+    
+    [self.mutableMapArray addObject:dict];
+    
+    if ([node.childs count] <= 0) {
+        return dict;
+    } else {
+        for (Node *childNode in node.childs) {
+            [self listedArrayOfNodesWithParentNode:childNode];
+        }
         return  dict;
     }
 }
