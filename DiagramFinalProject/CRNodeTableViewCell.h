@@ -12,5 +12,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *nodeTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nodeTextLabel;
+@property (weak, nonatomic) IBOutlet UIView *containerMainView;
+
+- (void)configureCellWithColor:(NSString *)color figure:(NSUInteger)CRNodeType andLevel:(NSInteger)level;
 
 @end

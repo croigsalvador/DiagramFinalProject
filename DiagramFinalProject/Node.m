@@ -16,6 +16,8 @@
 @dynamic shapeType;
 @dynamic text;
 @dynamic title;
+@dynamic color;
+@dynamic imagePath;
 @dynamic childs;
 @dynamic parent;
 

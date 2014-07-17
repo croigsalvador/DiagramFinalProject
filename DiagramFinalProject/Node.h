@@ -17,6 +17,8 @@
 @property (nonatomic, retain) NSNumber * shapeType;
 @property (nonatomic, retain) NSString * text;
 @property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSNumber * color;
+@property (nonatomic, retain) NSString * imagePath;
 @property (nonatomic, retain) NSSet *childs;
 @property (nonatomic, retain) Node *parent;
 @end

@@ -20,6 +20,14 @@ static NSString * const NodeCellIdentifier               = @"NodeCellIdentifier"
 static NSString *const kSegueAddNode                     = @"AddNodeSegue";
 static NSString *const kSegueEditNode                    = @"EditNodeSegue";
 
+static NSString *const kMainStoryBoardNameID             = @"Main";
+static NSString *const kEditViewControllerID             = @"EditNavViewController";
+
+
+static NSString *const kDeletingActionName               = @"DeleteAction";
+
+
+
 @interface CRNodeListViewController ()<NSFetchedResultsControllerDelegate, SWTableViewCellDelegate, EditNodeDelegate>
 
 @property (strong,nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -71,9 +79,9 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
 
 
 - (void)prepareViewControllerFromStoryBoardWithNewNode:(Node *)node {
-    UIStoryboard *mapStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UIStoryboard *mapStoryboard = [UIStoryboard storyboardWithName:kMainStoryBoardNameID bundle:[NSBundle mainBundle]];
     
-    UINavigationController *nextVC = [mapStoryboard instantiateViewControllerWithIdentifier:@"EditNavViewController"];
+    UINavigationController *nextVC = [mapStoryboard instantiateViewControllerWithIdentifier:kEditViewControllerID];
     CREditNodeViewController *editViewController =(CREditNodeViewController *) [nextVC topViewController];
     editViewController.delegate = self;
     editViewController.node = node;
@@ -102,7 +110,7 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
     self.deletedNode = node;
     [self.managedObjectContext deleteObject:node];
     
-    [self.managedObjectContext.undoManager setActionName:@"DeletingObjetc"];
+    [self.managedObjectContext.undoManager setActionName:kDeletingActionName];
     [self.managedObjectContext.undoManager endUndoGrouping];
 }
 
@@ -149,9 +157,9 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CRNodeTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:NodeCellIdentifier forIndexPath:indexPath];
+    CRNodeTableViewCell *cell = (CRNodeTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:NodeCellIdentifier forIndexPath:indexPath];
     if (cell == nil) {
-        cell = [[CRNodeTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:NodeCellIdentifier];
+        cell = (CRNodeTableViewCell *)[[CRNodeTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:NodeCellIdentifier];
     }
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
@@ -160,16 +168,14 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
 - (void)configureCell:(CRNodeTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Node *node = [self nodeFromFetchedResultsControllerAtIndexPath:indexPath];
     
-    Node *parent = node.parent;
-    if (parent) {
-        cell.nodeTitleLabel.text = [NSString stringWithFormat:@"%@ Hijo de: %@", node.title, parent.title];
-    }else {
-        cell.nodeTitleLabel.text = node.title;
-    }
+    cell.nodeTitleLabel.text = node.title;
     cell.rightUtilityButtons = [self rightButtons];
     cell.nodeTextLabel.text = node.text;
+    
+    [UIColor flatAsbestosColor];
+    
+    [cell configureCellWithColor:@"flatAsbestosColor" figure:[node.shapeType integerValue] andLevel:[node.level integerValue]];
     cell.delegate = self;
-    [cell setNeedsDisplay];
 }
 
 #pragma mark - UIElements Setup
