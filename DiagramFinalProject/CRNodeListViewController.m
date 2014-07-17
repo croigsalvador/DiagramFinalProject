@@ -37,7 +37,7 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(populateNodeList:) name:@"nodeNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(populateNodeList:) name:UIDocumentStateChangedNotification object:self.managedDocument];
 
     
 //    [self populateNodeList];
@@ -59,31 +59,23 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
 #pragma mark - Private Methods
 
 - (void)populateNodeList:(NSNotification *)notification {
-    self.rootNode = [notification.userInfo objectForKey:@"node"];    //[self rootNodeInManagedContext:self.managedObjectContext];
-    [self.nodeMap populateMapListForRootNode:self.rootNode];
+    NSArray *nodes = [Node rootNodeListInContext:self.managedObjectContext];
+
+    for (Node *node in nodes) {
+        [self.nodeMap populateMapListForRootNode:node];
+    }
+    
+    NSArray *ALLnODES = [self.managedObjectContext executeFetchRequest:[Node fetchAllNodes] error:nil];
+    for (Node *n in ALLnODES) {
+        NSLog(@"Title %@, level: %@, parent: %@", n.title, n.level, n.parent.title);
+        
+    }
+    
     self.nodeList = self.nodeMap.mapList;
     
-    NSArray *nodes = [self.managedObjectContext executeFetchRequest:[Node fetchAllNodes] error:nil];
-    
-    for (Node *node in nodes) {
-        NSLog(@"%@", node.title);
-        NSLog(@"level %@", node.level);
-    }
     [self.tableView reloadData];
 
     
-}
-
-- (Node *)rootNodeInManagedContext:(NSManagedObjectContext *)managedObjectContext {
-    [managedObjectContext.undoManager beginUndoGrouping];
-    Node *rootNode = [Node rootNodeInContext:managedObjectContext];
-    if (!rootNode) {
-        rootNode = [Node createNodeInManagedObjectContext:managedObjectContext];
-        rootNode.title = @"Map name";
-    }
-    [managedObjectContext.undoManager setActionName:@"Bad Action"];
-    [managedObjectContext.undoManager endUndoGrouping];
-    return rootNode;
 }
 
 
@@ -101,15 +93,16 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
 - (void)addChildNodeToParentAtIndexPath:(NSIndexPath *)indexPath {
     [self.managedObjectContext.undoManager beginUndoGrouping];
     
-    Node *parentNode = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    Node *node = [Node createNodeInManagedObjectContext:self.managedObjectContext withParent:parentNode];
+    Node *parentNode = [self nodeFromFetchedResultsControllerAtIndexPath:indexPath];
+
+    self.insertedNode = [Node createNodeInManagedObjectContext:self.managedObjectContext withParent:parentNode];
     
-    [self prepareViewControllerFromStoryBoardWithNewNode:node];
+    [self prepareViewControllerFromStoryBoardWithNewNode:self.insertedNode];
 }
 
 
 - (void)deleteItemAtIndexPath:(NSIndexPath *)indexPath {
-    Node * node = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    Node *node = [self nodeFromFetchedResultsControllerAtIndexPath:indexPath];
     for (Node *childNode in node.childs) {
         [self.managedObjectContext deleteObject:childNode];
     }
@@ -118,7 +111,6 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
 
 - (Node *)nodeFromFetchedResultsControllerAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *nodeDictionary = self.nodeList[indexPath.row];
-    NSLog(@"Dictionary %@", nodeDictionary);
 
     NSManagedObjectID *nodeID = nodeDictionary[kNodeIDKey];
     return (Node *)[self.fetchedResultsController.managedObjectContext existingObjectWithID:nodeID error:nil];
@@ -142,7 +134,7 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
 - (void)prepareEditNodeViewController:(CREditNodeViewController *)editNodetViewController withNode:(Node *)node {
     [self.managedObjectContext.undoManager beginUndoGrouping];
     if (!node) {
-        Node *newNode = [Node createNodeInManagedObjectContext:self.managedObjectContext withParent:self.rootNode];
+        Node *newNode = [Node createNodeInManagedObjectContext:self.managedObjectContext withParent:nil];
         self.insertedNode = newNode;
         editNodetViewController.node = newNode;
     } else {
@@ -155,19 +147,18 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
 #pragma mark - TableView Datasource Methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.nodeList count] - 1;
+    return [self.nodeList count] ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
         CRNodeTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:NodeCellIdentifier forIndexPath:indexPath];
-        [self configureCell:cell atIndexPath:[NSIndexPath indexPathForItem:indexPath.row + 1 inSection:indexPath.section]];
+        [self configureCell:cell atIndexPath:indexPath];
         return cell;
 }
 
 - (void)configureCell:(CRNodeTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Node *node = [self nodeFromFetchedResultsControllerAtIndexPath:indexPath];
     
-    NSLog(@"Cell Row at index path: %@", node.title);
     
     Node *parent = node.parent;
     if (parent) {
@@ -268,14 +259,14 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
     UITableView *tableView = self.tableView;
     switch(type) {
         case NSFetchedResultsChangeInsert:
-            [self.nodeMap addChild:self.insertedNode atIndex:1];
+            [self.nodeMap addChild:self.insertedNode atIndex:indexPath.row];
             self.nodeList = self.nodeMap.mapList;
             [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
             
         case NSFetchedResultsChangeDelete:
             // todo ÑAPA
-            [self.nodeMap removeChildAtIndex:1];
+            [self.nodeMap removeChildAtIndex:indexPath.row];
             self.nodeList = self.nodeMap.mapList;
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
             break;
@@ -284,8 +275,12 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
             break;
             
         case NSFetchedResultsChangeMove:
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.nodeMap removeChildAtIndex:indexPath.row];
+            [self.nodeMap addChild:self.insertedNode atIndex:indexPath.row];
+
+            self.nodeList = self.nodeMap.mapList;
+//            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+//            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
 }

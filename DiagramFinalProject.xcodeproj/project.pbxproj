@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		0E0051317D4A48C9858C0EE8 /* libPods-DiagramFinalProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 805FFD02800E48C4BE5CFD72 /* libPods-DiagramFinalProject.a */; };
 		1D103BC41976F4400050F092 /* NodeMapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D103BC31976F4400050F092 /* NodeMapTests.m */; };
+		1D103C1E1977FB220050F092 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D103C1D1977FB220050F092 /* Node.m */; };
 		1D5EA81119753267006C9650 /* CRAppDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5EA81019753267006C9650 /* CRAppDelegateTests.m */; };
-		1D61B37B1976897D0008F05B /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D61B37A1976897D0008F05B /* Node.m */; };
 		1D890A3E1973DB320038D983 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A3D1973DB320038D983 /* Foundation.framework */; };
 		1D890A401973DB320038D983 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A3F1973DB320038D983 /* CoreGraphics.framework */; };
 		1D890A421973DB320038D983 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A411973DB320038D983 /* UIKit.framework */; };
@@ -46,9 +46,9 @@
 
 /* Begin PBXFileReference section */
 		1D103BC31976F4400050F092 /* NodeMapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeMapTests.m; sourceTree = "<group>"; };
+		1D103C1C1977FB220050F092 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		1D103C1D1977FB220050F092 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		1D5EA81019753267006C9650 /* CRAppDelegateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAppDelegateTests.m; sourceTree = "<group>"; };
-		1D61B3791976897D0008F05B /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
-		1D61B37A1976897D0008F05B /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		1D890A3A1973DB320038D983 /* DiagramFinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiagramFinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D890A3D1973DB320038D983 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D890A3F1973DB320038D983 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -189,9 +189,9 @@
 			children = (
 				1D8B2D071975D9C900C67FB1 /* CRNodeMap.h */,
 				1D8B2D081975D9C900C67FB1 /* CRNodeMap.m */,
-				1D61B3791976897D0008F05B /* Node.h */,
-				1D61B37A1976897D0008F05B /* Node.m */,
 				1D890A731973DB510038D983 /* DiagramModel.xcdatamodeld */,
+				1D103C1C1977FB220050F092 /* Node.h */,
+				1D103C1D1977FB220050F092 /* Node.m */,
 				1D890A8219740BB00038D983 /* Node+Model.h */,
 				1D890A8319740BB00038D983 /* Node+Model.m */,
 			);
@@ -465,7 +465,7 @@
 				1D890A541973DB320038D983 /* CRNodeListViewController.m in Sources */,
 				1D890A871974143C0038D983 /* CRNodeTableViewCell.m in Sources */,
 				1D8B2D091975D9C900C67FB1 /* CRNodeMap.m in Sources */,
-				1D61B37B1976897D0008F05B /* Node.m in Sources */,
+				1D103C1E1977FB220050F092 /* Node.m in Sources */,
 				1D890A8A19741DAB0038D983 /* CREditNodeViewController.m in Sources */,
 				1D890A751973DB510038D983 /* DiagramModel.xcdatamodeld in Sources */,
 				1D890A8419740BB00038D983 /* Node+Model.m in Sources */,

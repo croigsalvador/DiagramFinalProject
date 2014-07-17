@@ -33,21 +33,14 @@ NSString * const kLevelPropertyName                 = @"level";
     return node;
 }
 
-+ (Node *)rootNodeInContext:(NSManagedObjectContext *)context {
-    Node *rootNode;
++ (NSArray *)rootNodeListInContext:(NSManagedObjectContext *)context {
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title == %@", @"Map name"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"level == %@",@1];
     NSFetchRequest *fetchRequest = [Node fetchAllNodesByNameWithPredicate:predicate];
     
     NSError *error;
     NSArray *matches = [context executeFetchRequest:fetchRequest error:&error];
-    NSLog(@"%@", matches);
-    if ([matches count]== 1) {
-        rootNode = [matches lastObject];
-    } else {
-        //TO DO ERROR
-    }
-    return rootNode;    
+    return matches;
 }
 
 #pragma mark - Fetch requests

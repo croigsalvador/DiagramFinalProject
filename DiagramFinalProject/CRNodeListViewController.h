@@ -14,7 +14,6 @@
 
 @property (strong,nonatomic) UIManagedDocument *managedDocument;
 @property (strong,nonatomic) CRNodeMap *nodeMap;
-@property (strong,nonatomic) Node *rootNode;
 
 
 @end

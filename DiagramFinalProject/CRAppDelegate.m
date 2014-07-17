@@ -57,25 +57,11 @@
     CRNodeListViewController *nodeListViewController =(CRNodeListViewController *) [navViewController topViewController];
     nodeListViewController.managedDocument = managedDocument;
     nodeListViewController.nodeMap = nodeMap;
-    //   nodeListViewController.rootNode = [self rootNodeInManagedContext:managedDocument.managedObjectContext];
     
 }
 
-- (Node *)rootNodeInManagedContext:(NSManagedObjectContext *)managedObjectContext {
-    [managedObjectContext.undoManager beginUndoGrouping];
-    Node *rootNode = [Node rootNodeInContext:managedObjectContext];
-    if (!rootNode) {
-        rootNode = [Node createNodeInManagedObjectContext:managedObjectContext];
-        rootNode.title = @"Map name";
-    }
-    [managedObjectContext.undoManager setActionName:@"Bad Action"];
-    [managedObjectContext.undoManager endUndoGrouping];
-    return rootNode;
-}
 
-- (NSDictionary *)rootDictionaryInManagedObjectContext:(NSManagedObjectContext *)contex {
-    return @{@"node": [self rootNodeInManagedContext:contex]};
-}
+
 
 #pragma mark - Initialize UIManagedDocument
 
@@ -88,13 +74,11 @@
             if (!success) {
                 NSLog(@"No se pudo abrir aq%@", managedDocument);
             } else {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"nodeNotification" object:self userInfo:[self rootDictionaryInManagedObjectContext:managedDocument.managedObjectContext ]];
             }
         }];
     } else {
         [managedDocument saveToURL:fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
             if (success) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"nodeNotification" object:self userInfo:[self rootDictionaryInManagedObjectContext:managedDocument.managedObjectContext ]];
             }
             NSLog(@"No se pudo abrir %@", managedDocument);
         }];

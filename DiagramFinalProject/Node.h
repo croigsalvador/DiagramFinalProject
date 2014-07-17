@@ -2,7 +2,7 @@
 //  Node.h
 //  DiagramFinalProject
 //
-//  Created by Carlos Roig Salvador on 16/07/14.
+//  Created by Carlos Roig Salvador on 17/07/14.
 //  Copyright (c) 2014 CRoigSalvador. All rights reserved.
 //
 
@@ -13,10 +13,10 @@
 
 @interface Node : NSManagedObject
 
+@property (nonatomic, retain) NSNumber * level;
 @property (nonatomic, retain) NSNumber * shapeType;
 @property (nonatomic, retain) NSString * text;
 @property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSNumber * level;
 @property (nonatomic, retain) NSSet *childs;
 @property (nonatomic, retain) Node *parent;
 @end
