@@ -32,6 +32,10 @@
 		1D8B2D091975D9C900C67FB1 /* CRNodeMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8B2D081975D9C900C67FB1 /* CRNodeMap.m */; };
 		1DC112FF19783EC8002F8148 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC112FE19783EC8002F8148 /* Node.m */; };
 		1DC113071978444C002F8148 /* CRSquareFigureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC113061978444C002F8148 /* CRSquareFigureView.m */; };
+		1DC1130B197860F3002F8148 /* CRColoursView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC1130A197860F3002F8148 /* CRColoursView.m */; };
+		1DC1130E197869F2002F8148 /* paleta.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DC1130D197869F2002F8148 /* paleta.png */; };
+		1DC113111978818D002F8148 /* UIFont+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC113101978818D002F8148 /* UIFont+Common.m */; };
+		1DC1131719788486002F8148 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DC1131619788486002F8148 /* background.png */; };
 		D6F117AE57B7483BA7067F00 /* libPods-DiagramFinalProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C17D554B018F4A15BBE93B0F /* libPods-DiagramFinalProjectTests.a */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +84,14 @@
 		1DC112FE19783EC8002F8148 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		1DC113051978444C002F8148 /* CRSquareFigureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSquareFigureView.h; sourceTree = "<group>"; };
 		1DC113061978444C002F8148 /* CRSquareFigureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSquareFigureView.m; sourceTree = "<group>"; };
+		1DC11309197860F3002F8148 /* CRColoursView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRColoursView.h; sourceTree = "<group>"; };
+		1DC1130A197860F3002F8148 /* CRColoursView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRColoursView.m; sourceTree = "<group>"; };
+		1DC1130D197869F2002F8148 /* paleta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paleta.png; sourceTree = "<group>"; };
+		1DC1130F1978818D002F8148 /* UIFont+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+Common.h"; sourceTree = "<group>"; };
+		1DC113101978818D002F8148 /* UIFont+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Common.m"; sourceTree = "<group>"; };
+		1DC1131419788212002F8148 /* Amatic-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amatic-Bold.ttf"; sourceTree = "<group>"; };
+		1DC1131519788212002F8148 /* AmaticSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AmaticSC-Regular.ttf"; sourceTree = "<group>"; };
+		1DC1131619788486002F8148 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		64C3103266D240ECA62CEA71 /* Pods-DiagramFinalProjectTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiagramFinalProjectTests.xcconfig"; path = "Pods/Pods-DiagramFinalProjectTests.xcconfig"; sourceTree = "<group>"; };
 		805FFD02800E48C4BE5CFD72 /* libPods-DiagramFinalProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DiagramFinalProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C17D554B018F4A15BBE93B0F /* libPods-DiagramFinalProjectTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DiagramFinalProjectTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,6 +234,7 @@
 		1D890A7E1973E5010038D983 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1DC11308197860D3002F8148 /* Colours */,
 				1DC1130419784422002F8148 /* Figures */,
 				1D890A8E19741DE50038D983 /* StoryBoard */,
 				1D890A8D19741DDD0038D983 /* NodeCell */,
@@ -232,6 +245,7 @@
 		1D890A7F19740AC20038D983 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1DC1130C197869D2002F8148 /* Assets */,
 				1D890A551973DB320038D983 /* Images.xcassets */,
 			);
 			name = Resources;
@@ -303,6 +317,8 @@
 		1DC1130019783F20002F8148 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				1DC1130F1978818D002F8148 /* UIFont+Common.h */,
+				1DC113101978818D002F8148 /* UIFont+Common.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -314,6 +330,42 @@
 				1DC113061978444C002F8148 /* CRSquareFigureView.m */,
 			);
 			name = Figures;
+			sourceTree = "<group>";
+		};
+		1DC11308197860D3002F8148 /* Colours */ = {
+			isa = PBXGroup;
+			children = (
+				1DC11309197860F3002F8148 /* CRColoursView.h */,
+				1DC1130A197860F3002F8148 /* CRColoursView.m */,
+			);
+			name = Colours;
+			sourceTree = "<group>";
+		};
+		1DC1130C197869D2002F8148 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				1DC11313197881F2002F8148 /* Images */,
+				1DC11312197881E8002F8148 /* Fonts */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		1DC11312197881E8002F8148 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1DC1131419788212002F8148 /* Amatic-Bold.ttf */,
+				1DC1131519788212002F8148 /* AmaticSC-Regular.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		1DC11313197881F2002F8148 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				1DC1131619788486002F8148 /* background.png */,
+				1DC1130D197869F2002F8148 /* paleta.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,6 +449,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DC1130E197869F2002F8148 /* paleta.png in Resources */,
+				1DC1131719788486002F8148 /* background.png in Resources */,
 				1D890A561973DB320038D983 /* Images.xcassets in Resources */,
 				1D890A481973DB320038D983 /* InfoPlist.strings in Resources */,
 				1D890A511973DB320038D983 /* Main.storyboard in Resources */,
@@ -484,8 +538,10 @@
 				1D890A4A1973DB320038D983 /* main.m in Sources */,
 				1D890A4E1973DB320038D983 /* CRAppDelegate.m in Sources */,
 				1D890A541973DB320038D983 /* CRNodeListViewController.m in Sources */,
+				1DC113111978818D002F8148 /* UIFont+Common.m in Sources */,
 				1D890A871974143C0038D983 /* CRNodeTableViewCell.m in Sources */,
 				1D8B2D091975D9C900C67FB1 /* CRNodeMap.m in Sources */,
+				1DC1130B197860F3002F8148 /* CRColoursView.m in Sources */,
 				1DC112FF19783EC8002F8148 /* Node.m in Sources */,
 				1D890A8A19741DAB0038D983 /* CREditNodeViewController.m in Sources */,
 				1D890A751973DB510038D983 /* DiagramModel.xcdatamodeld in Sources */,

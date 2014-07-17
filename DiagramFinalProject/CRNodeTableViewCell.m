@@ -22,6 +22,7 @@ static CGFloat const kTabMarginForCell           = 40.0f;
 
 
 - (void)awakeFromNib {
+    self.contentView.backgroundColor = [UIColor clearColor];
 }
 #pragma mark - Public Methods
 
@@ -30,7 +31,7 @@ static CGFloat const kTabMarginForCell           = 40.0f;
     self.containerMainView.backgroundColor = colorFromText;
     
     [self paintFigureInCell:CRNodeType withColor:colorFromText] ;
-    [self paintCellWithLevel:level];
+//    [self paintCellWithLevel:level];
     [self setNeedsDisplay];
 }
 
@@ -41,6 +42,7 @@ static CGFloat const kTabMarginForCell           = 40.0f;
     cellFrame.origin.x = cellFrame.origin.x + ((level - 1) *  kTabMarginForCell);
     cellFrame.size.width = cellFrame.size.width - ((level - 1) *  kTabMarginForCell);
     self.containerMainView.frame = cellFrame;
+    self.containerMainView.alpha = 0.5;
 }
 
 - (void)paintFigureInCell:(CRNodeTypeShape)crNodeType withColor:(UIColor *)color {

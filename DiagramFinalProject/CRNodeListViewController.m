@@ -46,6 +46,8 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(populateNodeList:) name:UIDocumentStateChangedNotification object:self.managedDocument];
     //    [self populateNodeList];
@@ -103,10 +105,10 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
 - (void)deleteItemAtIndexPath:(NSIndexPath *)indexPath {
     [self.managedObjectContext.undoManager beginUndoGrouping];
     Node *node = [self nodeFromFetchedResultsControllerAtIndexPath:indexPath];
-//    for (Node *childNode in node.childs) {
-//        self.deletedNode = node;
-//        [self.managedObjectContext deleteObject:childNode];
-//    }
+    //    for (Node *childNode in node.childs) {
+    //        self.deletedNode = node;
+    //        [self.managedObjectContext deleteObject:childNode];
+    //    }
     self.deletedNode = node;
     [self.managedObjectContext deleteObject:node];
     
@@ -172,9 +174,9 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
     cell.rightUtilityButtons = [self rightButtons];
     cell.nodeTextLabel.text = node.text;
     
-    [UIColor flatAsbestosColor];
+    [UIColor flatEmeraldColor];
     
-    [cell configureCellWithColor:@"flatAsbestosColor" figure:[node.shapeType integerValue] andLevel:[node.level integerValue]];
+    [cell configureCellWithColor:@"flatEmeraldColor" figure:[node.shapeType integerValue] andLevel:[node.level integerValue]];
     cell.delegate = self;
 }
 
@@ -280,7 +282,9 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
         case NSFetchedResultsChangeUpdate: {
             NSIndexPath *updateIndexPath =  [self.nodeMap indexPathForCurrentNode:self.insertedNode];
             CRNodeTableViewCell *currentCell = (CRNodeTableViewCell*)[self.tableView cellForRowAtIndexPath:updateIndexPath];
-                [currentCell setNeedsDisplay];
+            if (currentCell.nodeTitleLabel.superview == nil) {
+                [currentCell setNeedsLayout];
+            }
             break;
         }
         case NSFetchedResultsChangeMove:
