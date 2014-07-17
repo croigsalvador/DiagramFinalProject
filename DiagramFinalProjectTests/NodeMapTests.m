@@ -40,7 +40,7 @@
 
 - (void) setUp {
     [super setUp];
-
+    
     [self createCoreDataStack];
     [self createFixture];
     [self createSut];
@@ -74,8 +74,8 @@
 - (void) tearDown {
     [self releaseSut];
     [self releaseFixture];
-//    [self releaseCoreDataStack];
-
+    //    [self releaseCoreDataStack];
+    
     [super tearDown];
 }
 
@@ -86,7 +86,7 @@
 
 
 - (void) releaseFixture {
-
+    
 }
 
 
@@ -117,7 +117,7 @@
     //Prepare
     Node *rootNode = [Node createNodeInManagedObjectContext:context];
     for (int i = 0; i < 10; i++) {
-       [Node createNodeInManagedObjectContext:context withParent:rootNode];
+        [Node createNodeInManagedObjectContext:context withParent:rootNode];
     }
     //OPERATE
     [sut populateMapListForRootNode:rootNode];
@@ -128,7 +128,7 @@
 - (void)testMapListAddChildNode {
     Node *rootNode = [Node createNodeInManagedObjectContext:context];
     [sut populateMapListForRootNode:rootNode];
-
+    
     for (int i = 0; i < 10; i++) {
         Node *childNode = [Node createNodeInManagedObjectContext:context withParent:rootNode];
         [sut addChild:childNode atIndex:1];
@@ -152,6 +152,32 @@
     }
     //Check
     XCTAssert([sut.mapList count] == 1, @"Maplist array is not 11, is:%d", [sut.mapList count]);
+}
+
+- (void)testMapListIndexPathForNewNodeIsCorrect {
+    // PREPARE
+    Node *rootNode = [Node createNodeInManagedObjectContext:context withParent:nil];
+    rootNode.title = @"root";
+    [Node createNodeInManagedObjectContext:context withParent:nil];
+    for (int i = 0; i < 5; i++) {
+        [Node createNodeInManagedObjectContext:context withParent:rootNode];
+    }
+    [Node createNodeInManagedObjectContext:context withParent:nil];
+    NSArray *nodes = [Node rootNodeListInContext:context];
+    for (Node *node in nodes) {
+        [sut populateMapListForRootNode:node];
+    }
+    
+    NSLog(@"Node list %d", [sut.mapList count]);
+    
+    Node *insertedNode = [Node createNodeInManagedObjectContext:context withParent:rootNode];
+    //OPERATE
+    NSIndexPath *indexpath = [sut indexPathForNode:insertedNode];
+    
+    
+    
+    //Check
+    XCTAssert(indexpath.row == 8, @"Maplist array is not 8, is:%d", indexpath.row);
 }
 
 

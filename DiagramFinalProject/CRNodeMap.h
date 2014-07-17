@@ -21,4 +21,6 @@ extern NSString * const kNodeIDKey;
 
 - (void)populateMapListForRootNode:(Node *)node;
 
+- (NSIndexPath *)indexPathForNode:(Node *)node;
+
 @end
