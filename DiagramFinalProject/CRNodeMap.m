@@ -58,23 +58,36 @@ NSString * const kNodeIDKey             = @"nodeID";
     [self listedArrayOfNodesWithParentNode:node];
 }
 
-- (NSIndexPath *)indexPathForNode:(Node *)node {
+- (NSIndexPath *)indexPathNewForNode:(Node *)node {
     NSIndexPath *indexPath;
     if (node.parent) {
-        indexPath = [NSIndexPath indexPathForRow:[self indexOfNode:node.parent]  inSection:0];
+        indexPath = [NSIndexPath indexPathForRow:[self newIndexForNewOfNode:node.parent]  inSection:0];
     } else {
-        indexPath = [NSIndexPath indexPathForRow:([self.mutableMapArray count]-1) inSection:0];
+        indexPath = [NSIndexPath indexPathForRow:([self.mutableMapArray count]) inSection:0];
     }
+    return indexPath;
+}
+
+- (NSIndexPath *)indexPathForCurrentNode:(Node *)node {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self indexForNode:node]  inSection:0];
     return indexPath;
 }
 
 #pragma mark - Private Methods
 
-- (NSInteger)indexOfNode:(Node *)node {
+
+
+- (NSInteger)newIndexForNewOfNode:(Node *)node {
     NSUInteger index = [node.childs count];
+    index += [self indexForNode:node];
+    return index;
+}
+
+- (NSInteger)indexForNode:(Node *)node {
+    NSUInteger index = 0;
     for (NSDictionary *dict in self.mutableMapArray) {
         if ([[node objectID] isEqual:dict[kNodeIDKey]]) {
-            index += ([self.mutableMapArray indexOfObject:dict]);
+            index = ([self.mutableMapArray indexOfObject:dict]);
         }
     }
     return index;

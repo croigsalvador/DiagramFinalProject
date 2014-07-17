@@ -172,13 +172,39 @@
     
     Node *insertedNode = [Node createNodeInManagedObjectContext:context withParent:rootNode];
     //OPERATE
-    NSIndexPath *indexpath = [sut indexPathForNode:insertedNode];
+    NSIndexPath *indexpath = [sut indexPathNewForNode:insertedNode];
     
     
     
     //Check
     XCTAssert(indexpath.row == 8, @"Maplist array is not 8, is:%d", indexpath.row);
 }
+
+- (void)testMapListIndexPathForCurrentNode {
+    // PREPARE
+    Node *rootNode = [Node createNodeInManagedObjectContext:context withParent:nil];
+    rootNode.title = @"root";
+    [Node createNodeInManagedObjectContext:context withParent:nil];
+    for (int i = 0; i < 5; i++) {
+        [Node createNodeInManagedObjectContext:context withParent:rootNode];
+    }
+    [Node createNodeInManagedObjectContext:context withParent:nil];
+    
+    Node *currentNode = [Node createNodeInManagedObjectContext:context withParent:nil];
+   currentNode.title = @"AooZ";
+    NSArray *nodes = [Node rootNodeListInContext:context];
+    for (Node *node in nodes) {
+        [sut populateMapListForRootNode:node];
+    }
+    
+    //OPERATE
+    NSIndexPath *indexpath = [sut indexPathForCurrentNode:currentNode];
+    
+    //Check
+    XCTAssert(indexpath.row == 2, @"Maplist array is not 2, is:%d", indexpath.row);
+}
+
+
 
 
 
