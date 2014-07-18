@@ -15,6 +15,7 @@ NSString * const kNodeIDKey             = @"nodeID";
 
 @property (copy,nonatomic) NSMutableDictionary *mutableMapDictionary;
 @property (copy,nonatomic) NSMutableArray *mutableMapArray;
+@property (copy,nonatomic) NSMutableArray *mutableDictArray;
 @property (copy,nonatomic) NSDictionary *mappings;
 
 @end
@@ -28,6 +29,12 @@ NSString * const kNodeIDKey             = @"nodeID";
         _mutableMapArray = [[NSMutableArray alloc] init];
     }
     return _mutableMapArray;
+}
+- (NSMutableArray *)mutableDictArray {
+    if (!_mutableDictArray) {
+        _mutableDictArray = [[NSMutableArray alloc] init];
+    }
+    return _mutableDictArray;
 }
 
 - (NSArray *)mapList {
@@ -75,11 +82,11 @@ NSString * const kNodeIDKey             = @"nodeID";
 
 #pragma mark - Private Methods
 
-
-
 - (NSInteger)newIndexForNewOfNode:(Node *)node {
-    NSUInteger index = [node.childs count];
-    index += [self indexForNode:node];
+    NSUInteger index = [self indexForNode:node];
+    [self listedArrayOfNodesForAParentNode:node];
+     index += [self.mutableDictArray count] - 1;
+    self.mutableDictArray = nil;
     return index;
 }
 
@@ -92,6 +99,7 @@ NSString * const kNodeIDKey             = @"nodeID";
     }
     return index;
 }
+
 
 - (NSDictionary *)listedArrayOfNodesWithParentNode:(Node *)node {
     
@@ -111,6 +119,25 @@ NSString * const kNodeIDKey             = @"nodeID";
         return  dict;
     }
 }
+- (NSDictionary *)listedArrayOfNodesForAParentNode:(Node *)node {
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setValue:node.level forKey:kLevelPropertyName];
+    [dict setValue:[node objectID] forKey:kNodeIDKey];
+    
+    [self.mutableDictArray addObject:dict];
+    
+    if ([node.childs count] <= 0) {
+        return dict;
+    } else {
+        for (Node *childNode in node.childs) {
+            [self listedArrayOfNodesForAParentNode:childNode];
+        }
+        return  dict;
+    }
+}
+
+
 
 /**
  *  Serialize MAP Into NSDictionary
