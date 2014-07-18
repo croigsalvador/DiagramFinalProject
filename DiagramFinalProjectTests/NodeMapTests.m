@@ -191,9 +191,9 @@
     
     NSLog(@"Node list %d", [sut.mapList count]);
     
-    Node *insertedNode = [Node createNodeInManagedObjectContext:context withParent:rootNode];
+    Node *insertedNodeNew = [Node createNodeInManagedObjectContext:context withParent:rootNode];
     //OPERATE
-    NSIndexPath *indexpath = [sut indexPathNewForNode:insertedNode];
+    NSIndexPath *indexpath = [sut indexPathNewForNode:insertedNodeNew];
     
     
     
@@ -225,18 +225,43 @@
     XCTAssert(indexpath.row == 2, @"Maplist array is not 2, is:%d", indexpath.row);
 }
 
-- (void)testMapListRemoveNodeWithFetchedResultsController {
+- (void)testMapListInsertNodeWithFetchedResultsController {
     // PREPARE
     
+    Node *rootNode = [Node createNodeInManagedObjectContext:context];
+//    for (int i = 0; i < 10; i++) {
+//        [Node createNodeInManagedObjectContext:context withParent:rootNode];
+//    }
+    //OPERATE
+    [sut populateMapListForRootNode:rootNode];
+    insertedNode = rootNode;
+    
+    [self controller:_fetchedResultsController didChangeObject:rootNode atIndexPath:nil forChangeType:1 newIndexPath:nil];
+    
+    //    [context  deleteObject:rootNode];
+    
+    //Check
+    XCTAssert([sut.mapList count] == 2, @"Maplist array is not 1, is:%d", [sut.mapList count]);
+}
+
+- (void)testMapListRemoveNodeWithFetchedResultsController {
+    // PREPARE
+  
     Node *rootNode = [Node createNodeInManagedObjectContext:context];
     for (int i = 0; i < 10; i++) {
         [Node createNodeInManagedObjectContext:context withParent:rootNode];
     }
     //OPERATE
     [sut populateMapListForRootNode:rootNode];
-    [context  deleteObject:rootNode];
+        deleteNode = rootNode;
+    
+
+      [self controller:_fetchedResultsController didChangeObject:rootNode atIndexPath:nil forChangeType:2 newIndexPath:nil];
+    
+//    [context  deleteObject:rootNode];
+    
     //Check
-    XCTAssert([sut.mapList count] == 0, @"Maplist array is not 0, is:%d", [sut.mapList count]);
+    XCTAssert([sut.mapList count] == 10, @"Maplist array is not 0, is:%d", [sut.mapList count]);
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
