@@ -274,7 +274,7 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
         }
         case NSFetchedResultsChangeDelete:{
 //            NSArray *deleteIndexPaths = [self.nodeMap deleteIndexPathsFor:self.deletedNode];
-            NSIndexPath *delIndexPath = [self.nodeMap indexPathForCurrentNode:self.deletedNode];
+            NSIndexPath *delIndexPath = [self.nodeMap indexPathForCurrentNode:anObject];
             [self.nodeMap removeChildAtIndex:delIndexPath.row];
 
             self.nodeList = self.nodeMap.mapList;
@@ -282,11 +282,11 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
             break;
         }
         case NSFetchedResultsChangeUpdate: {
-            NSIndexPath *updateIndexPath =  [self.nodeMap indexPathForCurrentNode:self.insertedNode];
-            CRNodeTableViewCell *currentCell = (CRNodeTableViewCell*)[self.tableView cellForRowAtIndexPath:updateIndexPath];
-            if (currentCell.nodeTitleLabel.superview == nil) {
-                [currentCell setNeedsLayout];
-            }
+//            NSIndexPath *updateIndexPath =  [self.nodeMap indexPathForCurrentNode:self.insertedNode];
+//            CRNodeTableViewCell *currentCell = (CRNodeTableViewCell*)[self tableView:self.tableView cellForRowAtIndexPath:updateIndexPath];
+//            if (currentCell.nodeTitleLabel.superview == nil) {
+//                [currentCell setNeedsLayout];
+//            }
             break;
         }
         case NSFetchedResultsChangeMove:
@@ -298,6 +298,7 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
+    [self.tableView reloadData];
 }
 
 

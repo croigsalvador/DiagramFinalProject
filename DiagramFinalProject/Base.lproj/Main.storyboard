@@ -22,8 +22,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="1024" height="96"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J1Y-DH-V4b">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="96"/>
+                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J1Y-DH-V4b">
+                                            <rect key="frame" x="-5" y="0.0" width="1024" height="96"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9a-Iv-nVQ">
@@ -49,10 +49,22 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         </view>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="J1Y-DH-V4b" firstAttribute="top" secondItem="PnS-H3-txM" secondAttribute="top" id="2Zg-AE-ATH"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="J1Y-DH-V4b" secondAttribute="trailing" id="4Bf-7s-Tyn"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="J1Y-DH-V4b" secondAttribute="bottom" id="6l3-io-x1b"/>
+                                        <constraint firstAttribute="bottom" secondItem="J1Y-DH-V4b" secondAttribute="bottom" id="D5q-ES-ZPQ"/>
+                                        <constraint firstItem="J1Y-DH-V4b" firstAttribute="top" secondItem="PnS-H3-txM" secondAttribute="top" id="Dfx-fA-Do2"/>
+                                        <constraint firstItem="J1Y-DH-V4b" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PnS-H3-txM" secondAttribute="leading" id="J29-Hi-Fei" userLabel="LeftConstraint"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="J1Y-DH-V4b" secondAttribute="trailing" id="LyN-6n-4Bz"/>
+                                        <constraint firstItem="J1Y-DH-V4b" firstAttribute="leading" secondItem="PnS-H3-txM" secondAttribute="leading" constant="44" id="e50-WG-v65"/>
+                                        <constraint firstAttribute="trailing" secondItem="J1Y-DH-V4b" secondAttribute="trailing" constant="54" id="nQu-H5-0wN" userLabel="RightConstraint"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="containerMainView" destination="J1Y-DH-V4b" id="L1a-NL-8nP"/>
                                     <outlet property="figureView" destination="6rQ-0x-nNw" id="BNy-Vr-jPk"/>
+                                    <outlet property="leftTabLevelConstraint" destination="e50-WG-v65" id="XhG-sQ-gMD"/>
                                     <outlet property="nodeTextLabel" destination="2Bk-4I-9wM" id="RBC-jM-53z"/>
                                     <outlet property="nodeTitleLabel" destination="L9a-Iv-nVQ" id="fdU-YH-Djq"/>
                                     <segue destination="bAW-IY-pXW" kind="modal" identifier="EditNodeSegue" id="Tnc-58-cKD"/>

@@ -261,7 +261,7 @@
 //    [context  deleteObject:rootNode];
     
     //Check
-    XCTAssert([sut.mapList count] == 10, @"Maplist array is not 0, is:%d", [sut.mapList count]);
+    XCTAssert([sut.mapList count] == 10, @"Maplist array is not 10, is:%d", [sut.mapList count]);
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject

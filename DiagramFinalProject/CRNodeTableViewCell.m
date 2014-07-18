@@ -15,11 +15,16 @@
 static CGFloat const kTabMarginForCell           = 40.0f;
 
 @interface CRNodeTableViewCell ()
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftTabLevelConstraint;
 @property (weak, nonatomic) IBOutlet UIView *figureView;
 @end
 
 @implementation CRNodeTableViewCell
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+}
 
 - (void)awakeFromNib {
     self.contentView.backgroundColor = [UIColor clearColor];
@@ -32,17 +37,14 @@ static CGFloat const kTabMarginForCell           = 40.0f;
     
     [self paintFigureInCell:CRNodeType withColor:colorFromText] ;
     [self paintCellWithLevel:level];
-    [self setNeedsDisplay];
+//    [self setNeedsDisplay];
 }
 
 #pragma mark - Private Methods
 
 - (void)paintCellWithLevel:(NSInteger)level {
-    CGRect cellFrame = self.bounds;
-    cellFrame.origin.x = cellFrame.origin.x + ((level - 1) *  kTabMarginForCell);
-    cellFrame.size.width = cellFrame.size.width - ((level - 1) *  kTabMarginForCell);
-    self.containerMainView.frame = cellFrame;
-    self.containerMainView.alpha = 0.8;
+    self.leftTabLevelConstraint.constant = ((level - 1) *  kTabMarginForCell);
+    [self layoutIfNeeded];
 }
 
 - (void)paintFigureInCell:(CRNodeTypeShape)crNodeType withColor:(UIColor *)color {
