@@ -22,6 +22,8 @@ extern NSString * const kNodeIDKey;
 - (void)populateMapListForRootNode:(Node *)node;
 
 - (NSIndexPath *)indexPathNewForNode:(Node *)node;
-- (NSIndexPath *)indexPathForCurrentNode:(Node *)node ;
+- (NSIndexPath *)indexPathForCurrentNode:(Node *)node;
+
+- (NSArray *)deleteIndexPathsFor:(Node *)node;
 
 @end

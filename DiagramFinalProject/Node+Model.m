@@ -43,6 +43,22 @@ NSString * const kLevelPropertyName                 = @"level";
     return matches;
 }
 
+//+ (BOOL)deleteAllChildsOfNode:(Node *)node  inContext:(NSManagedObjectContext *)context{
+//    return YES;
+//}
+//
+//+ (void)deleteChildsOfNode:(Node *)node inContext:(NSManagedObjectContext *)context{
+//    
+//    for (Node *n in node.childs) {
+//        if (!n.childs) {
+//            [self deleteChildsOfNode:n inContext:context];
+//        }else {
+//            [context delete:n];
+//        }
+//    }
+//    [self deleteChildsOfNode:node inContext:context];
+//}
+
 #pragma mark - Fetch requests
 
 + (NSFetchRequest *) fetchAllNodes {

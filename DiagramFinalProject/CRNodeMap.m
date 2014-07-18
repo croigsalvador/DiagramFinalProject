@@ -80,6 +80,24 @@ NSString * const kNodeIDKey             = @"nodeID";
     return indexPath;
 }
 
+
+- (NSArray *)deleteIndexPathsFor:(Node *)node {
+    NSIndexPath *delIndexPath = [self indexPathForCurrentNode:node];
+    NSUInteger indexToDelete = 0;
+    if (![node.childs count]) {
+        indexToDelete = delIndexPath.row + 1;
+    } else {
+        indexToDelete = [self newIndexForNewOfNode:node.parent] + 1;
+    }
+    NSMutableArray *deleteIndexPaths = [[NSMutableArray alloc] init];
+    for (int i = delIndexPath.row; i < indexToDelete; i++) {
+        [self removeChildAtIndex:i];
+        [deleteIndexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+    }
+    return [deleteIndexPaths copy];
+}
+
+
 #pragma mark - Private Methods
 
 - (NSInteger)newIndexForNewOfNode:(Node *)node {
@@ -99,7 +117,6 @@ NSString * const kNodeIDKey             = @"nodeID";
     }
     return index;
 }
-
 
 - (NSDictionary *)listedArrayOfNodesWithParentNode:(Node *)node {
     

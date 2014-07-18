@@ -2,7 +2,7 @@
 //  Node.m
 //  DiagramFinalProject
 //
-//  Created by Carlos Roig Salvador on 17/07/14.
+//  Created by Carlos Roig Salvador on 18/07/14.
 //  Copyright (c) 2014 CRoigSalvador. All rights reserved.
 //
 
@@ -12,12 +12,12 @@
 
 @implementation Node
 
+@dynamic color;
+@dynamic imagePath;
 @dynamic level;
 @dynamic shapeType;
 @dynamic text;
 @dynamic title;
-@dynamic color;
-@dynamic imagePath;
 @dynamic childs;
 @dynamic parent;
 

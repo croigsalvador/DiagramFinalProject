@@ -20,7 +20,7 @@
 #import <OCMockito/OCMockito.h>
 
 
-@interface NodeMapTests : XCTestCase {
+@interface NodeMapTests : XCTestCase <NSFetchedResultsControllerDelegate> {
     // Core Data stack objects.
     NSManagedObjectModel *model;
     NSPersistentStoreCoordinator *coordinator;
@@ -28,7 +28,13 @@
     NSManagedObjectContext *context;
     // Object to test.
     CRNodeMap *sut;
+    Node *insertedNode;
+    Node *deleteNode;
+    NSFetchedResultsController  *_fetchedResultsController;
 }
+
+
+
 
 
 @end
@@ -58,9 +64,24 @@
                                               error: NULL];
     context = [[NSManagedObjectContext alloc] init];
     context.persistentStoreCoordinator = coordinator;
+    [self setupfetchedResultsController];
+    
 }
 
+#pragma mark - NSFetchedResultsController
 
+- (NSFetchedResultsController *)setupfetchedResultsController {
+    if (!_fetchedResultsController) {
+        
+        _fetchedResultsController = [[NSFetchedResultsController  alloc] initWithFetchRequest:[Node fetchAllNodes] managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
+        _fetchedResultsController.delegate = self;
+        
+        if (![_fetchedResultsController performFetch:nil]){
+            // hanfle error
+        }
+    }
+    return _fetchedResultsController;
+}
 - (void) createFixture {
     // Test data
 }
@@ -204,9 +225,40 @@
     XCTAssert(indexpath.row == 2, @"Maplist array is not 2, is:%d", indexpath.row);
 }
 
+- (void)testMapListRemoveNodeWithFetchedResultsController {
+    // PREPARE
+    
+    Node *rootNode = [Node createNodeInManagedObjectContext:context];
+    for (int i = 0; i < 10; i++) {
+        [Node createNodeInManagedObjectContext:context withParent:rootNode];
+    }
+    //OPERATE
+    [sut populateMapListForRootNode:rootNode];
+    [context  deleteObject:rootNode];
+    //Check
+    XCTAssert([sut.mapList count] == 0, @"Maplist array is not 0, is:%d", [sut.mapList count]);
+}
 
-
-
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    switch(type) {
+        case NSFetchedResultsChangeInsert:{
+            NSIndexPath * myIndexPath = [sut indexPathNewForNode:insertedNode];
+            [sut addChild:insertedNode atIndex:myIndexPath.row];
+            break;
+        }
+        case NSFetchedResultsChangeDelete:{
+            NSIndexPath *delIndexPath = [sut indexPathForCurrentNode:deleteNode];
+            [sut removeChildAtIndex:delIndexPath.row];
+            break;
+        }
+        case NSFetchedResultsChangeUpdate:
+     
+        case NSFetchedResultsChangeMove:
+            break;
+    }
+}
 
 
 

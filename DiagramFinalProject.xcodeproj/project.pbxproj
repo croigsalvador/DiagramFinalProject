@@ -30,12 +30,12 @@
 		1D8B2CFA19753EDB00C67FB1 /* NodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8B2CF919753EDB00C67FB1 /* NodeTests.m */; };
 		1D8B2CFB197540DD00C67FB1 /* DiagramModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1D890A731973DB510038D983 /* DiagramModel.xcdatamodeld */; };
 		1D8B2D091975D9C900C67FB1 /* CRNodeMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8B2D081975D9C900C67FB1 /* CRNodeMap.m */; };
-		1DC112FF19783EC8002F8148 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC112FE19783EC8002F8148 /* Node.m */; };
 		1DC113071978444C002F8148 /* CRSquareFigureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC113061978444C002F8148 /* CRSquareFigureView.m */; };
 		1DC1130B197860F3002F8148 /* CRColoursView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC1130A197860F3002F8148 /* CRColoursView.m */; };
 		1DC1130E197869F2002F8148 /* paleta.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DC1130D197869F2002F8148 /* paleta.png */; };
 		1DC113111978818D002F8148 /* UIFont+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC113101978818D002F8148 /* UIFont+Common.m */; };
 		1DC1131719788486002F8148 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DC1131619788486002F8148 /* background.png */; };
+		1DC1131A19792C69002F8148 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC1131919792C69002F8148 /* Node.m */; };
 		D6F117AE57B7483BA7067F00 /* libPods-DiagramFinalProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C17D554B018F4A15BBE93B0F /* libPods-DiagramFinalProjectTests.a */; };
 /* End PBXBuildFile section */
 
@@ -80,8 +80,6 @@
 		1D8B2CF919753EDB00C67FB1 /* NodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTests.m; sourceTree = "<group>"; };
 		1D8B2D071975D9C900C67FB1 /* CRNodeMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRNodeMap.h; sourceTree = "<group>"; };
 		1D8B2D081975D9C900C67FB1 /* CRNodeMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRNodeMap.m; sourceTree = "<group>"; };
-		1DC112FD19783EC8002F8148 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
-		1DC112FE19783EC8002F8148 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		1DC113051978444C002F8148 /* CRSquareFigureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSquareFigureView.h; sourceTree = "<group>"; };
 		1DC113061978444C002F8148 /* CRSquareFigureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSquareFigureView.m; sourceTree = "<group>"; };
 		1DC11309197860F3002F8148 /* CRColoursView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRColoursView.h; sourceTree = "<group>"; };
@@ -92,6 +90,8 @@
 		1DC1131419788212002F8148 /* Amatic-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amatic-Bold.ttf"; sourceTree = "<group>"; };
 		1DC1131519788212002F8148 /* AmaticSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AmaticSC-Regular.ttf"; sourceTree = "<group>"; };
 		1DC1131619788486002F8148 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		1DC1131819792C69002F8148 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		1DC1131919792C69002F8148 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		64C3103266D240ECA62CEA71 /* Pods-DiagramFinalProjectTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiagramFinalProjectTests.xcconfig"; path = "Pods/Pods-DiagramFinalProjectTests.xcconfig"; sourceTree = "<group>"; };
 		805FFD02800E48C4BE5CFD72 /* libPods-DiagramFinalProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DiagramFinalProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C17D554B018F4A15BBE93B0F /* libPods-DiagramFinalProjectTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DiagramFinalProjectTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -204,9 +204,9 @@
 			children = (
 				1D8B2D071975D9C900C67FB1 /* CRNodeMap.h */,
 				1D8B2D081975D9C900C67FB1 /* CRNodeMap.m */,
+				1DC1131819792C69002F8148 /* Node.h */,
+				1DC1131919792C69002F8148 /* Node.m */,
 				1D890A731973DB510038D983 /* DiagramModel.xcdatamodeld */,
-				1DC112FD19783EC8002F8148 /* Node.h */,
-				1DC112FE19783EC8002F8148 /* Node.m */,
 				1D890A8219740BB00038D983 /* Node+Model.h */,
 				1D890A8319740BB00038D983 /* Node+Model.m */,
 			);
@@ -542,11 +542,11 @@
 				1D890A871974143C0038D983 /* CRNodeTableViewCell.m in Sources */,
 				1D8B2D091975D9C900C67FB1 /* CRNodeMap.m in Sources */,
 				1DC1130B197860F3002F8148 /* CRColoursView.m in Sources */,
-				1DC112FF19783EC8002F8148 /* Node.m in Sources */,
 				1D890A8A19741DAB0038D983 /* CREditNodeViewController.m in Sources */,
 				1D890A751973DB510038D983 /* DiagramModel.xcdatamodeld in Sources */,
 				1DC113071978444C002F8148 /* CRSquareFigureView.m in Sources */,
 				1D890A8419740BB00038D983 /* Node+Model.m in Sources */,
+				1DC1131A19792C69002F8148 /* Node.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

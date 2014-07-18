@@ -12,7 +12,6 @@
 @interface CREditNodeViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITextView *nodeTextView;
-@property (weak, nonatomic) IBOutlet UITextField *shapeTextField;
 
 @property (nonatomic, assign, getter = isModified) BOOL modified;
 

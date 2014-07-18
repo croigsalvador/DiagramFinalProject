@@ -105,10 +105,10 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
 - (void)deleteItemAtIndexPath:(NSIndexPath *)indexPath {
     [self.managedObjectContext.undoManager beginUndoGrouping];
     Node *node = [self nodeFromFetchedResultsControllerAtIndexPath:indexPath];
-    //    for (Node *childNode in node.childs) {
-    //        self.deletedNode = node;
-    //        [self.managedObjectContext deleteObject:childNode];
-    //    }
+//    for (Node *childNode in node.childs) {
+//        self.deletedNode = node;
+//        [self.managedObjectContext deleteObject:childNode];
+//    }
     self.deletedNode = node;
     [self.managedObjectContext deleteObject:node];
     
@@ -273,8 +273,10 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
             break;
         }
         case NSFetchedResultsChangeDelete:{
+//            NSArray *deleteIndexPaths = [self.nodeMap deleteIndexPathsFor:self.deletedNode];
             NSIndexPath *delIndexPath = [self.nodeMap indexPathForCurrentNode:self.deletedNode];
             [self.nodeMap removeChildAtIndex:delIndexPath.row];
+
             self.nodeList = self.nodeMap.mapList;
             [tableView deleteRowsAtIndexPaths:@[delIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
             break;
