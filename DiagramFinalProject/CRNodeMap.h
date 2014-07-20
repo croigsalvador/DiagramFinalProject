@@ -24,6 +24,5 @@ extern NSString * const kNodeIDKey;
 - (NSIndexPath *)indexPathNewForNode:(Node *)node;
 - (NSIndexPath *)indexPathForCurrentNode:(Node *)node;
 
-- (NSArray *)deleteIndexPathsFor:(Node *)node;
-
+- (void)deleteNodesAtIndex:(NSArray *)deleteIndexs;
 @end

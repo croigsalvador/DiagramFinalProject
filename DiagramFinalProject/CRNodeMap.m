@@ -81,20 +81,12 @@ NSString * const kNodeIDKey             = @"nodeID";
 }
 
 
-- (NSArray *)deleteIndexPathsFor:(Node *)node {
-    NSIndexPath *delIndexPath = [self indexPathForCurrentNode:node];
-    NSUInteger indexToDelete = 0;
-    if (![node.childs count]) {
-        indexToDelete = delIndexPath.row + 1;
-    } else {
-        indexToDelete = [self newIndexForNewOfNode:node.parent] + 1;
+- (void)deleteNodesAtIndex:(NSArray *)deleteIndexs {
+    NSSortDescriptor* sortOrder = [NSSortDescriptor sortDescriptorWithKey: @"self" ascending: NO];
+    NSArray *indexs = [deleteIndexs  sortedArrayUsingDescriptors: [NSArray arrayWithObject: sortOrder]];
+    for (NSNumber *index in indexs) {
+        [self removeChildAtIndex:[index intValue]];
     }
-    NSMutableArray *deleteIndexPaths = [[NSMutableArray alloc] init];
-    for (int i = delIndexPath.row; i < indexToDelete; i++) {
-        [self removeChildAtIndex:i];
-        [deleteIndexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-    }
-    return [deleteIndexPaths copy];
 }
 
 

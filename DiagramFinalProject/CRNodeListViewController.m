@@ -38,6 +38,8 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
 
 @property (strong,nonatomic) NSManagedObjectContext *managedObjectContext;
 
+@property (strong,nonatomic) NSMutableArray *deleteIndexs;
+@property (assign,nonatomic, getter = isDeleting) BOOL deleting;
 @end
 
 @implementation CRNodeListViewController
@@ -61,6 +63,13 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
         _managedObjectContext = self.managedDocument.managedObjectContext;
     }
     return _managedObjectContext;
+}
+
+- (NSMutableArray *)deleteIndexs {
+    if (!_deleteIndexs) {
+        _deleteIndexs = [[NSMutableArray alloc] init];
+    }
+    return _deleteIndexs;
 }
 
 #pragma mark - Private Methods
@@ -105,10 +114,10 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
 - (void)deleteItemAtIndexPath:(NSIndexPath *)indexPath {
     [self.managedObjectContext.undoManager beginUndoGrouping];
     Node *node = [self nodeFromFetchedResultsControllerAtIndexPath:indexPath];
-//    for (Node *childNode in node.childs) {
-//        self.deletedNode = node;
-//        [self.managedObjectContext deleteObject:childNode];
-//    }
+    //    for (Node *childNode in node.childs) {
+    //        self.deletedNode = node;
+    //        [self.managedObjectContext deleteObject:childNode];
+    //    }
     self.deletedNode = node;
     [self.managedObjectContext deleteObject:node];
     
@@ -122,6 +131,15 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
     NSManagedObjectID *nodeID = nodeDictionary[kNodeIDKey];
     Node *node =(Node *) [self.fetchedResultsController.managedObjectContext existingObjectWithID:nodeID error:nil];
     return node;
+}
+
+- (void)removeNodes {
+    
+    [self.nodeMap deleteNodesAtIndex:[self.deleteIndexs copy]];
+    self.deleting = NO;
+    self.deleteIndexs = nil;
+    
+    self.nodeList = self.nodeMap.mapList;
 }
 
 #pragma mark - Navigation Methods
@@ -242,7 +260,6 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
@@ -273,31 +290,25 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
             break;
         }
         case NSFetchedResultsChangeDelete:{
-//            NSArray *deleteIndexPaths = [self.nodeMap deleteIndexPathsFor:self.deletedNode];
             NSIndexPath *delIndexPath = [self.nodeMap indexPathForCurrentNode:anObject];
-            [self.nodeMap removeChildAtIndex:delIndexPath.row];
-
-            self.nodeList = self.nodeMap.mapList;
-            [tableView deleteRowsAtIndexPaths:@[delIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+            [self.deleteIndexs addObject:@(delIndexPath.row)];
+            self.deleting = YES;
             break;
         }
         case NSFetchedResultsChangeUpdate: {
-//            NSIndexPath *updateIndexPath =  [self.nodeMap indexPathForCurrentNode:self.insertedNode];
-//            CRNodeTableViewCell *currentCell = (CRNodeTableViewCell*)[self tableView:self.tableView cellForRowAtIndexPath:updateIndexPath];
-//            if (currentCell.nodeTitleLabel.superview == nil) {
-//                [currentCell setNeedsLayout];
-//            }
+            
             break;
         }
         case NSFetchedResultsChangeMove:
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-            [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            
             break;
     }
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView endUpdates];
+    if (self.isDeleting) {
+        [self removeNodes];
+    }
     [self.tableView reloadData];
 }
 
