@@ -6,13 +6,12 @@
 //  Copyright (c) 2014 CRoigSalvador. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
+#import "CRBaseViewController.h"
 
 @class Node;
 @protocol EditNodeDelegate;
 
-@interface CREditNodeViewController : UIViewController
+@interface CREditNodeViewController : CRBaseViewController
 
 @property (strong,nonatomic) Node *node;
 @property (weak,nonatomic) id<EditNodeDelegate> delegate;

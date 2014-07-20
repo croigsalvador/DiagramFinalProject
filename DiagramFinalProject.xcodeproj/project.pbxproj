@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		0E0051317D4A48C9858C0EE8 /* libPods-DiagramFinalProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 805FFD02800E48C4BE5CFD72 /* libPods-DiagramFinalProject.a */; };
 		1D103BC41976F4400050F092 /* NodeMapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D103BC31976F4400050F092 /* NodeMapTests.m */; };
+		1D353723197C182B0005747F /* CRMapDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D353722197C182B0005747F /* CRMapDrawerViewController.m */; };
+		1D35372B197C18D90005747F /* CRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D35372A197C18D90005747F /* CRBaseViewController.m */; };
+		1D353731197C199D0005747F /* CRMapListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D353730197C199D0005747F /* CRMapListViewController.m */; };
+		1D353734197C1A8E0005747F /* CRMapList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D353733197C1A8E0005747F /* CRMapList.m */; };
+		1D353739197C1C6E0005747F /* CRMapCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D353738197C1C6E0005747F /* CRMapCollectionViewCell.m */; };
+		1D35373F197C1F980005747F /* CRMapCollectionFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D35373E197C1F980005747F /* CRMapCollectionFlowLayout.m */; };
+		1D353741197C3B7E0005747F /* maps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D353740197C3B7E0005747F /* maps.plist */; };
+		1D353744197C43080005747F /* CRDocumentNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D353743197C43080005747F /* CRDocumentNameView.m */; };
 		1D5EA81119753267006C9650 /* CRAppDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5EA81019753267006C9650 /* CRAppDelegateTests.m */; };
 		1D890A3E1973DB320038D983 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A3D1973DB320038D983 /* Foundation.framework */; };
 		1D890A401973DB320038D983 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A3F1973DB320038D983 /* CoreGraphics.framework */; };
@@ -51,6 +59,21 @@
 
 /* Begin PBXFileReference section */
 		1D103BC31976F4400050F092 /* NodeMapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeMapTests.m; sourceTree = "<group>"; };
+		1D353721197C182B0005747F /* CRMapDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRMapDrawerViewController.h; sourceTree = "<group>"; };
+		1D353722197C182B0005747F /* CRMapDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRMapDrawerViewController.m; sourceTree = "<group>"; };
+		1D353729197C18D90005747F /* CRBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBaseViewController.h; sourceTree = "<group>"; };
+		1D35372A197C18D90005747F /* CRBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBaseViewController.m; sourceTree = "<group>"; };
+		1D35372F197C199D0005747F /* CRMapListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRMapListViewController.h; sourceTree = "<group>"; };
+		1D353730197C199D0005747F /* CRMapListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRMapListViewController.m; sourceTree = "<group>"; };
+		1D353732197C1A8E0005747F /* CRMapList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRMapList.h; sourceTree = "<group>"; };
+		1D353733197C1A8E0005747F /* CRMapList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRMapList.m; sourceTree = "<group>"; };
+		1D353737197C1C6E0005747F /* CRMapCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRMapCollectionViewCell.h; sourceTree = "<group>"; };
+		1D353738197C1C6E0005747F /* CRMapCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRMapCollectionViewCell.m; sourceTree = "<group>"; };
+		1D35373D197C1F980005747F /* CRMapCollectionFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRMapCollectionFlowLayout.h; sourceTree = "<group>"; };
+		1D35373E197C1F980005747F /* CRMapCollectionFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRMapCollectionFlowLayout.m; sourceTree = "<group>"; };
+		1D353740197C3B7E0005747F /* maps.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = maps.plist; sourceTree = "<group>"; };
+		1D353742197C43080005747F /* CRDocumentNameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRDocumentNameView.h; sourceTree = "<group>"; };
+		1D353743197C43080005747F /* CRDocumentNameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRDocumentNameView.m; sourceTree = "<group>"; };
 		1D5EA81019753267006C9650 /* CRAppDelegateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAppDelegateTests.m; sourceTree = "<group>"; };
 		1D890A3A1973DB320038D983 /* DiagramFinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiagramFinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D890A3D1973DB320038D983 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -124,6 +147,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D353720197C17EC0005747F /* MapDrawer */ = {
+			isa = PBXGroup;
+			children = (
+				1D353721197C182B0005747F /* CRMapDrawerViewController.h */,
+				1D353722197C182B0005747F /* CRMapDrawerViewController.m */,
+			);
+			name = MapDrawer;
+			sourceTree = "<group>";
+		};
+		1D353724197C18590005747F /* MapList */ = {
+			isa = PBXGroup;
+			children = (
+				1D353735197C1C090005747F /* FlowLayout */,
+				1D35372F197C199D0005747F /* CRMapListViewController.h */,
+				1D353730197C199D0005747F /* CRMapListViewController.m */,
+			);
+			name = MapList;
+			sourceTree = "<group>";
+		};
+		1D353728197C18B90005747F /* BaseController */ = {
+			isa = PBXGroup;
+			children = (
+				1D353729197C18D90005747F /* CRBaseViewController.h */,
+				1D35372A197C18D90005747F /* CRBaseViewController.m */,
+			);
+			name = BaseController;
+			sourceTree = "<group>";
+		};
+		1D353735197C1C090005747F /* FlowLayout */ = {
+			isa = PBXGroup;
+			children = (
+				1D35373D197C1F980005747F /* CRMapCollectionFlowLayout.h */,
+				1D35373E197C1F980005747F /* CRMapCollectionFlowLayout.m */,
+			);
+			name = FlowLayout;
+			sourceTree = "<group>";
+		};
+		1D353736197C1C160005747F /* MapCell */ = {
+			isa = PBXGroup;
+			children = (
+				1D353737197C1C6E0005747F /* CRMapCollectionViewCell.h */,
+				1D353738197C1C6E0005747F /* CRMapCollectionViewCell.m */,
+			);
+			name = MapCell;
+			sourceTree = "<group>";
+		};
+		1D353745197C43110005747F /* DocumentName */ = {
+			isa = PBXGroup;
+			children = (
+				1D353742197C43080005747F /* CRDocumentNameView.h */,
+				1D353743197C43080005747F /* CRDocumentNameView.m */,
+			);
+			name = DocumentName;
+			sourceTree = "<group>";
+		};
 		1D890A311973DB320038D983 = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +287,8 @@
 				1D890A731973DB510038D983 /* DiagramModel.xcdatamodeld */,
 				1D890A8219740BB00038D983 /* Node+Model.h */,
 				1D890A8319740BB00038D983 /* Node+Model.m */,
+				1D353732197C1A8E0005747F /* CRMapList.h */,
+				1D353733197C1A8E0005747F /* CRMapList.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -225,6 +305,9 @@
 		1D890A7D1973DE310038D983 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1D353728197C18B90005747F /* BaseController */,
+				1D353724197C18590005747F /* MapList */,
+				1D353720197C17EC0005747F /* MapDrawer */,
 				1D890A8B19741DC60038D983 /* NodeList */,
 				1D890A8C19741DD20038D983 /* EditNode */,
 			);
@@ -234,10 +317,12 @@
 		1D890A7E1973E5010038D983 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1DC11308197860D3002F8148 /* Colours */,
+				1D353736197C1C160005747F /* MapCell */,
+				1DC11308197860D3002F8148 /* Colors */,
 				1DC1130419784422002F8148 /* Figures */,
 				1D890A8E19741DE50038D983 /* StoryBoard */,
 				1D890A8D19741DDD0038D983 /* NodeCell */,
+				1D353745197C43110005747F /* DocumentName */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -247,6 +332,7 @@
 			children = (
 				1DC1130C197869D2002F8148 /* Assets */,
 				1D890A551973DB320038D983 /* Images.xcassets */,
+				1D353740197C3B7E0005747F /* maps.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -332,13 +418,13 @@
 			name = Figures;
 			sourceTree = "<group>";
 		};
-		1DC11308197860D3002F8148 /* Colours */ = {
+		1DC11308197860D3002F8148 /* Colors */ = {
 			isa = PBXGroup;
 			children = (
 				1DC11309197860F3002F8148 /* CRColoursView.h */,
 				1DC1130A197860F3002F8148 /* CRColoursView.m */,
 			);
-			name = Colours;
+			name = Colors;
 			sourceTree = "<group>";
 		};
 		1DC1130C197869D2002F8148 /* Assets */ = {
@@ -450,6 +536,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DC1130E197869F2002F8148 /* paleta.png in Resources */,
+				1D353741197C3B7E0005747F /* maps.plist in Resources */,
 				1DC1131719788486002F8148 /* background.png in Resources */,
 				1D890A561973DB320038D983 /* Images.xcassets in Resources */,
 				1D890A481973DB320038D983 /* InfoPlist.strings in Resources */,
@@ -536,17 +623,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D890A4A1973DB320038D983 /* main.m in Sources */,
+				1D353723197C182B0005747F /* CRMapDrawerViewController.m in Sources */,
 				1D890A4E1973DB320038D983 /* CRAppDelegate.m in Sources */,
+				1D353731197C199D0005747F /* CRMapListViewController.m in Sources */,
 				1D890A541973DB320038D983 /* CRNodeListViewController.m in Sources */,
+				1D353734197C1A8E0005747F /* CRMapList.m in Sources */,
+				1D353739197C1C6E0005747F /* CRMapCollectionViewCell.m in Sources */,
 				1DC113111978818D002F8148 /* UIFont+Common.m in Sources */,
 				1D890A871974143C0038D983 /* CRNodeTableViewCell.m in Sources */,
 				1D8B2D091975D9C900C67FB1 /* CRNodeMap.m in Sources */,
 				1DC1130B197860F3002F8148 /* CRColoursView.m in Sources */,
 				1D890A8A19741DAB0038D983 /* CREditNodeViewController.m in Sources */,
+				1D353744197C43080005747F /* CRDocumentNameView.m in Sources */,
 				1D890A751973DB510038D983 /* DiagramModel.xcdatamodeld in Sources */,
 				1DC113071978444C002F8148 /* CRSquareFigureView.m in Sources */,
 				1D890A8419740BB00038D983 /* Node+Model.m in Sources */,
 				1DC1131A19792C69002F8148 /* Node.m in Sources */,
+				1D35372B197C18D90005747F /* CRBaseViewController.m in Sources */,
+				1D35373F197C1F980005747F /* CRMapCollectionFlowLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

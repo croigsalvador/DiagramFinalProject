@@ -16,7 +16,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self setupDependencyInjection];
+//    [self setupDependencyInjection];
     return YES;
 }
 
@@ -50,50 +50,11 @@
 #pragma mark - Setup ViewController Dependencies
 
 - (void)setupDependencyInjection {
-    UIManagedDocument *managedDocument = [self setupManagedDocument];
-    CRNodeMap *nodeMap = [[CRNodeMap alloc] init];
-    
-    UINavigationController *navViewController =(UINavigationController *)self.window.rootViewController;
-    CRNodeListViewController *nodeListViewController =(CRNodeListViewController *) [navViewController topViewController];
-    nodeListViewController.managedDocument = managedDocument;
-    nodeListViewController.nodeMap = nodeMap;
-    
+   
 }
 
 
 
-
-#pragma mark - Initialize UIManagedDocument
-
-- (UIManagedDocument *)setupManagedDocument {
-    NSURL *fileURL =[self urlForUIManagedDocument];
-    
-    UIManagedDocument *managedDocument = [[UIManagedDocument alloc] initWithFileURL:fileURL];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[fileURL path]]) {
-        [managedDocument openWithCompletionHandler:^(BOOL success) {
-            if (!success) {
-                NSLog(@"No se pudo abrir aq%@", managedDocument);
-            } else {
-            }
-        }];
-    } else {
-        [managedDocument saveToURL:fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
-            if (success) {
-            }
-            NSLog(@"No se pudo abrir %@", managedDocument);
-        }];
-    }
-    return managedDocument;
-}
-
-#pragma mark - Document Path
-
-- (NSURL *)urlForUIManagedDocument{
-    NSArray *paths = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
-    NSURL *documentsURL = [paths lastObject];
-    NSURL *fileURL = [documentsURL URLByAppendingPathComponent:@"map.sqlite"];
-    return fileURL;
-}
 
 
 

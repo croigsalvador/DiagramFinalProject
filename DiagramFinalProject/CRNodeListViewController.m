@@ -38,7 +38,7 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
 
 @property (strong,nonatomic) NSManagedObjectContext *managedObjectContext;
 
-@property (strong,nonatomic) NSMutableArray *deleteIndexs;
+@property (copy, nonatomic) NSMutableArray *deleteIndexs;
 @property (assign,nonatomic, getter = isDeleting) BOOL deleting;
 @end
 
@@ -114,10 +114,6 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
 - (void)deleteItemAtIndexPath:(NSIndexPath *)indexPath {
     [self.managedObjectContext.undoManager beginUndoGrouping];
     Node *node = [self nodeFromFetchedResultsControllerAtIndexPath:indexPath];
-    //    for (Node *childNode in node.childs) {
-    //        self.deletedNode = node;
-    //        [self.managedObjectContext deleteObject:childNode];
-    //    }
     self.deletedNode = node;
     [self.managedObjectContext deleteObject:node];
     
