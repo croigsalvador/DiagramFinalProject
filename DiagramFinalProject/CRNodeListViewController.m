@@ -23,10 +23,7 @@ static NSString *const kSegueEditNode                    = @"EditNodeSegue";
 static NSString *const kMainStoryBoardNameID             = @"Main";
 static NSString *const kEditViewControllerID             = @"EditNavViewController";
 
-
 static NSString *const kDeletingActionName               = @"DeleteAction";
-
-
 
 @interface CRNodeListViewController ()<NSFetchedResultsControllerDelegate, SWTableViewCellDelegate, EditNodeDelegate>
 
@@ -102,17 +99,14 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
 
 - (void)addChildNodeToParentAtIndexPath:(NSIndexPath *)indexPath {
     [self.managedObjectContext.undoManager beginUndoGrouping];
-    
     Node *parentNode = [self nodeFromFetchedResultsControllerAtIndexPath:indexPath];
-    
     self.insertedNode = [Node createNodeInManagedObjectContext:self.managedObjectContext withParent:parentNode];
-    
     [self prepareViewControllerFromStoryBoardWithNewNode:self.insertedNode];
 }
 
-
 - (void)deleteItemAtIndexPath:(NSIndexPath *)indexPath {
     [self.managedObjectContext.undoManager beginUndoGrouping];
+   
     Node *node = [self nodeFromFetchedResultsControllerAtIndexPath:indexPath];
     self.deletedNode = node;
     [self.managedObjectContext deleteObject:node];

@@ -23,10 +23,8 @@
 
 static NSString * const kFilePathComponent                = @"sqlite";
 static NSString * const kMainStoryBoardNameID             = @"Main";
-static NSString * const kEditViewControllerID             = @"NodeListNavViewController";
-
-
-static UIEdgeInsets kCollectionInsets              = {64.0, 0.0 , 0.0 ,0.0};
+static NSString * const kListViewControllerID             = @"NodeListNavViewController";
+static UIEdgeInsets const kCollectionInsets                     = {64.0, 0.0 , 0.0 ,0.0};
 
 @interface CRMapListViewController ()<DocumentNameViewDelegate>
 @property (copy, nonatomic) NSArray *mapListArray;
@@ -34,7 +32,6 @@ static UIEdgeInsets kCollectionInsets              = {64.0, 0.0 , 0.0 ,0.0};
 @property (strong,nonatomic) CRMapList *mapList;
 @property (strong,nonatomic) CRDocumentNameView *documentNameView;
 @property (assign,nonatomic, getter = isShowed) BOOL showed;
-
 @end
 
 @implementation CRMapListViewController
@@ -59,7 +56,7 @@ static UIEdgeInsets kCollectionInsets              = {64.0, 0.0 , 0.0 ,0.0};
 
 - (CRDocumentNameView *)documentNameView {
     if (!_documentNameView) {
-        _documentNameView = [[CRDocumentNameView alloc] initWithFrame:CGRectMake(100, 64, 400, 200)];
+        _documentNameView = [[CRDocumentNameView alloc] initWithFrame:CGRectMake(312, 64, 400, 200)];
         _documentNameView.delegate = self;
         _documentNameView.hidden = YES;
     }
@@ -71,7 +68,6 @@ static UIEdgeInsets kCollectionInsets              = {64.0, 0.0 , 0.0 ,0.0};
 - (void)setupCollectionView {
     CGRect collectionFrame = UIEdgeInsetsInsetRect(self.view.bounds, kCollectionInsets);
     CRMapCollectionFlowLayout *flowLayout = [[CRMapCollectionFlowLayout alloc] init];
-    
     self.collectionView = [[UICollectionView alloc]initWithFrame:collectionFrame collectionViewLayout:flowLayout];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -123,11 +119,10 @@ static UIEdgeInsets kCollectionInsets              = {64.0, 0.0 , 0.0 ,0.0};
     
     UIStoryboard *mapStoryboard = [UIStoryboard storyboardWithName:kMainStoryBoardNameID bundle:[NSBundle mainBundle]];
     
-    UINavigationController *navViewController =(UINavigationController *)[mapStoryboard instantiateViewControllerWithIdentifier:kEditViewControllerID];
-    CRNodeListViewController *nodeListViewController =(CRNodeListViewController *) [navViewController topViewController];
+    CRNodeListViewController *nodeListViewController =(CRNodeListViewController *)[mapStoryboard instantiateViewControllerWithIdentifier:kListViewControllerID];
     nodeListViewController.managedDocument = managedDocument;
     nodeListViewController.nodeMap = nodeMap;
-    [self presentViewController:navViewController animated:YES completion:nil];
+    [self.navigationController pushViewController:nodeListViewController animated:YES];
 }
 
 #pragma mark - IBAction Methods

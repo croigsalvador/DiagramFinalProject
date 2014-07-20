@@ -8,13 +8,13 @@
 
 #import "CRDocumentNameView.h"
 
-static CGFloat const kMarginLeft                   = 20.0f;
-static CGFloat const kTextFieldHeight              = 30.0f;
-static CGSize  const kButtonSize                   = { 40.0f, 100.0f };
+static CGFloat const kMarginLeft                            = 20.0f;
+static CGFloat const kTextFieldHeight                       = 30.0f;
+static CGSize  const kButtonSize                            = { 100.0f, 40.0f };
 
-static NSString * const kNameString                      = @"Nombre";
-static NSString * const kCancelButtonName                = @"Cancelar";
-static NSString * const kAcceptButtonName                = @"Aceptar";
+static NSString * const kNameString                         = @"Nombre";
+static NSString * const kCancelButtonName                   = @"Cancelar";
+static NSString * const kAcceptButtonName                   = @"Aceptar";
 
 @interface CRDocumentNameView ()
 @property (strong,nonatomic) UITextField *nameTextField;
@@ -85,19 +85,5 @@ static NSString * const kAcceptButtonName                = @"Aceptar";
         [self.delegate buttonPressedInDocument:self withTag:sender.tag andText:self.nameTextField.text];
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @end

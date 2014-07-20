@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E0051317D4A48C9858C0EE8 /* libPods-DiagramFinalProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 805FFD02800E48C4BE5CFD72 /* libPods-DiagramFinalProject.a */; };
+		1D0402EF197C6EFC003932FB /* CRRoundColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0402EE197C6EFC003932FB /* CRRoundColorView.m */; };
 		1D103BC41976F4400050F092 /* NodeMapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D103BC31976F4400050F092 /* NodeMapTests.m */; };
 		1D353723197C182B0005747F /* CRMapDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D353722197C182B0005747F /* CRMapDrawerViewController.m */; };
 		1D35372B197C18D90005747F /* CRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D35372A197C18D90005747F /* CRBaseViewController.m */; };
@@ -17,6 +18,7 @@
 		1D35373F197C1F980005747F /* CRMapCollectionFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D35373E197C1F980005747F /* CRMapCollectionFlowLayout.m */; };
 		1D353741197C3B7E0005747F /* maps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D353740197C3B7E0005747F /* maps.plist */; };
 		1D353744197C43080005747F /* CRDocumentNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D353743197C43080005747F /* CRDocumentNameView.m */; };
+		1D353749197C65840005747F /* UIColor+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D353748197C65840005747F /* UIColor+Custom.m */; };
 		1D5EA81119753267006C9650 /* CRAppDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5EA81019753267006C9650 /* CRAppDelegateTests.m */; };
 		1D890A3E1973DB320038D983 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A3D1973DB320038D983 /* Foundation.framework */; };
 		1D890A401973DB320038D983 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A3F1973DB320038D983 /* CoreGraphics.framework */; };
@@ -58,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D0402ED197C6EFC003932FB /* CRRoundColorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRRoundColorView.h; sourceTree = "<group>"; };
+		1D0402EE197C6EFC003932FB /* CRRoundColorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRRoundColorView.m; sourceTree = "<group>"; };
 		1D103BC31976F4400050F092 /* NodeMapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeMapTests.m; sourceTree = "<group>"; };
 		1D353721197C182B0005747F /* CRMapDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRMapDrawerViewController.h; sourceTree = "<group>"; };
 		1D353722197C182B0005747F /* CRMapDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRMapDrawerViewController.m; sourceTree = "<group>"; };
@@ -74,6 +78,8 @@
 		1D353740197C3B7E0005747F /* maps.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = maps.plist; sourceTree = "<group>"; };
 		1D353742197C43080005747F /* CRDocumentNameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRDocumentNameView.h; sourceTree = "<group>"; };
 		1D353743197C43080005747F /* CRDocumentNameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRDocumentNameView.m; sourceTree = "<group>"; };
+		1D353747197C65840005747F /* UIColor+Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Custom.h"; sourceTree = "<group>"; };
+		1D353748197C65840005747F /* UIColor+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Custom.m"; sourceTree = "<group>"; };
 		1D5EA81019753267006C9650 /* CRAppDelegateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAppDelegateTests.m; sourceTree = "<group>"; };
 		1D890A3A1973DB320038D983 /* DiagramFinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiagramFinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D890A3D1973DB320038D983 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -306,10 +312,10 @@
 			isa = PBXGroup;
 			children = (
 				1D353728197C18B90005747F /* BaseController */,
-				1D353724197C18590005747F /* MapList */,
-				1D353720197C17EC0005747F /* MapDrawer */,
-				1D890A8B19741DC60038D983 /* NodeList */,
 				1D890A8C19741DD20038D983 /* EditNode */,
+				1D353720197C17EC0005747F /* MapDrawer */,
+				1D353724197C18590005747F /* MapList */,
+				1D890A8B19741DC60038D983 /* NodeList */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -405,6 +411,8 @@
 			children = (
 				1DC1130F1978818D002F8148 /* UIFont+Common.h */,
 				1DC113101978818D002F8148 /* UIFont+Common.m */,
+				1D353747197C65840005747F /* UIColor+Custom.h */,
+				1D353748197C65840005747F /* UIColor+Custom.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -414,6 +422,8 @@
 			children = (
 				1DC113051978444C002F8148 /* CRSquareFigureView.h */,
 				1DC113061978444C002F8148 /* CRSquareFigureView.m */,
+				1D0402ED197C6EFC003932FB /* CRRoundColorView.h */,
+				1D0402EE197C6EFC003932FB /* CRRoundColorView.m */,
 			);
 			name = Figures;
 			sourceTree = "<group>";
@@ -629,6 +639,7 @@
 				1D890A541973DB320038D983 /* CRNodeListViewController.m in Sources */,
 				1D353734197C1A8E0005747F /* CRMapList.m in Sources */,
 				1D353739197C1C6E0005747F /* CRMapCollectionViewCell.m in Sources */,
+				1D0402EF197C6EFC003932FB /* CRRoundColorView.m in Sources */,
 				1DC113111978818D002F8148 /* UIFont+Common.m in Sources */,
 				1D890A871974143C0038D983 /* CRNodeTableViewCell.m in Sources */,
 				1D8B2D091975D9C900C67FB1 /* CRNodeMap.m in Sources */,
@@ -639,6 +650,7 @@
 				1DC113071978444C002F8148 /* CRSquareFigureView.m in Sources */,
 				1D890A8419740BB00038D983 /* Node+Model.m in Sources */,
 				1DC1131A19792C69002F8148 /* Node.m in Sources */,
+				1D353749197C65840005747F /* UIColor+Custom.m in Sources */,
 				1D35372B197C18D90005747F /* CRBaseViewController.m in Sources */,
 				1D35373F197C1F980005747F /* CRMapCollectionFlowLayout.m in Sources */,
 			);

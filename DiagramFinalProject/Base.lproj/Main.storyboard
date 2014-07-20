@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="anT-EQ-bPe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="LHn-kj-Yhn">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -7,7 +7,7 @@
         <!--Node List View Controller-->
         <scene sceneID="dlw-oQ-tEr">
             <objects>
-                <tableViewController id="Z4o-7E-8ke" customClass="CRNodeListViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="NodeListNavViewController" id="Z4o-7E-8ke" customClass="CRNodeListViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="96" sectionHeaderHeight="22" sectionFooterHeight="22" id="s4b-Bq-Hnf">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -16,7 +16,7 @@
                         <color key="sectionIndexBackgroundColor" red="0.78823536630000002" green="0.83529418710000003" blue="0.94901967050000002" alpha="1" colorSpace="deviceRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NodeCellIdentifier" rowHeight="96" id="cc7-Zb-nVU" customClass="CRNodeTableViewCell">
-                                <rect key="frame" x="0.0" y="86" width="1024" height="96"/>
+                                <rect key="frame" x="0.0" y="22" width="1024" height="96"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cc7-Zb-nVU" id="PnS-H3-txM">
                                     <rect key="frame" x="0.0" y="0.0" width="1024" height="96"/>
@@ -87,7 +87,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iog-Wp-xGb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2528" y="77"/>
+            <point key="canvasLocation" x="2952" y="-1818"/>
         </scene>
         <!--Edit Node View Controller-->
         <scene sceneID="939-Xq-6Gu">
@@ -227,7 +227,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4fe-bk-Bvu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4081" y="661"/>
+            <point key="canvasLocation" x="3369" y="-171"/>
         </scene>
         <!--Map List View Controller-->
         <scene sceneID="eMR-Vx-MBW">
@@ -256,25 +256,40 @@
             </objects>
             <point key="canvasLocation" x="1234" y="-1810"/>
         </scene>
-        <!--Navigation Controller - Item-->
-        <scene sceneID="crq-RL-Xhg">
+        <!--Map Drawer View Controller-->
+        <scene sceneID="SE4-AH-eHf">
             <objects>
-                <navigationController storyboardIdentifier="NodeListNavViewController" automaticallyAdjustsScrollViewInsets="NO" id="sDc-DV-qZu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Sl2-fP-np5"/>
-                    <toolbarItems/>
+                <viewController id="LHn-kj-Yhn" customClass="CRMapDrawerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="25K-Af-Gkr"/>
+                        <viewControllerLayoutGuide type="bottom" id="bIa-ZC-WVD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ccj-1e-OWc">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ecr-wF-Gbu" customClass="CRColoursView">
+                                <rect key="frame" x="112" y="635" width="800" height="144"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.81988853216171265" green="0.81998765468597412" blue="0.81985491514205933" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w7m-qt-K33">
+                                <rect key="frame" x="915" y="93" width="122" height="501"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.8336912989616394" green="0.89735466241836548" blue="0.91126608848571777" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hf1-t1-1l4">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Z4o-7E-8ke" kind="relationship" relationship="rootViewController" id="SzG-PD-0ze"/>
+                        <outlet property="colorsView" destination="ecr-wF-Gbu" id="YCI-b3-Vad"/>
                     </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jBg-Gi-uQF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d5F-yT-HA9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1090" y="-544"/>
+            <point key="canvasLocation" x="1297" y="-384"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Grs-Dm-iIc">
@@ -293,7 +308,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Vi-TK-jhY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4081" y="-466"/>
+            <point key="canvasLocation" x="4377" y="-1394"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KtP-cf-SML">
