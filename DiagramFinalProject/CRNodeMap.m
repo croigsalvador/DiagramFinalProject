@@ -44,17 +44,16 @@ NSString * const kNodeIDKey             = @"nodeID";
 #pragma mark - Public Methods
 
 - (void)addChild:(Node *)node atIndex:(NSUInteger)index {
-    NSDictionary *nodeDictionary = @{kLevelPropertyName : node.level,
-                                     kTitlePropertyName : @"Prueba" ,
-                                             kNodeIDKey : [node objectID]};
-    
-    [self.mutableMapArray insertObject:nodeDictionary atIndex:index];
+    [self.mutableMapArray insertObject:[self createNodeDictionaryForNode:node] atIndex:index];
 }
 
 - (void)removeChildAtIndex:(NSUInteger)index{
     [self.mutableMapArray removeObjectAtIndex:index];
 }
 
+- (void)updateNode:(Node *)node atIndex:(NSUInteger)index {
+    [self.mutableMapArray replaceObjectAtIndex:index withObject:[self createNodeDictionaryForNode:node]];
+}
 
 /**
  *  Launch listeArrayOfNodes
@@ -80,7 +79,6 @@ NSString * const kNodeIDKey             = @"nodeID";
     return indexPath;
 }
 
-
 - (void)deleteNodesAtIndex:(NSArray *)deleteIndexs {
     NSSortDescriptor* sortOrder = [NSSortDescriptor sortDescriptorWithKey: @"self" ascending: NO];
     NSArray *indexs = [deleteIndexs  sortedArrayUsingDescriptors: [NSArray arrayWithObject: sortOrder]];
@@ -89,13 +87,57 @@ NSString * const kNodeIDKey             = @"nodeID";
     }
 }
 
+- (CGPoint)calculateFreeRectForNode:(Node *)node {
+    if (!node.parent) {
+        CGPoint newPoint;
+        newPoint.y = [node.level intValue] * (100 + 100);
+        newPoint.x = 100;
+        return newPoint;
+    }
+    [self listedArrayOfNodesForAParentNode:node.parent];
+    NSDictionary *currentNodeDict = [self createNodeDictionaryForNode:node];
+    
+    CGPoint nodePoint;
+    int countInNodeLevel = 0;
+    for(NSDictionary *dictnode in self.mutableDictArray){
+        if ([dictnode[kLevelPropertyName] isEqualToNumber:currentNodeDict[kLevelPropertyName]]) {
+            countInNodeLevel++;
+            if ([currentNodeDict isEqualToDictionary:dictnode]) {
+                nodePoint.y = [node.parent.yPosition floatValue] + 100;
+                nodePoint.x = [node.parent.xPosition floatValue] - 2 *[node.width floatValue];
+            }
+        }
+    }
+    self.mutableDictArray = nil;
+    return nodePoint;
+}
 
 #pragma mark - Private Methods
+
+- (CGRect)rectFromNodeDictionary:(NSDictionary *)dict {
+    CGRect frameCurrentNode = {
+        .origin.x = [dict[kXPositionPropertyName] floatValue],
+        .origin.y = [dict[kYPositionPropertyName] floatValue],
+        .size.width = [dict[kWidthPropertyName] floatValue],
+        .size.height = [dict[kHeightPropertyName] floatValue],
+    };
+    return frameCurrentNode;
+}
+
+- (NSDictionary *)createNodeDictionaryForNode:(Node *)node {
+    NSMutableDictionary *nodeDict = [NSMutableDictionary dictionary];
+    [nodeDict setValue:node.level forKey:kLevelPropertyName];
+    [nodeDict setValue:[node objectID] forKey:kNodeIDKey];
+    [nodeDict setValue:node.xPosition forKey:kXPositionPropertyName];
+    [nodeDict setValue:node.yPosition forKey:kYPositionPropertyName];
+    
+    return [nodeDict copy];
+}
 
 - (NSInteger)newIndexForNewOfNode:(Node *)node {
     NSUInteger index = [self indexForNode:node];
     [self listedArrayOfNodesForAParentNode:node];
-     index += [self.mutableDictArray count] - 1;
+    index += [self.mutableDictArray count] - 1;
     self.mutableDictArray = nil;
     return index;
 }
@@ -114,8 +156,9 @@ NSString * const kNodeIDKey             = @"nodeID";
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:node.level forKey:kLevelPropertyName];
-    [dict setValue:node.title forKey:kTitlePropertyName];
     [dict setValue:[node objectID] forKey:kNodeIDKey];
+    [dict setValue:node.xPosition forKey:kXPositionPropertyName];
+    [dict setValue:node.yPosition forKey:kYPositionPropertyName];
     
     [self.mutableMapArray addObject:dict];
     
@@ -133,6 +176,8 @@ NSString * const kNodeIDKey             = @"nodeID";
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:node.level forKey:kLevelPropertyName];
     [dict setValue:[node objectID] forKey:kNodeIDKey];
+    [dict setValue:node.xPosition forKey:kXPositionPropertyName];
+    [dict setValue:node.yPosition forKey:kYPositionPropertyName];
     
     [self.mutableDictArray addObject:dict];
     
@@ -145,8 +190,6 @@ NSString * const kNodeIDKey             = @"nodeID";
         return  dict;
     }
 }
-
-
 
 /**
  *  Serialize MAP Into NSDictionary

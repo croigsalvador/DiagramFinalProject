@@ -4,10 +4,30 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
+        <!--Map Parent View Controller-->
+        <scene sceneID="9YU-yK-xfd">
+            <objects>
+                <viewController storyboardIdentifier="MapParentViewController" id="mdd-fW-mCT" customClass="CRMapParentViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EEE-gP-Zkb"/>
+                        <viewControllerLayoutGuide type="bottom" id="YHb-kV-w5H"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2v7-WD-q7c">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LJd-QC-I5b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1937" y="-684"/>
+        </scene>
         <!--Node List View Controller-->
         <scene sceneID="dlw-oQ-tEr">
             <objects>
-                <tableViewController storyboardIdentifier="NodeListNavViewController" id="Z4o-7E-8ke" customClass="CRNodeListViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="NodeListViewController" id="Z4o-7E-8ke" customClass="CRNodeListViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="96" sectionHeaderHeight="22" sectionFooterHeight="22" id="s4b-Bq-Hnf">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -15,7 +35,7 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <color key="sectionIndexBackgroundColor" red="0.78823536630000002" green="0.83529418710000003" blue="0.94901967050000002" alpha="1" colorSpace="deviceRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NodeCellIdentifier" rowHeight="96" id="cc7-Zb-nVU" customClass="CRNodeTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NodeCellIdentifier" rowHeight="96" id="cc7-Zb-nVU" customClass="CRNodeTableViewCell">
                                 <rect key="frame" x="0.0" y="22" width="1024" height="96"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cc7-Zb-nVU" id="PnS-H3-txM">
@@ -67,7 +87,32 @@
                                     <outlet property="leftTabLevelConstraint" destination="e50-WG-v65" id="XhG-sQ-gMD"/>
                                     <outlet property="nodeTextLabel" destination="2Bk-4I-9wM" id="RBC-jM-53z"/>
                                     <outlet property="nodeTitleLabel" destination="L9a-Iv-nVQ" id="fdU-YH-Djq"/>
-                                    <segue destination="bAW-IY-pXW" kind="modal" identifier="EditNodeSegue" id="Tnc-58-cKD"/>
+                                    <segue destination="bAW-IY-pXW" kind="modal" identifier="EditNodeSegue" id="Gr6-Na-EC9"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddNodeCellIdentifier" id="Muv-W2-vAR" customClass="CRAddNodeTableViewCell">
+                                <rect key="frame" x="0.0" y="118" width="1024" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Muv-W2-vAR" id="Xv5-I1-BIq">
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="96"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Añadir Nuevo +" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RrI-Il-sa8">
+                                            <rect key="frame" x="73" y="20" width="884" height="56"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="56" id="I4f-k5-M0C"/>
+                                                <constraint firstAttribute="width" constant="769" id="ggg-eB-8I6"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <segue destination="bAW-IY-pXW" kind="modal" identifier="AddNodeSegue" id="eYe-yP-F98"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -77,17 +122,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="xc1-5e-U5T">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Mqj-XG-Kec">
-                            <connections>
-                                <segue destination="bAW-IY-pXW" kind="modal" identifier="AddNodeSegue" id="KoD-y7-aNm"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Mqj-XG-Kec"/>
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iog-Wp-xGb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2952" y="-1818"/>
+            <point key="canvasLocation" x="3124" y="-1560"/>
         </scene>
         <!--Edit Node View Controller-->
         <scene sceneID="939-Xq-6Gu">
@@ -227,7 +268,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4fe-bk-Bvu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3369" y="-171"/>
+            <point key="canvasLocation" x="5617" y="-627"/>
         </scene>
         <!--Map List View Controller-->
         <scene sceneID="eMR-Vx-MBW">
@@ -254,12 +295,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ade-YO-r71" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1234" y="-1810"/>
+            <point key="canvasLocation" x="594" y="-706"/>
         </scene>
         <!--Map Drawer View Controller-->
         <scene sceneID="SE4-AH-eHf">
             <objects>
-                <viewController id="LHn-kj-Yhn" customClass="CRMapDrawerViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapDrawerViewController" id="LHn-kj-Yhn" customClass="CRMapDrawerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="25K-Af-Gkr"/>
                         <viewControllerLayoutGuide type="bottom" id="bIa-ZC-WVD"/>
@@ -269,15 +310,19 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ecr-wF-Gbu" customClass="CRColoursView">
-                                <rect key="frame" x="112" y="635" width="800" height="144"/>
+                                <rect key="frame" x="112" y="570" width="800" height="144"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.81988853216171265" green="0.81998765468597412" blue="0.81985491514205933" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w7m-qt-K33">
-                                <rect key="frame" x="915" y="93" width="122" height="501"/>
+                                <rect key="frame" x="915" y="0.0" width="122" height="501"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.8336912989616394" green="0.89735466241836548" blue="0.91126608848571777" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZiG-mV-hbw">
+                                <rect key="frame" x="0.0" y="0.0" width="912" height="570"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -285,17 +330,19 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="colorsView" destination="ecr-wF-Gbu" id="YCI-b3-Vad"/>
+                        <outlet property="scrollView" destination="ZiG-mV-hbw" id="IsE-U5-kDr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d5F-yT-HA9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1297" y="-384"/>
+            <point key="canvasLocation" x="3145" y="392"/>
         </scene>
         <!--Custom Navigation Controller-->
         <scene sceneID="Grs-Dm-iIc">
             <objects>
                 <navigationController storyboardIdentifier="EditNavViewController" automaticallyAdjustsScrollViewInsets="NO" id="bAW-IY-pXW" customClass="CRCustomNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="ozq-9a-Qc1"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TwC-7z-A2l">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
@@ -308,11 +355,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Vi-TK-jhY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4377" y="-1394"/>
+            <point key="canvasLocation" x="4427" y="-1560"/>
         </scene>
         <!--Custom Navigation Controller-->
         <scene sceneID="KtP-cf-SML">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NDD-wX-m9w" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="anT-EQ-bPe" customClass="CRCustomNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -325,9 +373,8 @@
                         <segue destination="UwI-sI-fKP" kind="relationship" relationship="rootViewController" id="v2v-KE-6bR"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NDD-wX-m9w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-300" y="-1818"/>
+            <point key="canvasLocation" x="-812" y="-1794"/>
         </scene>
     </scenes>
     <resources>
@@ -339,6 +386,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Tnc-58-cKD"/>
+        <segue reference="eYe-yP-F98"/>
     </inferredMetricsTieBreakers>
 </document>

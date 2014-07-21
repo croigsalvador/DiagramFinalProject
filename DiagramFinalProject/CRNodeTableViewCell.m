@@ -63,11 +63,12 @@ static CGFloat const kTabMarginForCell           = 40.0f;
     [self.figureView addSubview:figureView];
 }
 
+/*
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
     
     // Configure the view for the selected state
 }
-
+*/
 @end

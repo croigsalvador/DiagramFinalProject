@@ -8,7 +8,7 @@
 
 #pragma mark - Controller imports
 #import "CRMapListViewController.h"
-#import "CRNodeListViewController.h"
+#import "CRMapParentViewController.h"
 
 #pragma mark - View imports
 #import "CRDocumentNameView.h"
@@ -23,8 +23,8 @@
 
 static NSString * const kFilePathComponent                = @"sqlite";
 static NSString * const kMainStoryBoardNameID             = @"Main";
-static NSString * const kListViewControllerID             = @"NodeListNavViewController";
-static UIEdgeInsets const kCollectionInsets                     = {64.0, 0.0 , 0.0 ,0.0};
+static NSString * const kMapParentViewControllerID        = @"MapParentViewController";
+static UIEdgeInsets const kCollectionInsets               = {64.0, 0.0 , 0.0 ,0.0};
 
 @interface CRMapListViewController ()<DocumentNameViewDelegate>
 @property (copy, nonatomic) NSArray *mapListArray;
@@ -119,10 +119,10 @@ static UIEdgeInsets const kCollectionInsets                     = {64.0, 0.0 , 0
     
     UIStoryboard *mapStoryboard = [UIStoryboard storyboardWithName:kMainStoryBoardNameID bundle:[NSBundle mainBundle]];
     
-    CRNodeListViewController *nodeListViewController =(CRNodeListViewController *)[mapStoryboard instantiateViewControllerWithIdentifier:kListViewControllerID];
-    nodeListViewController.managedDocument = managedDocument;
-    nodeListViewController.nodeMap = nodeMap;
-    [self.navigationController pushViewController:nodeListViewController animated:YES];
+    CRMapParentViewController *mapParentViewController =(CRMapParentViewController *)[mapStoryboard instantiateViewControllerWithIdentifier:kMapParentViewControllerID];
+    mapParentViewController.managedDocument = managedDocument;
+    mapParentViewController.nodeMap = nodeMap;
+    [self.navigationController pushViewController:mapParentViewController animated:YES];
 }
 
 #pragma mark - IBAction Methods

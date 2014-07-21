@@ -9,6 +9,7 @@
 #import "CRNodeListViewController.h"
 #import "CREditNodeViewController.h"
 #import "CRNodeTableViewCell.h"
+#import "CRAddNodeTableViewCell.h"
 #import "SWTableViewCell.h"
 
 #import "CRNodeMap.h"
@@ -16,6 +17,7 @@
 #import "Node+Model.h"
 
 static NSString * const NodeCellIdentifier               = @"NodeCellIdentifier";
+static NSString * const AddNodeCellIdentifier            = @"AddNodeCellIdentifier";
 
 static NSString *const kSegueAddNode                     = @"AddNodeSegue";
 static NSString *const kSegueEditNode                    = @"EditNodeSegue";
@@ -37,21 +39,27 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
 
 @property (copy, nonatomic) NSMutableArray *deleteIndexs;
 @property (assign,nonatomic, getter = isDeleting) BOOL deleting;
+
 @end
 
 @implementation CRNodeListViewController
+
+#pragma mark - Initializer
+
+- (instancetype)initWithDocument:(UIManagedDocument *)document andNodeMap:(CRNodeMap *)nodeMap {
+    if (self = [super init]) {
+        _managedDocument = document;
+        _nodeMap = nodeMap;
+    }
+    return self;
+}
 
 #pragma mark - ViewController Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(populateNodeList:) name:UIDocumentStateChangedNotification object:self.managedDocument];
-    //    [self populateNodeList];
 }
-
 
 #pragma mark - Custom Getters
 
@@ -73,7 +81,6 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
 
 - (void)populateNodeList:(NSNotification *)notification {
     if (!self.isAlreadyNotificated) {
-        
         NSArray *nodes = [Node rootNodeListInContext:self.managedObjectContext];
         for (Node *node in nodes) {
             [self.nodeMap populateMapListForRootNode:node];
@@ -82,9 +89,9 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
         self.fetchedResultsController = self.fetchedResultsController;
         [self.tableView reloadData];
         self.alreadyNotificated = YES;
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDocumentStateChangedNotification object:self.managedDocument];
     }
 }
-
 
 - (void)prepareViewControllerFromStoryBoardWithNewNode:(Node *)node {
     UIStoryboard *mapStoryboard = [UIStoryboard storyboardWithName:kMainStoryBoardNameID bundle:[NSBundle mainBundle]];
@@ -106,7 +113,7 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
 
 - (void)deleteItemAtIndexPath:(NSIndexPath *)indexPath {
     [self.managedObjectContext.undoManager beginUndoGrouping];
-   
+    
     Node *node = [self nodeFromFetchedResultsControllerAtIndexPath:indexPath];
     self.deletedNode = node;
     [self.managedObjectContext deleteObject:node];
@@ -117,18 +124,15 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
 
 - (Node *)nodeFromFetchedResultsControllerAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *nodeDictionary = self.nodeList[indexPath.row];
-    
     NSManagedObjectID *nodeID = nodeDictionary[kNodeIDKey];
     Node *node =(Node *) [self.fetchedResultsController.managedObjectContext existingObjectWithID:nodeID error:nil];
     return node;
 }
 
 - (void)removeNodes {
-    
     [self.nodeMap deleteNodesAtIndex:[self.deleteIndexs copy]];
     self.deleting = NO;
     self.deleteIndexs = nil;
-    
     self.nodeList = self.nodeMap.mapList;
 }
 
@@ -142,7 +146,7 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
         UINavigationController *navViewController = [segue destinationViewController];
         CREditNodeViewController *nodeEditViewControlle=  [navViewController.viewControllers lastObject];
         NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
-        Node *node = [self.fetchedResultsController objectAtIndexPath:selectedIndexPath];
+        Node *node = [self nodeFromFetchedResultsControllerAtIndexPath:selectedIndexPath];
         [self prepareEditNodeViewController:nodeEditViewControlle withNode:node];
     }
 }
@@ -159,20 +163,42 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
     editNodetViewController.delegate = self;
 }
 
+#pragma mark - TableView Delegate Methods
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        [self performSegueWithIdentifier:kSegueEditNode sender:nil];
+    }
+}
 
 #pragma mark - TableView Datasource Methods
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.nodeList count] ;
+    if (section == 0) {
+        return [self.nodeList count] ;
+    } else {
+        return 1;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CRNodeTableViewCell *cell = (CRNodeTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:NodeCellIdentifier forIndexPath:indexPath];
-    if (cell == nil) {
-        cell = (CRNodeTableViewCell *)[[CRNodeTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:NodeCellIdentifier];
+    
+    if (indexPath.section == 0) {
+        CRNodeTableViewCell *cell = (CRNodeTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:NodeCellIdentifier forIndexPath:indexPath];
+        if (cell == nil) {
+            cell = (CRNodeTableViewCell *)[[CRNodeTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:NodeCellIdentifier];
+        }
+        [self configureCell:cell atIndexPath:indexPath];
+         return cell;
+    } else {
+        CRAddNodeTableViewCell *cell = (CRAddNodeTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:AddNodeCellIdentifier forIndexPath:indexPath];
+        return cell;
     }
-    [self configureCell:cell atIndexPath:indexPath];
-    return cell;
 }
 
 - (void)configureCell:(CRNodeTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -272,10 +298,14 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
     UITableView *tableView = self.tableView;
     switch(type) {
         case NSFetchedResultsChangeInsert:{
-            NSIndexPath * myIndexPath = [self.nodeMap indexPathNewForNode:self.insertedNode];
+            CGPoint nodePoint = [self.nodeMap calculateFreeRectForNode:self.insertedNode];
+            self.insertedNode.xPosition = @(nodePoint.x);
+            self.insertedNode.yPosition = @(nodePoint.y);
             
+            NSIndexPath * myIndexPath = [self.nodeMap indexPathNewForNode:self.insertedNode];
             [self.nodeMap addChild:self.insertedNode atIndex:myIndexPath.row];
             self.nodeList = self.nodeMap.mapList;
+            
             [tableView insertRowsAtIndexPaths:@[myIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
         }

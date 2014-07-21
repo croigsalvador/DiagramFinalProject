@@ -18,6 +18,7 @@ extern NSString * const kNodeIDKey;
 
 - (void)addChild:(Node *)node atIndex:(NSUInteger)index;
 - (void)removeChildAtIndex:(NSUInteger)index;
+- (void)updateNode:(Node *)node atIndex:(NSUInteger)index;
 
 - (void)populateMapListForRootNode:(Node *)node;
 
@@ -25,4 +26,6 @@ extern NSString * const kNodeIDKey;
 - (NSIndexPath *)indexPathForCurrentNode:(Node *)node;
 
 - (void)deleteNodesAtIndex:(NSArray *)deleteIndexs;
+
+- (CGPoint)calculateFreeRectForNode:(Node *)node;
 @end

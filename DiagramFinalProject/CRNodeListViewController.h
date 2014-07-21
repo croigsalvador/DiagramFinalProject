@@ -11,11 +11,8 @@
 @class CRNodeMap, Node;
 
 @interface CRNodeListViewController : UITableViewController
-
 @property (strong,nonatomic) UIManagedDocument *managedDocument;
 @property (strong,nonatomic) CRNodeMap *nodeMap;
-
-//- (instancetype)initWithDocument:(UIManagedDocument *)document andNodeMap:(CRNodeMap *)nodeMap;
-
+- (instancetype)initWithDocument:(UIManagedDocument *)document andNodeMap:(CRNodeMap *)nodeMap;
 
 @end

@@ -13,6 +13,10 @@ NSString * const kTitlePropertyName                 = @"title";
 NSString * const kTextPropertyName                  = @"text";
 NSString * const kShapeTypePropertyName             = @"shapeType";
 NSString * const kLevelPropertyName                 = @"level";
+NSString * const kHeightPropertyName                = @"height";
+NSString * const kWidthPropertyName                 = @"width";
+NSString * const kXPositionPropertyName             = @"xPosition";
+NSString * const kYPositionPropertyName             = @"yPosition";
 
 @implementation Node (Model)
 
@@ -34,7 +38,6 @@ NSString * const kLevelPropertyName                 = @"level";
 }
 
 + (NSArray *)rootNodeListInContext:(NSManagedObjectContext *)context {
-    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"level == %@",@1];
     NSFetchRequest *fetchRequest = [Node fetchAllNodesByNameWithPredicate:predicate];
     
@@ -43,21 +46,10 @@ NSString * const kLevelPropertyName                 = @"level";
     return matches;
 }
 
-//+ (BOOL)deleteAllChildsOfNode:(Node *)node  inContext:(NSManagedObjectContext *)context{
-//    return YES;
-//}
-//
-//+ (void)deleteChildsOfNode:(Node *)node inContext:(NSManagedObjectContext *)context{
-//    
-//    for (Node *n in node.childs) {
-//        if (!n.childs) {
-//            [self deleteChildsOfNode:n inContext:context];
-//        }else {
-//            [context delete:n];
-//        }
-//    }
-//    [self deleteChildsOfNode:node inContext:context];
-//}
++ (NSArray *)fetchAllNodesFromContext:(NSManagedObjectContext *)context {
+    NSArray *matches = [context executeFetchRequest:[Node fetchAllNodes] error:NULL];
+    return matches;
+}
 
 #pragma mark - Fetch requests
 
