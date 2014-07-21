@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0E0051317D4A48C9858C0EE8 /* libPods-DiagramFinalProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 805FFD02800E48C4BE5CFD72 /* libPods-DiagramFinalProject.a */; };
 		1D0402EF197C6EFC003932FB /* CRRoundColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0402EE197C6EFC003932FB /* CRRoundColorView.m */; };
+		1D0402F2197C8D13003932FB /* CRCustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0402F1197C8D13003932FB /* CRCustomNavigationController.m */; };
+		1D0402F9197C8EB1003932FB /* CRPushAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0402F6197C8EB1003932FB /* CRPushAnimationController.m */; };
+		1D0402FA197C8EB1003932FB /* CRPopAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0402F8197C8EB1003932FB /* CRPopAnimationController.m */; };
 		1D103BC41976F4400050F092 /* NodeMapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D103BC31976F4400050F092 /* NodeMapTests.m */; };
 		1D353723197C182B0005747F /* CRMapDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D353722197C182B0005747F /* CRMapDrawerViewController.m */; };
 		1D35372B197C18D90005747F /* CRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D35372A197C18D90005747F /* CRBaseViewController.m */; };
@@ -62,6 +65,12 @@
 /* Begin PBXFileReference section */
 		1D0402ED197C6EFC003932FB /* CRRoundColorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRRoundColorView.h; sourceTree = "<group>"; };
 		1D0402EE197C6EFC003932FB /* CRRoundColorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRRoundColorView.m; sourceTree = "<group>"; };
+		1D0402F0197C8D13003932FB /* CRCustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRCustomNavigationController.h; sourceTree = "<group>"; };
+		1D0402F1197C8D13003932FB /* CRCustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRCustomNavigationController.m; sourceTree = "<group>"; };
+		1D0402F5197C8EB1003932FB /* CRPushAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRPushAnimationController.h; sourceTree = "<group>"; };
+		1D0402F6197C8EB1003932FB /* CRPushAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRPushAnimationController.m; sourceTree = "<group>"; };
+		1D0402F7197C8EB1003932FB /* CRPopAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRPopAnimationController.h; sourceTree = "<group>"; };
+		1D0402F8197C8EB1003932FB /* CRPopAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRPopAnimationController.m; sourceTree = "<group>"; };
 		1D103BC31976F4400050F092 /* NodeMapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeMapTests.m; sourceTree = "<group>"; };
 		1D353721197C182B0005747F /* CRMapDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRMapDrawerViewController.h; sourceTree = "<group>"; };
 		1D353722197C182B0005747F /* CRMapDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRMapDrawerViewController.m; sourceTree = "<group>"; };
@@ -153,6 +162,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D0402F3197C8E59003932FB /* NavigationTransition */ = {
+			isa = PBXGroup;
+			children = (
+				1D0402F4197C8E6C003932FB /* Transitions */,
+				1D0402F0197C8D13003932FB /* CRCustomNavigationController.h */,
+				1D0402F1197C8D13003932FB /* CRCustomNavigationController.m */,
+			);
+			name = NavigationTransition;
+			sourceTree = "<group>";
+		};
+		1D0402F4197C8E6C003932FB /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				1D0402F5197C8EB1003932FB /* CRPushAnimationController.h */,
+				1D0402F6197C8EB1003932FB /* CRPushAnimationController.m */,
+				1D0402F7197C8EB1003932FB /* CRPopAnimationController.h */,
+				1D0402F8197C8EB1003932FB /* CRPopAnimationController.m */,
+			);
+			name = Transitions;
+			sourceTree = "<group>";
+		};
 		1D353720197C17EC0005747F /* MapDrawer */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +346,7 @@
 				1D353720197C17EC0005747F /* MapDrawer */,
 				1D353724197C18590005747F /* MapList */,
 				1D890A8B19741DC60038D983 /* NodeList */,
+				1D0402F3197C8E59003932FB /* NavigationTransition */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -634,6 +665,7 @@
 			files = (
 				1D890A4A1973DB320038D983 /* main.m in Sources */,
 				1D353723197C182B0005747F /* CRMapDrawerViewController.m in Sources */,
+				1D0402FA197C8EB1003932FB /* CRPopAnimationController.m in Sources */,
 				1D890A4E1973DB320038D983 /* CRAppDelegate.m in Sources */,
 				1D353731197C199D0005747F /* CRMapListViewController.m in Sources */,
 				1D890A541973DB320038D983 /* CRNodeListViewController.m in Sources */,
@@ -645,6 +677,7 @@
 				1D8B2D091975D9C900C67FB1 /* CRNodeMap.m in Sources */,
 				1DC1130B197860F3002F8148 /* CRColoursView.m in Sources */,
 				1D890A8A19741DAB0038D983 /* CREditNodeViewController.m in Sources */,
+				1D0402F2197C8D13003932FB /* CRCustomNavigationController.m in Sources */,
 				1D353744197C43080005747F /* CRDocumentNameView.m in Sources */,
 				1D890A751973DB510038D983 /* DiagramModel.xcdatamodeld in Sources */,
 				1DC113071978444C002F8148 /* CRSquareFigureView.m in Sources */,
@@ -653,6 +686,7 @@
 				1D353749197C65840005747F /* UIColor+Custom.m in Sources */,
 				1D35372B197C18D90005747F /* CRBaseViewController.m in Sources */,
 				1D35373F197C1F980005747F /* CRMapCollectionFlowLayout.m in Sources */,
+				1D0402F9197C8EB1003932FB /* CRPushAnimationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
