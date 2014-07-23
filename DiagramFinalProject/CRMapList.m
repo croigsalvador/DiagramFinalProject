@@ -10,6 +10,10 @@
 
 static NSString * const kPlistFileName                  = @"maps.plist";
 
+@interface CRMapList ()
+@property (nonatomic,copy) NSMutableArray *mapMutableList;
+@end
+
 @implementation CRMapList
 
 - (instancetype)init {
@@ -19,6 +23,13 @@ static NSString * const kPlistFileName                  = @"maps.plist";
     return self;
 }
 
+#pragma mark - Custom Getter
+
+- (NSArray *)mapList {
+    return [NSArray arrayWithContentsOfFile:[self dataFilePath]];;
+}
+
+#pragma mark - Private Methods
 - (NSString *)dataFilePath {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -26,6 +37,8 @@ static NSString * const kPlistFileName                  = @"maps.plist";
     return path;
 }
 
+
+#pragma mark - Public methods
 - (void)addMapToPlist:(NSString *)mapName {
     NSMutableArray *plist = [NSMutableArray arrayWithContentsOfFile:[self dataFilePath]];
     if (plist == nil){
