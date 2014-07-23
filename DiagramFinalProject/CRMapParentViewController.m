@@ -33,7 +33,7 @@ static NSString * const kNodeListViewControllerID          = @"NodeListViewContr
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupSegmentedControl];
-    
+    self.navigationController.navigationBarHidden = NO;
     {
         [self displayContentController:self.nodeListViewController];
     }

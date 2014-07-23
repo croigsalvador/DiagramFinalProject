@@ -26,7 +26,7 @@
 static NSString * const kFilePathComponent                = @"sqlite";
 static NSString * const kMainStoryBoardNameID             = @"Main";
 static NSString * const kMapParentViewControllerID        = @"MapParentViewController";
-static UIEdgeInsets const kCollectionInsets               = {64.0, 0.0 , 0.0 ,0.0};
+static UIEdgeInsets const kCollectionInsets               = {100.0, 0.0 , 0.0 ,0.0};
 
 @interface CRMapListViewController ()<DocumentNameViewDelegate>
 @property (copy, nonatomic) NSArray *mapListArray;
@@ -46,6 +46,11 @@ static UIEdgeInsets const kCollectionInsets               = {64.0, 0.0 , 0.0 ,0.
     [self setupCollectionView];
     [self.view addSubview:self.documentNameView];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Colección" style:UIBarButtonItemStylePlain target:nil action:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
 }
 
 #pragma mark - Custom Getters
@@ -78,6 +83,7 @@ static UIEdgeInsets const kCollectionInsets               = {64.0, 0.0 , 0.0 ,0.
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.allowsMultipleSelection = YES;
+    self.collectionView.backgroundColor = [UIColor flatCloudsColor];
     [self.collectionView registerClass:[CRMapCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([CRMapCollectionViewCell class])];
     [self.view addSubview:self.collectionView];
 }
@@ -124,12 +130,13 @@ static UIEdgeInsets const kCollectionInsets               = {64.0, 0.0 , 0.0 ,0.
     CRMapParentViewController *mapParentViewController =(CRMapParentViewController *)[mapStoryboard instantiateViewControllerWithIdentifier:kMapParentViewControllerID];
     mapParentViewController.managedDocument = managedDocument;
     mapParentViewController.nodeMap = nodeMap;
+//    [self presentViewController:mapParentViewController animated:YES completion:nil];
     [self.navigationController pushViewController:mapParentViewController animated:YES];
 }
 
 #pragma mark - IBAction Methods
 
-- (IBAction)addNewDocument:(UIBarButtonItem *)sender {
+- (IBAction)addNewDocument:(UIButton *)sender {
     if (self.documentNameView.hidden) {
         self.documentNameView.hidden = NO;
     }

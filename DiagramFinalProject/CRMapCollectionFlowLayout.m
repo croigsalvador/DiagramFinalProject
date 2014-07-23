@@ -8,21 +8,20 @@
 
 #import "CRMapCollectionFlowLayout.h"
 
-static UIEdgeInsets kFlowLayoutInsets              = {30.0, 40.0, 50.0, 40.0};
+static UIEdgeInsets kFlowLayoutInsets              = {30.0, 137.0, 70.0, 137.0};
 
 @implementation CRMapCollectionFlowLayout
 
 - (instancetype)init {
     if (self = [super init]) {
     
-        self.itemSize = CGSizeMake(200,200);
-        self.scrollDirection = UICollectionViewScrollDirectionVertical;
-        self.minimumInteritemSpacing = 50.0f;
-        self.minimumLineSpacing = 50.0f;
+        self.itemSize = CGSizeMake(250,180);
+        self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        self.minimumInteritemSpacing = 10.0f;
+        self.collectionView.pagingEnabled = YES;
+        self.minimumLineSpacing = 10.0f;
         self.sectionInset = kFlowLayoutInsets;
 //        self.headerReferenceSize = CGSizeMake(100, 100);
-        
-        
     }
     return self;
 }

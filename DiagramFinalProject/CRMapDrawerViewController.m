@@ -16,7 +16,7 @@
 #import "CRNodeMap.h"
 #import "Node+Model.h"
 
-static CGSize kScrollViewContainerSize                  = {2324.0f, 1500.0f};
+static CGSize kScrollViewContainerSize                  = {2324.0f, 2000.0f};
 
 @interface CRMapDrawerViewController ()<ColorViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate, CRCustomViewDelegate, FigureViewDelegate>
 @property (weak, nonatomic) IBOutlet CRColoursView *colorsView;
@@ -54,6 +54,11 @@ static CGSize kScrollViewContainerSize                  = {2324.0f, 1500.0f};
     self.scrollView.zoomScale = minScale;
     
     [self centerScrollViewContents];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.scrollView.contentSize = kScrollViewContainerSize;
 }
 
 #pragma mark - Setting up UIElements
