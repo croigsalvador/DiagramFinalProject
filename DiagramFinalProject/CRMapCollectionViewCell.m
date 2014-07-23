@@ -32,13 +32,14 @@
 
 - (void)setupNameLabel {
     
-    CGRect labelFrame = CGRectInset(self.bounds, 10, 20);
+    CGRect labelFrame = CGRectInset(self.bounds, 10, 0);
     
     self.nameLabel = [[UILabel alloc] initWithFrame:labelFrame];
     self.nameLabel.textColor = [UIColor whiteColor];
     self.nameLabel.font =  [UIFont montSerratBoldForCollectionCell];
     self.nameLabel.textAlignment = NSTextAlignmentCenter;
     self.nameLabel.backgroundColor = [UIColor clearColor];
+    self.nameLabel.numberOfLines = 0;
     [self addSubview:self.nameLabel];
 }
 

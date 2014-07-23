@@ -47,15 +47,22 @@ static UIEdgeInsets kFlowLayoutInsets                     = {30.0, 137.0, 70.0, 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.mapListArray = [self.mapList mapList];
-    [self setupCollectionView];
-    [self.view addSubview:self.documentNameView];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Colección" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.mapTitle.font = [UIFont montSerratBoldForCollectionTitle];
+    [self setupCollectionView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self setGradient];
+    [self.view addSubview:self.documentNameView];
+
 }
 
 #pragma mark - Custom Getters
@@ -78,10 +85,17 @@ static UIEdgeInsets kFlowLayoutInsets                     = {30.0, 137.0, 70.0, 
 
 #pragma mark - UIElements Setup
 
+- (void) setGradient {
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.view.bounds;
+    gradient.colors = @[(id)[UIColor flatSilverColor].CGColor, (id)[UIColor flatCloudsColor].CGColor,(id)[UIColor flatSilverColor].CGColor];
+    [self.view.layer insertSublayer:gradient atIndex:0];
+}
+
 - (void)setupCollectionView {
-    CGRect collectionFrame = UIEdgeInsetsInsetRect(self.view.bounds, kCollectionInsets);
-    // CGRect collectionFrame = CGRectMake(0, 80, 1024, 768-80);
-    
+    CGRect collectionFrame = UIEdgeInsetsInsetRect(self.view.frame, kCollectionInsets);
+    NSLog(@"View Frame %@", NSStringFromCGRect(collectionFrame));
+
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = CGSizeMake(250,180);
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
@@ -94,7 +108,7 @@ static UIEdgeInsets kFlowLayoutInsets                     = {30.0, 137.0, 70.0, 
      self.collectionView.autoresizingMask =  UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.showsVerticalScrollIndicator = NO;
-    self.collectionView.backgroundColor = [UIColor flatCloudsColor];
+    self.collectionView.backgroundColor = [UIColor clearColor];
     [self.collectionView registerClass:[CRMapCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([CRMapCollectionViewCell class])];
     [self.view addSubview:self.collectionView];
 }
