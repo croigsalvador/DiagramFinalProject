@@ -8,9 +8,9 @@
 
 #import "CRBaseViewController.h"
 
-@class CRNodeMap;
+@class CRNodeMap, CRManagedDocument;
 
 @interface CRMapParentViewController : CRBaseViewController
 @property (strong,nonatomic) CRNodeMap *nodeMap;
-@property (strong,nonatomic) UIManagedDocument *managedDocument;
+@property (strong,nonatomic) CRManagedDocument *managedDocument;
 @end
