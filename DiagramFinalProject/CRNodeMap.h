@@ -8,14 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const kNodeIDKey;
+
 @class Node;
 
 @interface CRNodeMap : NSObject
 
-@property (strong,nonatomic,readonly) NSDictionary *mapDictionary;
+@property (copy,nonatomic,readonly) NSArray  *mapList;
 
-- (void)addChild:(Node *)node toParent:(Node *)parentNode;
-- (void)removeChild:(Node *)node fromParent:(Node *)parentNode;
-- (NSDictionary *)serializedDictionaryWithParentNode:(Node *)node;
+- (void)addChild:(Node *)node atIndex:(NSUInteger)index;
+- (void)removeChildAtIndex:(NSUInteger)index;
+- (void)updateNode:(Node *)node atIndex:(NSUInteger)index;
 
+- (void)populateMapListForRootNode:(Node *)node;
+
+- (NSIndexPath *)indexPathNewForNode:(Node *)node;
+- (NSIndexPath *)indexPathForCurrentNode:(Node *)node;
+
+- (void)deleteNodesAtIndex:(NSArray *)deleteIndexs;
+
+//- (CGPoint)calculateFreeRectForNode:(Node *)node;
+- (CGPoint)calculateFreeRectForNode:(Node *)node point:(CGPoint)point;
 @end

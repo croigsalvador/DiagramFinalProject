@@ -3,6 +3,7 @@
 
 target "DiagramFinalProject" do
 pod 'SWTableViewCell', '~> 0.3.0'
+pod 'UIColor+FlatColors', '~> 0.0.2'
 end
 
 target "DiagramFinalProjectTests" do

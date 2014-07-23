@@ -9,6 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "CRAppDelegate.h"
 #import "CRNodeListViewController.h"
+#import "CRNodeMap.h"
 
 #define HC_SHORTHAND
 #import <OCHamcrest/OCHamcrest.h>
@@ -50,6 +51,19 @@
    
     [self.sut application:nil didFinishLaunchingWithOptions:nil];
     [verify(mockNodeList) setManagedDocument:notNilValue()];
+}
+- (void)testNodeListViewControllerGetsNodeMap {
+    UIWindow *windowMock = mock([UIWindow class]);
+    self.sut.window = windowMock;
+    
+    UINavigationController *navMock = mock([UINavigationController class]);
+    [given([windowMock rootViewController]) willReturn:navMock];
+    
+    CRNodeListViewController *mockNodeList = mock([CRNodeListViewController class]);
+    [given([navMock topViewController]) willReturn:mockNodeList];
+   
+    [self.sut application:nil didFinishLaunchingWithOptions:nil];
+    [verify(mockNodeList) setNodeMap:notNilValue()];
 }
 
 

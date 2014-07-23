@@ -11,10 +11,9 @@
 
 @interface CREditNodeViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
-@property (weak, nonatomic) IBOutlet UITextView *nodeTextView;
-@property (weak, nonatomic) IBOutlet UITextField *shapeTextField;
-
+@property (weak, nonatomic) IBOutlet UITextField *nodeTextField;
 @property (nonatomic, assign, getter = isModified) BOOL modified;
+@property (nonatomic,copy) NSString *colorString;
 
 @end
 
@@ -25,27 +24,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupDefaultValues];
+    self.view.backgroundColor = [UIColor flatCloudsColor];
+    self.view.alpha = 0.8;
 }
-
-//- (void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:animated];
-//    [self.node addObserver:self forKeyPath:kTitlePropertyName options:0 context:NULL];
-//    [self.node addObserver:self forKeyPath:kTextPropertyName options:0 context:NULL];
-//    [self.node addObserver:self forKeyPath:kShapeTypePropertyName options:0 context:NULL];
-//}
-//
-//- (void)viewDidDisappear:(BOOL)animated {
-//    [super viewDidDisappear:animated];
-//    [self.node removeObserver:self forKeyPath:kTitlePropertyName];
-//    [self.node removeObserver:self forKeyPath:kTextPropertyName];
-//    [self.node removeObserver:self forKeyPath:kShapeTypePropertyName];
-//}
 
 #pragma mark - Setup Methods
 
 - (void)setupDefaultValues {
     self.titleTextField.text = self.node.title;
-    self.nodeTextView.text = self.node.text;
+    self.nodeTextField.text = self.node.text;
 }
 
 #pragma mark - Private Methods
@@ -54,7 +41,7 @@
     self.modified = YES;
     [self.view endEditing:YES];
     self.node.title = self.titleTextField.text;
-    self.node.text = self.nodeTextView.text;
+    self.node.text = self.nodeTextField.text;
     self.node.shapeType = CRNodeTypeShapeSquare;
 }
 
@@ -84,7 +71,7 @@
     if ([keyPath isEqualToString:kTitlePropertyName]) {
         self.titleTextField.text = node.title;
     } else if ([keyPath isEqualToString:kTextPropertyName]) {
-        self.nodeTextView.text = node.text;
+        self.nodeTextField.text = node.text;
     }
 }
 

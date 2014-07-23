@@ -8,13 +8,15 @@
 
 #import "CRAppDelegate.h"
 #import "CRNodeListViewController.h"
+#import "CRNodeMap.h"
+#import "Node+Model.h"
 
 
 @implementation CRAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self setupDependencyInjection];
+//    [self setupDependencyInjection];
     return YES;
 }
 
@@ -45,45 +47,14 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-
 #pragma mark - Setup ViewController Dependencies
 
 - (void)setupDependencyInjection {
-    UIManagedDocument *managedDocument = [self setupManagedDocument];
-    
-    UINavigationController *navViewController =(UINavigationController *)self.window.rootViewController;
-    CRNodeListViewController *nodeListViewController =(CRNodeListViewController *) [navViewController topViewController];
-    nodeListViewController.managedDocument = managedDocument;
+   
 }
 
-#pragma mark - Initialize UIManagedDocument
 
-- (UIManagedDocument *)setupManagedDocument {
-    NSURL *fileURL =[self urlForUIManagedDocument];
-    
-    UIManagedDocument *managedDocument = [[UIManagedDocument alloc] initWithFileURL:fileURL];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[fileURL path]]) {
-        [managedDocument openWithCompletionHandler:^(BOOL success) {
-            if (!success) {
-                NSLog(@"No se pudo abrir %@", managedDocument);
-            }
-        }];
-    } else {
-        [managedDocument saveToURL:fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
-            NSLog(@"No se pudo abrir %@", managedDocument);
-        }];
-    }
-    return managedDocument;
-}
 
-#pragma mark - Document Path
-
-- (NSURL *)urlForUIManagedDocument{
-    NSArray *paths = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
-    NSURL *documentsURL = [paths lastObject];
-    NSURL *fileURL = [documentsURL URLByAppendingPathComponent:@"map.mapa"];
-    return fileURL;
-}
 
 
 

@@ -12,6 +12,11 @@ NSString * const kNodeEntityName                    = @"Node";
 NSString * const kTitlePropertyName                 = @"title";
 NSString * const kTextPropertyName                  = @"text";
 NSString * const kShapeTypePropertyName             = @"shapeType";
+NSString * const kLevelPropertyName                 = @"level";
+NSString * const kHeightPropertyName                = @"height";
+NSString * const kWidthPropertyName                 = @"width";
+NSString * const kXPositionPropertyName             = @"xPosition";
+NSString * const kYPositionPropertyName             = @"yPosition";
 
 @implementation Node (Model)
 
@@ -27,12 +32,28 @@ NSString * const kShapeTypePropertyName             = @"shapeType";
 + (instancetype)createNodeInManagedObjectContext:(NSManagedObjectContext *)context withParent:(Node *)parentNode {
     Node *node = [self createNodeInManagedObjectContext:context];
     node.parent = parentNode;
+    node.level = @([parentNode.level intValue] + 1);
     
     return node;
 }
+
++ (NSArray *)rootNodeListInContext:(NSManagedObjectContext *)context {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"level == %@",@1];
+    NSFetchRequest *fetchRequest = [Node fetchAllNodesByNameWithPredicate:predicate];
+    
+    NSError *error;
+    NSArray *matches = [context executeFetchRequest:fetchRequest error:&error];
+    return matches;
+}
+
++ (NSArray *)fetchAllNodesFromContext:(NSManagedObjectContext *)context {
+    NSArray *matches = [context executeFetchRequest:[Node fetchAllNodes] error:NULL];
+    return matches;
+}
+
 #pragma mark - Fetch requests
 
-+ (NSFetchRequest *) fetchAllNodesByTitle {
++ (NSFetchRequest *) fetchAllNodes {
     NSSortDescriptor *nameSortDescriptor = [NSSortDescriptor  sortDescriptorWithKey:kTitlePropertyName ascending:YES];
     NSFetchRequest *fetchRequest = [Node fetchAllNodesWithSortDescriptors:@[nameSortDescriptor]];
     
@@ -46,8 +67,8 @@ NSString * const kShapeTypePropertyName             = @"shapeType";
     return fetchRequest;
 }
 
-+ (NSFetchRequest *) fetchAllAgentsByNameWithPredicate:(NSPredicate *)predicate {
-    NSFetchRequest *fetchRequest = [Node fetchAllNodesByTitle];
++ (NSFetchRequest *) fetchAllNodesByNameWithPredicate:(NSPredicate *)predicate {
+    NSFetchRequest *fetchRequest = [Node fetchAllNodes];
     fetchRequest.predicate = predicate;
     
     return fetchRequest;
