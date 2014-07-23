@@ -38,7 +38,7 @@ NSString * const kNodeIDKey             = @"nodeID";
 }
 
 - (NSArray *)mapList {
-    return self.mutableMapArray;
+    return [self.mutableMapArray copy];
 }
 
 #pragma mark - Public Methods

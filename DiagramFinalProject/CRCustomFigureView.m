@@ -37,7 +37,6 @@
 - (void)setNode:(Node *)node {
     _node = node;
     [self updateFigure];
-    
 }
 
 - (void)updateFigure {

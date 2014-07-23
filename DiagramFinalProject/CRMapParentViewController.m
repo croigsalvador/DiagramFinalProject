@@ -12,6 +12,10 @@
 
 #import "CRNodeMap.h"
 
+
+
+
+
 static UIEdgeInsets kViewControllerInsets                  = {64.0f, 0.0f, 0.0f , 0.0f};
 static NSString * const kMainStoryBoardNameID              = @"Main";
 static NSString * const kMapDrawerViewControllerID         = @"MapDrawerViewController";
@@ -23,6 +27,8 @@ static NSString * const kNodeListViewControllerID          = @"NodeListViewContr
 @property (strong,nonatomic) UISegmentedControl *segmentedControl;
 @property (strong,nonatomic) CRNodeListViewController *nodeListViewController;
 @property (strong,nonatomic) CRMapDrawerViewController *mapDrawerViewController;
+
+@property (copy,nonatomic) AddNewNodeHandlerBlock addNewNodeHandlerBlock;
 
 @end
 
@@ -57,6 +63,7 @@ static NSString * const kNodeListViewControllerID          = @"NodeListViewContr
         _nodeListViewController = (CRNodeListViewController *)[mapStoryboard instantiateViewControllerWithIdentifier:kNodeListViewControllerID];
         _nodeListViewController.nodeMap = self.nodeMap;
         _nodeListViewController.managedDocument = self.managedDocument;
+        _nodeListViewController.addNewNodeHandlerBLock = self.addNewNodeHandlerBlock;
     }
     return _nodeListViewController;
 }
@@ -69,6 +76,17 @@ static NSString * const kNodeListViewControllerID          = @"NodeListViewContr
         _mapDrawerViewController.managedDocument = self.managedDocument;
     }
     return _mapDrawerViewController;
+}
+
+- (AddNewNodeHandlerBlock)addNewNodeHandlerBlock {
+    if (!_addNewNodeHandlerBlock) {
+        __weak typeof(self) weakSelf = self;
+        _addNewNodeHandlerBlock = ^(Node *node){
+            NSLog(@"Añadiendo Nodo");
+            [weakSelf.mapDrawerViewController addNewNodeFromList:node];
+        };
+    }
+    return _addNewNodeHandlerBlock;
 }
 
 #pragma mark - Action Methods

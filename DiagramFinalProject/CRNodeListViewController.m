@@ -145,7 +145,10 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
     NSIndexPath * myIndexPath = [self.nodeMap indexPathNewForNode:self.insertedNode];
     [self.nodeMap addChild:self.insertedNode atIndex:myIndexPath.row];
     self.nodeList = self.nodeMap.mapList;
-    
+
+    // Paint node in Map
+    self.addNewNodeHandlerBLock(self.insertedNode);
+
     self.insertedNode = nil;
     return myIndexPath;
 }

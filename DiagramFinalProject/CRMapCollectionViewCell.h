@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CRMapCollectionViewCell : UICollectionViewCell
-
+@property (nonatomic,copy) NSString *cellText;
 @end

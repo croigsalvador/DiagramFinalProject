@@ -18,10 +18,8 @@ static UIEdgeInsets kFlowLayoutInsets              = {30.0, 137.0, 70.0, 137.0};
         self.itemSize = CGSizeMake(250,180);
         self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         self.minimumInteritemSpacing = 10.0f;
-        self.collectionView.pagingEnabled = YES;
         self.minimumLineSpacing = 10.0f;
         self.sectionInset = kFlowLayoutInsets;
-//        self.headerReferenceSize = CGSizeMake(100, 100);
     }
     return self;
 }

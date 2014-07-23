@@ -9,8 +9,8 @@
 #import "CRColoursView.h"
 #import "CRRoundColorView.h"
 
-static CGFloat const kCircleHeight                = 50.0f;
-static CGFloat const kOffsetMargin                = 15.3f;
+static CGFloat const kCircleHeight                = 80.0f;
+static CGFloat const kOffsetMargin                = 16.0f;
 
 @interface CRColoursView ()
 
@@ -23,7 +23,7 @@ static CGFloat const kOffsetMargin                = 15.3f;
 
 #pragma mark - Initializer
 - (void)awakeFromNib {
-    [self setupBordersAndShadows];
+//    [self setupBordersAndShadows];
     [self setupColorPalette];
 }
 
@@ -37,17 +37,15 @@ static CGFloat const kOffsetMargin                = 15.3f;
 }
 
 #pragma mark - Setup Elements
-- (void)setupBordersAndShadows {
-    self.backgroundColor = [UIColor flatBlue];
-    self.layer.shadowOffset = CGSizeMake(3 , 3);
-    self.layer.shadowRadius = 3;
-    self.layer.shadowOpacity = .8f;
-    self.layer.shadowColor = [UIColor blackColor].CGColor;
-}
+//- (void)setupBordersAndShadows {
+//    self.layer.shadowOffset = CGSizeMake(3 , 3);
+//    self.layer.shadowRadius = 3;
+//    self.layer.shadowOpacity = .8f;
+//    self.layer.shadowColor = [UIColor blackColor].CGColor;
+//}
 
 - (void)setupColorPalette {
-    [self setupRowColorWithXPosition:48.5f yPosition:10.0f anIndex:11 colorIndex:10];
-    [self setupRowColorWithXPosition:15.8f yPosition:70.0f anIndex:12 colorIndex:22];
+    [self setupRowColorWithXPosition:40.0f yPosition:10.0f anIndex:10 colorIndex:10];
 }
 
 - (void)setupRowColorWithXPosition:(CGFloat)xPos yPosition:(CGFloat)yPos anIndex:(NSUInteger)index colorIndex:(NSUInteger)colorIndex{

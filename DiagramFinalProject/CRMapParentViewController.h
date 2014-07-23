@@ -7,8 +7,12 @@
 //
 
 #import "CRBaseViewController.h"
+#import "Node.h"
+
+typedef void(^AddNewNodeHandlerBlock)(Node *node);
 
 @class CRNodeMap, CRManagedDocument;
+
 
 @interface CRMapParentViewController : CRBaseViewController
 @property (strong,nonatomic) CRNodeMap *nodeMap;

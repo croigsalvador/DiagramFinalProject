@@ -203,7 +203,8 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mis Mapas" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jge-lA-9y9">
                                 <rect key="frame" x="193" y="20" width="639" height="74"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DFp-iZ-Tq6">
@@ -223,6 +224,9 @@
                     <navigationItem key="navigationItem" id="6S5-C2-iYP"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="mapTitle" destination="jge-lA-9y9" id="4lk-fG-ya1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ade-YO-r71" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -241,24 +245,24 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w7m-qt-K33" customClass="CRFiguresView">
-                                <rect key="frame" x="915" y="0.0" width="122" height="570"/>
+                                <rect key="frame" x="915" y="0.0" width="120" height="625"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.8336912989616394" green="0.89735466241836548" blue="0.91126608848571777" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.5999525785446167" green="0.60002672672271729" blue="0.59992736577987671" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="LHn-kj-Yhn" id="MGH-ci-J7w"/>
                                 </connections>
                             </view>
                             <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZiG-mV-hbw">
-                                <rect key="frame" x="0.0" y="0.0" width="912" height="570"/>
+                                <rect key="frame" x="0.0" y="0.0" width="914" height="605"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="LHn-kj-Yhn" id="acy-pF-UXI"/>
                                 </connections>
                             </scrollView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3RJ-xv-dAj" customClass="CRColoursView">
-                                <rect key="frame" x="0.0" y="566" width="1024" height="152"/>
+                                <rect key="frame" x="0.0" y="602" width="1024" height="120"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.81988853220000002" green="0.81998765470000001" blue="0.81985491509999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.19998148083686829" green="0.20001035928726196" blue="0.19997167587280273" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

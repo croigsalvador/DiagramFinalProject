@@ -11,4 +11,7 @@
 @interface UIFont (Common)
 + (UIFont *)amaticMediumBold;
 + (UIFont *)amaticMedium;
++ (UIFont *)montserratRegular;
++ (UIFont *)montSerratBoldForCollectionCell;
++ (UIFont *)montSerratBoldForCollectionTitle;
 @end

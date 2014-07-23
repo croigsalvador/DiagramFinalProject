@@ -21,4 +21,20 @@
     return font;
 }
 
++ (UIFont *)montserratRegular {
+    UIFont *font =[UIFont fontWithName:@"Montserrat-Regular" size:15] ;
+    return font;
+}
+
++ (UIFont *)montSerratBoldForCollectionCell {
+    UIFont *font =[UIFont fontWithName:@"Montserrat-Bold" size:25] ;
+    return font;
+}
+
++ (UIFont *)montSerratBoldForCollectionTitle {
+    UIFont *font =[UIFont fontWithName:@"Montserrat-Bold" size:45] ;
+    return font;
+}
+
+
 @end

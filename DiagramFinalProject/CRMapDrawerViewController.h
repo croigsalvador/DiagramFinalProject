@@ -8,10 +8,13 @@
 
 #import "CRBaseViewController.h"
 
-@class CRNodeMap, CRManagedDocument;
+@class CRNodeMap, CRManagedDocument, Node;
 
 @interface CRMapDrawerViewController : CRBaseViewController
 @property (strong,nonatomic) CRManagedDocument *managedDocument;
 @property (strong,nonatomic) CRNodeMap *nodeMap;
 //- (instancetype)initWithDocument:(UIManagedDocument *)document andNodeMap:(CRNodeMap *)nodeMap;
+
+- (void)addNewNodeFromList:(Node *)node;
+
 @end

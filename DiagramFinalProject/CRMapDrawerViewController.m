@@ -142,6 +142,12 @@ static CGSize kScrollViewContainerSize                  = {2324.0f, 2000.0f};
     return figureView;
 }
 
+#pragma mark - Public Methods
+
+- (void)addNewNodeFromList:(Node *)node {
+     [self createFigure:node];
+}
+
 #pragma mark - Private Model Methods 
 
 - (void)updateNode:(Node *)node frame:(CGRect)nodeFrame {
@@ -169,9 +175,10 @@ static CGSize kScrollViewContainerSize                  = {2324.0f, 2000.0f};
 }
 
 - (void)createNewNodeForParent:(Node *)parentNode {
-    Node *newNode = [Node createNodeInManagedObjectContext:parentNode.managedObjectContext withParent:parentNode];
+    [Node createNodeInManagedObjectContext:parentNode.managedObjectContext withParent:parentNode];
     [self.managedDocument updateChangeCount:UIDocumentChangeDone];
-    [self createFigure:newNode];
+    
+    
 }
 
 #pragma mark - Touch Methods

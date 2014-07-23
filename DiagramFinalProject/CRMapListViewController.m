@@ -22,13 +22,17 @@
 #import "CRMapList.h"
 
 #import "CRManagedDocument.h"
+#import "UIFont+Common.h"
 
 static NSString * const kFilePathComponent                = @"sqlite";
 static NSString * const kMainStoryBoardNameID             = @"Main";
 static NSString * const kMapParentViewControllerID        = @"MapParentViewController";
 static UIEdgeInsets const kCollectionInsets               = {100.0, 0.0 , 0.0 ,0.0};
+static UIEdgeInsets kFlowLayoutInsets                     = {30.0, 137.0, 70.0, 137.0};
+
 
 @interface CRMapListViewController ()<DocumentNameViewDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *mapTitle;
 @property (copy, nonatomic) NSArray *mapListArray;
 @property (strong,nonatomic) UICollectionView *collectionView;
 @property (strong,nonatomic) CRMapList *mapList;
@@ -46,6 +50,7 @@ static UIEdgeInsets const kCollectionInsets               = {100.0, 0.0 , 0.0 ,0
     [self setupCollectionView];
     [self.view addSubview:self.documentNameView];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Colección" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.mapTitle.font = [UIFont montSerratBoldForCollectionTitle];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -75,14 +80,20 @@ static UIEdgeInsets const kCollectionInsets               = {100.0, 0.0 , 0.0 ,0
 
 - (void)setupCollectionView {
     CGRect collectionFrame = UIEdgeInsetsInsetRect(self.view.bounds, kCollectionInsets);
-    CRMapCollectionFlowLayout *flowLayout = [[CRMapCollectionFlowLayout alloc] init];
+    // CGRect collectionFrame = CGRectMake(0, 80, 1024, 768-80);
+    
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.itemSize = CGSizeMake(250,180);
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+
+    flowLayout.sectionInset = kFlowLayoutInsets;
     self.collectionView = [[UICollectionView alloc]initWithFrame:collectionFrame collectionViewLayout:flowLayout];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    self.collectionView.autoresizingMask =  UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.collectionView.pagingEnabled = YES;
+     self.collectionView.autoresizingMask =  UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.showsVerticalScrollIndicator = NO;
-    self.collectionView.allowsMultipleSelection = YES;
     self.collectionView.backgroundColor = [UIColor flatCloudsColor];
     [self.collectionView registerClass:[CRMapCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([CRMapCollectionViewCell class])];
     [self.view addSubview:self.collectionView];
@@ -106,9 +117,15 @@ static UIEdgeInsets const kCollectionInsets               = {100.0, 0.0 , 0.0 ,0
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CRMapCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([CRMapCollectionViewCell class]) forIndexPath:indexPath];
-    
-    cell.backgroundColor = [UIColor blueColor];
+    [self configCell:cell atIndexPath:indexPath];
     return cell;
+}
+
+- (void)configCell:(CRMapCollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    NSArray *colorArray = [UIColor flatColorsArray];
+    cell.backgroundColor = [UIColor colorFromText:colorArray[indexPath.row]];
+    
+    cell.cellText = self.mapListArray[indexPath.row];
 }
 
 #pragma mark - Private Methods 
@@ -116,6 +133,8 @@ static UIEdgeInsets const kCollectionInsets               = {100.0, 0.0 , 0.0 ,0
 - (void)createManagedDocumentAndLaunchNextControllerWithName:(NSString *)name {
     if (name) {
         [self.mapList addMapToPlist:name];
+        self.mapListArray = self.mapList.mapList;
+        [self.collectionView reloadData];
         [self setupNextViewControllerWithName:name];
     }
     self.documentNameView.hidden = YES;

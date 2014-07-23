@@ -37,9 +37,9 @@
 #pragma mark - Public Methods
 - (void)calculateNewNodePositionFromParent:(Node *)parentNode withCompletionBlock:(void(^)(CGRect))completionBlock {
     if (parentNode.parent) {
-        CGRect parentFrame = [self frameForNode:parentNode];
+        CGRect parentFrame = [self frameForNode:parentNode.parent];
         CGRect newNodeFrame = CGRectMake(parentFrame.origin.x - 200, parentFrame.origin.y + parentFrame.size.height + 50, 100,100);
-        for (Node *node in parentNode.childs) {
+        for (Node *node in parentNode.parent.childs) {
             CGRect childFrame = [self frameForNode:node];
             if (!CGRectIntersectsRect(newNodeFrame, childFrame)) {
                 completionBlock(newNodeFrame);

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CRMapParentViewController.h"
 
 @class CRNodeMap, Node, CRManagedDocument;
 
@@ -14,5 +15,9 @@
 @property (strong,nonatomic) CRManagedDocument *managedDocument;
 @property (strong,nonatomic) CRNodeMap *nodeMap;
 - (instancetype)initWithDocument:(UIManagedDocument *)document andNodeMap:(CRNodeMap *)nodeMap;
+
+
+// Block from ParentViewController
+@property (copy,nonatomic)AddNewNodeHandlerBlock  addNewNodeHandlerBLock;
 
 @end
