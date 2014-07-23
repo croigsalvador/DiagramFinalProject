@@ -420,7 +420,6 @@
 		1D890A7D1973DE310038D983 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				1D9BCAA219800FC6007EE965 /* FigureDrawer */,
 				1D40CD76197D13FE003D6160 /* MapParent */,
 				1D353728197C18B90005747F /* BaseController */,
 				1D890A8C19741DD20038D983 /* EditNode */,
@@ -435,6 +434,7 @@
 		1D890A7E1973E5010038D983 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1D9BCAA219800FC6007EE965 /* FigureDrawer */,
 				1DB16C351980000D00858F3F /* Line */,
 				1D40CD7A197D29DD003D6160 /* AddNodeHeader */,
 				1D353736197C1C160005747F /* MapCell */,

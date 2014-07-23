@@ -19,13 +19,15 @@
 static CGSize kScrollViewContainerSize                  = {2324.0f, 2000.0f};
 
 @interface CRMapDrawerViewController ()<ColorViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate, CRCustomViewDelegate, FigureViewDelegate>
+
 @property (weak, nonatomic) IBOutlet CRColoursView *colorsView;
 @property (nonatomic, assign) CGPoint currentTouch;
 @property (nonatomic, strong) CRCustomFigureView *selectedView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong,nonatomic) NSMutableArray *nodeList;
+@property (copy,nonatomic) NSArray *nodeList;
 
 @property (strong,nonatomic) UIView *containerView;
+@property (strong,nonatomic) Node *lastNodeInserted;
 @end
 
 @implementation CRMapDrawerViewController
@@ -78,8 +80,8 @@ static CGSize kScrollViewContainerSize                  = {2324.0f, 2000.0f};
 }
 
 - (void)setupCurrentMap {
-   self.nodeList = [[Node fetchAllNodesFromContext:self.managedDocument.managedObjectContext] mutableCopy];
-    for (Node *node in self.nodeList){
+   NSArray *listOfNodes = [Node fetchAllNodesFromContext:self.managedDocument.managedObjectContext];
+    for (Node *node in listOfNodes){
         [self createFigure:node];
     }
 }
@@ -142,43 +144,42 @@ static CGSize kScrollViewContainerSize                  = {2324.0f, 2000.0f};
     return figureView;
 }
 
-#pragma mark - Public Methods
-
-- (void)addNewNodeFromList:(Node *)node {
-     [self createFigure:node];
-}
-
 #pragma mark - Private Model Methods 
+- (void)addNewNodeFromList:(Node *)node {
+    self.lastNodeInserted = node;
+    [self createFigure:node];
+}
 
 - (void)updateNode:(Node *)node frame:(CGRect)nodeFrame {
     node.width =   @(nodeFrame.size.width);
     node.height = @(nodeFrame.size.height);
     node.xPosition = @(nodeFrame.origin.x);
     node.yPosition = @(nodeFrame.origin.y);
-
-    [self updateNodeListWithNode:node];
 }
 
 - (void)updateNode:(Node *)node colorText:(NSString *)color{
     node.color = color;
-    [self updateNodeListWithNode:node];
-}
-
-- (void)updateNodeListWithNode:(Node *)node {
-    self.selectedView.node = node;
-    [self.nodeList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        Node *n = (Node *)obj;
-        if ([node isEqual:n]) {
-            [self.nodeList replaceObjectAtIndex:idx withObject:node];
-        }
-    }];
 }
 
 - (void)createNewNodeForParent:(Node *)parentNode {
-    [Node createNodeInManagedObjectContext:parentNode.managedObjectContext withParent:parentNode];
+    Node *node = [Node createNodeInManagedObjectContext:parentNode.managedObjectContext withParent:parentNode];
+    [self insertNewNode:node];
     [self.managedDocument updateChangeCount:UIDocumentChangeDone];
-    
-    
+}
+
+- (void)insertNewNode:(Node *)node {
+    if (![node isEqual:self.lastNodeInserted]) {
+        self.lastNodeInserted = node;
+    CRMap *map = [[CRMap alloc] initWithManagedObjectContext:node.managedObjectContext];
+    [map calculateNewNodePositionFromParent:node withCompletionBlock:^(CGRect frame) {
+        node.xPosition = @(frame.origin.x) ;
+        node.yPosition = @(frame.origin.y) ;
+    }];
+    NSIndexPath * myIndexPath = [self.nodeMap indexPathNewForNode:node];
+    [self.nodeMap addChild:node atIndex:myIndexPath.row];
+//    self.nodeList = self.nodeMap.mapList;
+    [self addNewNodeFromList:node];
+    }
 }
 
 #pragma mark - Touch Methods
@@ -267,6 +268,5 @@ static CGSize kScrollViewContainerSize                  = {2324.0f, 2000.0f};
 - (void)sendTappedView:(CRSquareFigureView *)selectedView {
     [self createNewNodeForParent:self.selectedView.node];
 }
-
 
 @end

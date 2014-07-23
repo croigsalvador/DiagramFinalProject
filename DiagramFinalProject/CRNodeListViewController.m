@@ -55,6 +55,31 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(populateNodeList:) name:UIDocumentStateChangedNotification object:self.managedDocument];
 }
 
+/**
+ *  fetchedResultsController delegate set to self
+ *  separating between ViewControllers;
+ *
+ *  @param animated
+ */
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.fetchedResultsController.delegate = self;
+    self.nodeList = self.nodeMap.mapList;
+    [self.tableView reloadData];
+}
+
+/**
+ *  Setting fetchedResultsController delegate
+ * to nil so that not notify  the other viewController
+ *
+ *  @param animated
+ */
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.fetchedResultsController.delegate = nil;
+}
 
 #pragma mark - Custom Getters
 

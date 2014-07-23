@@ -28,7 +28,7 @@ static NSString * const kFilePathComponent                = @"sqlite";
 static NSString * const kMainStoryBoardNameID             = @"Main";
 static NSString * const kMapParentViewControllerID        = @"MapParentViewController";
 static UIEdgeInsets const kCollectionInsets               = {100.0, 0.0 , 0.0 ,0.0};
-static UIEdgeInsets kFlowLayoutInsets                     = {30.0, 137.0, 70.0, 137.0};
+static UIEdgeInsets kFlowLayoutInsets                     = {30.0, 127.0, 70.0, 127.0};
 
 
 @interface CRMapListViewController ()<DocumentNameViewDelegate>
@@ -62,6 +62,7 @@ static UIEdgeInsets kFlowLayoutInsets                     = {30.0, 137.0, 70.0, 
     [super viewDidAppear:animated];
     [self setGradient];
     [self.view addSubview:self.documentNameView];
+    
 
 }
 
@@ -98,7 +99,7 @@ static UIEdgeInsets kFlowLayoutInsets                     = {30.0, 137.0, 70.0, 
 
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = CGSizeMake(250,180);
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
 
     flowLayout.sectionInset = kFlowLayoutInsets;
     self.collectionView = [[UICollectionView alloc]initWithFrame:collectionFrame collectionViewLayout:flowLayout];
