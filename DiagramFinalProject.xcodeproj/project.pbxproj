@@ -13,6 +13,10 @@
 		1D0402F9197C8EB1003932FB /* CRPushAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0402F6197C8EB1003932FB /* CRPushAnimationController.m */; };
 		1D0402FA197C8EB1003932FB /* CRPopAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0402F8197C8EB1003932FB /* CRPopAnimationController.m */; };
 		1D103BC41976F4400050F092 /* NodeMapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D103BC31976F4400050F092 /* NodeMapTests.m */; };
+		1D1635F01980691A00A61899 /* CRSquareMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D1635EF1980691A00A61899 /* CRSquareMapView.m */; };
+		1D1635F719806B7C00A61899 /* CRTriangleMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D1635F619806B7C00A61899 /* CRTriangleMapView.m */; };
+		1D1635FA19806BA700A61899 /* CRCircleMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D1635F919806BA700A61899 /* CRCircleMapView.m */; };
+		1D1635FE1980753D00A61899 /* CRPolygonMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D1635FD1980753D00A61899 /* CRPolygonMapView.m */; };
 		1D353723197C182B0005747F /* CRMapDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D353722197C182B0005747F /* CRMapDrawerViewController.m */; };
 		1D35372B197C18D90005747F /* CRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D35372A197C18D90005747F /* CRBaseViewController.m */; };
 		1D353731197C199D0005747F /* CRMapListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D353730197C199D0005747F /* CRMapListViewController.m */; };
@@ -84,6 +88,14 @@
 		1D0402F7197C8EB1003932FB /* CRPopAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRPopAnimationController.h; sourceTree = "<group>"; };
 		1D0402F8197C8EB1003932FB /* CRPopAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRPopAnimationController.m; sourceTree = "<group>"; };
 		1D103BC31976F4400050F092 /* NodeMapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeMapTests.m; sourceTree = "<group>"; };
+		1D1635EE1980691A00A61899 /* CRSquareMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSquareMapView.h; sourceTree = "<group>"; };
+		1D1635EF1980691A00A61899 /* CRSquareMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSquareMapView.m; sourceTree = "<group>"; };
+		1D1635F519806B7C00A61899 /* CRTriangleMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRTriangleMapView.h; sourceTree = "<group>"; };
+		1D1635F619806B7C00A61899 /* CRTriangleMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRTriangleMapView.m; sourceTree = "<group>"; };
+		1D1635F819806BA700A61899 /* CRCircleMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRCircleMapView.h; sourceTree = "<group>"; };
+		1D1635F919806BA700A61899 /* CRCircleMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRCircleMapView.m; sourceTree = "<group>"; };
+		1D1635FC1980753D00A61899 /* CRPolygonMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRPolygonMapView.h; sourceTree = "<group>"; };
+		1D1635FD1980753D00A61899 /* CRPolygonMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRPolygonMapView.m; sourceTree = "<group>"; };
 		1D353721197C182B0005747F /* CRMapDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRMapDrawerViewController.h; sourceTree = "<group>"; };
 		1D353722197C182B0005747F /* CRMapDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRMapDrawerViewController.m; sourceTree = "<group>"; };
 		1D353729197C18D90005747F /* CRBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBaseViewController.h; sourceTree = "<group>"; };
@@ -211,6 +223,51 @@
 				1D0402F8197C8EB1003932FB /* CRPopAnimationController.m */,
 			);
 			name = Transitions;
+			sourceTree = "<group>";
+		};
+		1D1635F119806B3F00A61899 /* FactoryDrawer */ = {
+			isa = PBXGroup;
+			children = (
+				1D9BCAA31980100B007EE965 /* CRFigureDrawerFactory.h */,
+				1D9BCAA41980100B007EE965 /* CRFigureDrawerFactory.m */,
+			);
+			name = FactoryDrawer;
+			sourceTree = "<group>";
+		};
+		1D1635F219806B4B00A61899 /* Square */ = {
+			isa = PBXGroup;
+			children = (
+				1D1635EE1980691A00A61899 /* CRSquareMapView.h */,
+				1D1635EF1980691A00A61899 /* CRSquareMapView.m */,
+			);
+			name = Square;
+			sourceTree = "<group>";
+		};
+		1D1635F319806B5500A61899 /* Circle */ = {
+			isa = PBXGroup;
+			children = (
+				1D1635F819806BA700A61899 /* CRCircleMapView.h */,
+				1D1635F919806BA700A61899 /* CRCircleMapView.m */,
+			);
+			name = Circle;
+			sourceTree = "<group>";
+		};
+		1D1635F419806B5B00A61899 /* Triangle */ = {
+			isa = PBXGroup;
+			children = (
+				1D1635F519806B7C00A61899 /* CRTriangleMapView.h */,
+				1D1635F619806B7C00A61899 /* CRTriangleMapView.m */,
+			);
+			name = Triangle;
+			sourceTree = "<group>";
+		};
+		1D1635FB1980752A00A61899 /* Polygon */ = {
+			isa = PBXGroup;
+			children = (
+				1D1635FC1980753D00A61899 /* CRPolygonMapView.h */,
+				1D1635FD1980753D00A61899 /* CRPolygonMapView.m */,
+			);
+			name = Polygon;
 			sourceTree = "<group>";
 		};
 		1D353720197C17EC0005747F /* MapDrawer */ = {
@@ -439,6 +496,7 @@
 				1D40CD7A197D29DD003D6160 /* AddNodeHeader */,
 				1D353736197C1C160005747F /* MapCell */,
 				1DC11308197860D3002F8148 /* Colors */,
+				1D40CD87197E52BF003D6160 /* FiguresView */,
 				1DC1130419784422002F8148 /* Figures */,
 				1D890A8E19741DE50038D983 /* StoryBoard */,
 				1D890A8D19741DDD0038D983 /* NodeCell */,
@@ -524,8 +582,11 @@
 		1D9BCAA219800FC6007EE965 /* FigureDrawer */ = {
 			isa = PBXGroup;
 			children = (
-				1D9BCAA31980100B007EE965 /* CRFigureDrawerFactory.h */,
-				1D9BCAA41980100B007EE965 /* CRFigureDrawerFactory.m */,
+				1D1635FB1980752A00A61899 /* Polygon */,
+				1D1635F419806B5B00A61899 /* Triangle */,
+				1D1635F319806B5500A61899 /* Circle */,
+				1D1635F119806B3F00A61899 /* FactoryDrawer */,
+				1D1635F219806B4B00A61899 /* Square */,
 			);
 			name = FigureDrawer;
 			sourceTree = "<group>";
@@ -553,7 +614,6 @@
 		1DC1130419784422002F8148 /* Figures */ = {
 			isa = PBXGroup;
 			children = (
-				1D40CD87197E52BF003D6160 /* FiguresView */,
 				1D40CD81197D74EF003D6160 /* CRCustomFigureView.h */,
 				1D40CD82197D74EF003D6160 /* CRCustomFigureView.m */,
 				1D40CD94197EAAC3003D6160 /* Shapes */,
@@ -777,6 +837,7 @@
 				1D0402FA197C8EB1003932FB /* CRPopAnimationController.m in Sources */,
 				1D890A4E1973DB320038D983 /* CRAppDelegate.m in Sources */,
 				1D40CD9E197F30FB003D6160 /* Node.m in Sources */,
+				1D1635F719806B7C00A61899 /* CRTriangleMapView.m in Sources */,
 				1D9BCAA51980100B007EE965 /* CRFigureDrawerFactory.m in Sources */,
 				1D40CD86197DC774003D6160 /* CRAddNodeHeaderSection.m in Sources */,
 				1D353731197C199D0005747F /* CRMapListViewController.m in Sources */,
@@ -784,6 +845,7 @@
 				1D890A541973DB320038D983 /* CRNodeListViewController.m in Sources */,
 				1D353734197C1A8E0005747F /* CRMapList.m in Sources */,
 				1D353739197C1C6E0005747F /* CRMapCollectionViewCell.m in Sources */,
+				1D1635F01980691A00A61899 /* CRSquareMapView.m in Sources */,
 				1D0402EF197C6EFC003932FB /* CRRoundColorView.m in Sources */,
 				1DC113111978818D002F8148 /* UIFont+Common.m in Sources */,
 				1D890A871974143C0038D983 /* CRNodeTableViewCell.m in Sources */,
@@ -792,6 +854,7 @@
 				1DC1130B197860F3002F8148 /* CRColoursView.m in Sources */,
 				1D890A8A19741DAB0038D983 /* CREditNodeViewController.m in Sources */,
 				1D0402F2197C8D13003932FB /* CRCustomNavigationController.m in Sources */,
+				1D1635FE1980753D00A61899 /* CRPolygonMapView.m in Sources */,
 				1D40CD8A197E531D003D6160 /* CRFiguresView.m in Sources */,
 				1D353744197C43080005747F /* CRDocumentNameView.m in Sources */,
 				1D890A751973DB510038D983 /* DiagramModel.xcdatamodeld in Sources */,
@@ -799,6 +862,7 @@
 				1D890A8419740BB00038D983 /* Node+Model.m in Sources */,
 				1D353749197C65840005747F /* UIColor+Custom.m in Sources */,
 				1D35372B197C18D90005747F /* CRBaseViewController.m in Sources */,
+				1D1635FA19806BA700A61899 /* CRCircleMapView.m in Sources */,
 				1D35373F197C1F980005747F /* CRMapCollectionFlowLayout.m in Sources */,
 				1DB16C381980004400858F3F /* CRLineView.m in Sources */,
 				1D0402F9197C8EB1003932FB /* CRPushAnimationController.m in Sources */,

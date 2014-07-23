@@ -7,8 +7,9 @@
 //
 
 #import "CRFiguresView.h"
-#import "CRSquareFigureView.h"
+#import "CRSquareMapView.h"
 #import "CRRoundColorView.h"
+#import "CRFigureDrawerFactory.h"
 
 @implementation CRFiguresView
 
@@ -18,23 +19,21 @@
 
 - (void)setupFigures {
     CGRect figureFrame = CGRectMake(10, 20, 70, 70);
-    [self setupSquareViewWithFrame:figureFrame];
-    figureFrame.origin.y = CGRectGetMaxY(figureFrame) + 10;
-    [self setupCircleViewWithFrame:figureFrame];
+    [self setupSquareViewWithFrame:figureFrame shapeType:0];
+    figureFrame.origin.y = CGRectGetMaxY(figureFrame) + 20;
+    [self setupSquareViewWithFrame:figureFrame shapeType:1];
+    figureFrame.origin.y = CGRectGetMaxY(figureFrame) + 20;
+    [self setupSquareViewWithFrame:figureFrame shapeType:2];
+    figureFrame.origin.y = CGRectGetMaxY(figureFrame) + 20;
+    [self setupSquareViewWithFrame:figureFrame shapeType:3];
 }
 
-- (void)setupSquareViewWithFrame:(CGRect)figureFrame {
-    CRSquareFigureView *squareView = [[CRSquareFigureView alloc] initWithFrame:figureFrame andColor:[UIColor flatConcreteColor]];
+- (void)setupSquareViewWithFrame:(CGRect)figureFrame shapeType:(NSUInteger)shapeType {
+    CRFigureDrawerFactory *squareView = [[CRFigureDrawerFactory alloc] initWithFrame:figureFrame andShapeType:shapeType andNode:nil];
+    squareView.color = [UIColor redColor];
+    squareView.tag = shapeType;
     [self addTapGestureToView:squareView];
     [self addSubview:squareView];
-}
-
-- (void)setupCircleViewWithFrame:(CGRect)figureFrame {
-    UIColor *currentColor = [UIColor flatConcreteColor];
-    CRRoundColorView *roundView = [[CRRoundColorView alloc] initWithFrame:figureFrame andColor:currentColor];
-    roundView.alpha = 0.8;
-    [self addTapGestureToView:roundView];
-    [self addSubview:roundView];
 }
 
 - (void)addTapGestureToView:(UIView *)colorView {
@@ -43,9 +42,9 @@
 }
 
 - (void)figureViewPressed:(UITapGestureRecognizer *)sender {
-    CRSquareFigureView *figureView =(CRSquareFigureView *)sender.view;
-    if ([self.delegate respondsToSelector:@selector(sendTappedView:)]) {
-        [self.delegate sendTappedView:figureView];
+    CRFigureDrawerFactory *figureView = (CRFigureDrawerFactory *)sender.view;
+    if ([self.delegate respondsToSelector:@selector(sendTappedView:withTag:)]) {
+        [self.delegate sendTappedView:figureView withTag:figureView.tag];
     }
 }
 

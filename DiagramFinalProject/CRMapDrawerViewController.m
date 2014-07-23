@@ -8,7 +8,8 @@
 
 #import "CRMapDrawerViewController.h"
 #import "CRColoursView.h"
-#import "CRCustomFigureView.h"
+//#import "CRCustomFigureView.h"
+#import "CRSquareMapView.h"
 #import "CRFiguresView.h"
 #import "CRMap.h"
 #import "CRManagedDocument.h"
@@ -18,11 +19,11 @@
 
 static CGSize kScrollViewContainerSize                  = {2324.0f, 2000.0f};
 
-@interface CRMapDrawerViewController ()<ColorViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate, CRCustomViewDelegate, FigureViewDelegate>
+@interface CRMapDrawerViewController ()<ColorViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate, CRFigureDrawerDelegate, FigureViewDelegate>
 
 @property (weak, nonatomic) IBOutlet CRColoursView *colorsView;
 @property (nonatomic, assign) CGPoint currentTouch;
-@property (nonatomic, strong) CRCustomFigureView *selectedView;
+@property (nonatomic, strong) CRFigureDrawerFactory *selectedView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (copy,nonatomic) NSArray *nodeList;
 
@@ -135,12 +136,10 @@ static CGSize kScrollViewContainerSize                  = {2324.0f, 2000.0f};
     [self lightSelectedView];
 }
 
-- (CRCustomFigureView *)createViewWithFigure:(Node *)node {
+- (CRFigureDrawerFactory *)createViewWithFigure:(Node *)node {
     CGRect figureFrame = CGRectMake([node.xPosition floatValue], [node.yPosition floatValue],[node.width floatValue],[node.height floatValue]);
-    CRCustomFigureView *figureView = [[CRCustomFigureView alloc] initWithFrame:figureFrame];
-    figureView.backgroundColor = [UIColor colorFromText:node.color];
+    CRFigureDrawerFactory *figureView = [[CRFigureDrawerFactory alloc] initWithFrame:figureFrame andNode:node];
     figureView.delegate = self;
-    figureView.node = node;
     return figureView;
 }
 
@@ -159,10 +158,12 @@ static CGSize kScrollViewContainerSize                  = {2324.0f, 2000.0f};
 
 - (void)updateNode:(Node *)node colorText:(NSString *)color{
     node.color = color;
+    self.selectedView.node = node;
 }
 
-- (void)createNewNodeForParent:(Node *)parentNode {
+- (void)createNewNodeForParent:(Node *)parentNode andShapeType:(NSUInteger)shapeType {
     Node *node = [Node createNodeInManagedObjectContext:parentNode.managedObjectContext withParent:parentNode];
+    node.shapeType = @(shapeType);
     [self insertNewNode:node];
     [self.managedDocument updateChangeCount:UIDocumentChangeDone];
 }
@@ -213,7 +214,7 @@ static CGSize kScrollViewContainerSize                  = {2324.0f, 2000.0f};
             break;
         case UIGestureRecognizerStateBegan:
             [self unLightSelectedView];
-            self.selectedView = (CRCustomFigureView *)recognizer.view;
+            self.selectedView = (CRFigureDrawerFactory *)recognizer.view;
             [self lightSelectedView];
             break;
         case UIGestureRecognizerStateChanged:
@@ -249,7 +250,7 @@ static CGSize kScrollViewContainerSize                  = {2324.0f, 2000.0f};
 
 #pragma mark - Figure Delegate Methods
 
-- (void)changeSelectedView:(CRCustomFigureView *)view {
+- (void)changeSelectedView:(CRFigureDrawerFactory *)view {
     if (self.selectedView != view) {
         [self unLightSelectedView];
         self.selectedView = view;
@@ -265,8 +266,8 @@ static CGSize kScrollViewContainerSize                  = {2324.0f, 2000.0f};
 }
 
 #pragma mark - Figures Delegate
-- (void)sendTappedView:(CRSquareFigureView *)selectedView {
-    [self createNewNodeForParent:self.selectedView.node];
+- (void)sendTappedView:(CRFigureDrawerFactory *)selectedView withTag:(NSUInteger)tag {
+    [self createNewNodeForParent:self.selectedView.node andShapeType:tag];
 }
 
 @end

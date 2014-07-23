@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class CRSquareFigureView;
+@class CRFigureDrawerFactory;
 
 @protocol FigureViewDelegate;
 
@@ -19,6 +19,6 @@
 
 @protocol FigureViewDelegate <NSObject>
 
-- (void)sendTappedView:(CRSquareFigureView *)selectedView;
+- (void)sendTappedView:(CRFigureDrawerFactory *)selectedView withTag:(NSUInteger)tag;
 
 @end
