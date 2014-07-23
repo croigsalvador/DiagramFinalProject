@@ -87,32 +87,48 @@ NSString * const kNodeIDKey             = @"nodeID";
     }
 }
 
-- (CGPoint)calculateFreeRectForNode:(Node *)node {
+- (CGPoint)calculateFreeRectForNode:(Node *)node point:(CGPoint)point {
     if (!node.parent) {
         CGPoint newPoint;
-        newPoint.y = [node.level intValue] * (100 + 100);
-        newPoint.x = 100;
+        NSDictionary *nodeDict = [self createNodeDictionaryForNode:node];
+        int i = 0;
+        for (NSDictionary *dict in [self brotherParentsInContext:node.managedObjectContext]) {
+            if ([nodeDict isEqualToDictionary:dict]) {
+                newPoint.y = [node.level intValue] * (100 + 100);
+                newPoint.x = point.x + (i* 200) ;
+            }
+        }
         return newPoint;
     }
     [self listedArrayOfNodesForAParentNode:node.parent];
     NSDictionary *currentNodeDict = [self createNodeDictionaryForNode:node];
     
     CGPoint nodePoint;
-    int countInNodeLevel = 0;
+    int countInNodeLevel = -1;
     for(NSDictionary *dictnode in self.mutableDictArray){
         if ([dictnode[kLevelPropertyName] isEqualToNumber:currentNodeDict[kLevelPropertyName]]) {
             countInNodeLevel++;
             if ([currentNodeDict isEqualToDictionary:dictnode]) {
-                nodePoint.y = [node.parent.yPosition floatValue] + 100;
-                nodePoint.x = [node.parent.xPosition floatValue] - 2 *[node.width floatValue];
+                nodePoint.y = [node.parent.yPosition floatValue] + 150 ;
+                nodePoint.x = [node.parent.xPosition floatValue] - (countInNodeLevel * [node.width floatValue]) + (countInNodeLevel * 100);
             }
         }
+        countInNodeLevel++;
     }
     self.mutableDictArray = nil;
     return nodePoint;
 }
 
 #pragma mark - Private Methods
+
+- (NSArray *)brotherParentsInContext:(NSManagedObjectContext *)context {
+    NSArray *parentsNodes = [Node rootNodeListInContext:context];
+    NSMutableArray *dictArray = [[NSMutableArray alloc] init];
+    for (Node *node in parentsNodes) {
+        [dictArray addObject:[self createNodeDictionaryForNode:node]];
+    }
+    return [dictArray copy];
+}
 
 - (CGRect)rectFromNodeDictionary:(NSDictionary *)dict {
     CGRect frameCurrentNode = {

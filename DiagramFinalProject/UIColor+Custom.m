@@ -12,8 +12,18 @@
 
 @implementation UIColor (Custom)
 
-+ (UIColor *)cr_darkColor {
++ (UIColor *)flatBlue {
     return UIColorFromRGB(0x1D5B8C);
-}   
+}
+
++ (UIColor *)colorFromText:(NSString *)colorText {
+    UIColor *colorFromText =[UIColor performSelector: NSSelectorFromString(colorText)];
+    return colorFromText;
+}
+
++ (NSArray *)flatColorsArray {
+    NSArray *colorsArray = @[@"flatTurquoiseColor",@"flatGreenSeaColor",@"flatEmeraldColor",@"flatNephritisColor",@"flatPeterRiverColor",@"flatBelizeHoleColor",@"flatAmethystColor",@"flatWisteriaColor",@"flatWetAsphaltColor",@"flatMidnightBlueColor",@"flatSunFlowerColor",@"flatOrangeColor",@"flatCarrotColor",@"flatPumpkinColor",@"flatAlizarinColor",@"flatPomegranateColor", @"flatCloudsColor", @"flatSilverColor", @"flatConcreteColor", @"flatAsbestosColor", @"blueColor", @"redColor",@"blackColor"];
+    return colorsArray;
+}
 
 @end

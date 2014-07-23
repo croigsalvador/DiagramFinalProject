@@ -21,6 +21,8 @@
 #import "CRNodeMap.h"
 #import "CRMapList.h"
 
+#import "CRManagedDocument.h"
+
 static NSString * const kFilePathComponent                = @"sqlite";
 static NSString * const kMainStoryBoardNameID             = @"Main";
 static NSString * const kMapParentViewControllerID        = @"MapParentViewController";
@@ -43,6 +45,7 @@ static UIEdgeInsets const kCollectionInsets               = {64.0, 0.0 , 0.0 ,0.
     self.mapListArray = [self.mapList mapList];
     [self setupCollectionView];
     [self.view addSubview:self.documentNameView];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Colección" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 #pragma mark - Custom Getters
@@ -99,7 +102,6 @@ static UIEdgeInsets const kCollectionInsets               = {64.0, 0.0 , 0.0 ,0.
     CRMapCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([CRMapCollectionViewCell class]) forIndexPath:indexPath];
     
     cell.backgroundColor = [UIColor blueColor];
-    
     return cell;
 }
 
@@ -114,7 +116,7 @@ static UIEdgeInsets const kCollectionInsets               = {64.0, 0.0 , 0.0 ,0.
 }
 
 - (void)setupNextViewControllerWithName:(NSString *)name {
-    UIManagedDocument *managedDocument = [self setupManagedDocumentWithName:name];
+    CRManagedDocument *managedDocument = [self setupManagedDocumentWithName:name];
     CRNodeMap *nodeMap = [[CRNodeMap alloc] init];
     
     UIStoryboard *mapStoryboard = [UIStoryboard storyboardWithName:kMainStoryBoardNameID bundle:[NSBundle mainBundle]];
@@ -148,15 +150,16 @@ static UIEdgeInsets const kCollectionInsets               = {64.0, 0.0 , 0.0 ,0.
 
 #pragma mark - Initialize UIManagedDocument
 
-- (UIManagedDocument *)setupManagedDocumentWithName:(NSString *)fileName {
+- (CRManagedDocument *)setupManagedDocumentWithName:(NSString *)fileName {
     NSURL *fileURL =[self urlForUIManagedDocumentWithName:fileName];
     
-    UIManagedDocument *managedDocument = [[UIManagedDocument alloc] initWithFileURL:fileURL];
+    CRManagedDocument *managedDocument = [[CRManagedDocument alloc] initWithFileURL:fileURL];
     if ([[NSFileManager defaultManager] fileExistsAtPath:[fileURL path]]) {
         [managedDocument openWithCompletionHandler:^(BOOL success) {
             if (!success) {
                 NSLog(@"No se pudo abrir aq%@", managedDocument);
             } else {
+                 NSLog(@"No se pudo abrir aq%@", managedDocument);
             }
         }];
     } else {

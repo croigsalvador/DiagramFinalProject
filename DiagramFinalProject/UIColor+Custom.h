@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UIColor (Custom)
-+ (UIColor *)cr_darkColor;
++ (UIColor *)flatBlue;
++ (UIColor *)colorFromText:(NSString *)colorText;
++ (NSArray *)flatColorsArray;
 @end

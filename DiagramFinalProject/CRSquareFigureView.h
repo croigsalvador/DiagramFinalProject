@@ -6,7 +6,8 @@
 //  Copyright (c) 2014 CRoigSalvador. All rights reserved.
 //
 
-#import "CRCustomFigureView.h"
-@interface CRSquareFigureView : CRCustomFigureView
+#import <UIKit/UIKit.h>
+
+@interface CRSquareFigureView : UIView
 - (id)initWithFrame:(CGRect)frame andColor:(UIColor *)color;
 @end

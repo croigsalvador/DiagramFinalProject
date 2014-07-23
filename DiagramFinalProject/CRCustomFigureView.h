@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @protocol CRCustomViewDelegate;
+@class Node;
 
 @interface CRCustomFigureView : UIView
 
 @property (weak,nonatomic) id <CRCustomViewDelegate> delegate;
 @property (copy,nonatomic) NSString *titleText;
+@property (strong,nonatomic) Node *node;
 
 @end
 

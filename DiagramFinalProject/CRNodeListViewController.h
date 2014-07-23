@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class CRNodeMap, Node;
+@class CRNodeMap, Node, CRManagedDocument;
 
 @interface CRNodeListViewController : UITableViewController
-@property (strong,nonatomic) UIManagedDocument *managedDocument;
+@property (strong,nonatomic) CRManagedDocument *managedDocument;
 @property (strong,nonatomic) CRNodeMap *nodeMap;
 - (instancetype)initWithDocument:(UIManagedDocument *)document andNodeMap:(CRNodeMap *)nodeMap;
 

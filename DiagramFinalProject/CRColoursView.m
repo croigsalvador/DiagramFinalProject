@@ -9,66 +9,80 @@
 #import "CRColoursView.h"
 #import "CRRoundColorView.h"
 
-static CGFloat const kCircleHeight           = 50.0f;
+static CGFloat const kCircleHeight                = 50.0f;
+static CGFloat const kOffsetMargin                = 15.3f;
+
 @interface CRColoursView ()
 
 @property (strong,nonatomic) CRRoundColorView *selectedRoundView;
+@property (nonatomic,copy) NSArray *colorsArray;
 
 @end
 
 @implementation CRColoursView
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-    }
-    return self;
-}
-
+#pragma mark - Initializer
 - (void)awakeFromNib {
     [self setupBordersAndShadows];
     [self setupColorPalette];
 }
 
+#pragma mark - Custom Getter
+
+- (NSArray *)colorsArray {
+    if (!_colorsArray) {
+        _colorsArray = [UIColor flatColorsArray];
+    }
+    return _colorsArray;
+}
+
+#pragma mark - Setup Elements
 - (void)setupBordersAndShadows {
-    self.backgroundColor = [UIColor cr_darkColor];
+    self.backgroundColor = [UIColor flatBlue];
     self.layer.shadowOffset = CGSizeMake(3 , 3);
     self.layer.shadowRadius = 3;
     self.layer.shadowOpacity = .8f;
     self.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.layer.cornerRadius = 5.0f;
 }
 
 - (void)setupColorPalette {
-    static CGFloat xOffsetFirstRow = 48.5f;
-    
-    for (int i = 0; i < 11; i++) {
-        CGRect colorFrame = CGRectMake(xOffsetFirstRow, 10, kCircleHeight, kCircleHeight);
-        CRRoundColorView *roundView = [[CRRoundColorView alloc] initWithFrame:colorFrame andColor:[UIColor blueColor]];
-        roundView.alpha = 0.5;
-        xOffsetFirstRow = CGRectGetMaxX(roundView.frame) + 15.3f ;
-         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(roundViewPressed:)];
-        [roundView addGestureRecognizer:tapGesture];
-        [self addSubview:roundView];
-    }
-    static CGFloat xOffsetSecondRow = 15.8f;
-    for (int i = 0; i < 12; i++) {
-        CGRect colorFrame = CGRectMake(xOffsetSecondRow, 70, kCircleHeight, kCircleHeight);
-        CRRoundColorView *roundView = [[CRRoundColorView alloc] initWithFrame:colorFrame andColor:[UIColor blueColor]];
-        xOffsetSecondRow = CGRectGetMaxX(roundView.frame) + 15.3f;
-        roundView.alpha = 0.5;
-         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(roundViewPressed:)];
-        [roundView addGestureRecognizer:tapGesture];
-        [self addSubview:roundView];
+    [self setupRowColorWithXPosition:48.5f yPosition:10.0f anIndex:11 colorIndex:10];
+    [self setupRowColorWithXPosition:15.8f yPosition:70.0f anIndex:12 colorIndex:22];
+}
+
+- (void)setupRowColorWithXPosition:(CGFloat)xPos yPosition:(CGFloat)yPos anIndex:(NSUInteger)index colorIndex:(NSUInteger)colorIndex{
+    CGFloat xOffsetFirstRow = xPos;
+    int colorCount = colorIndex;
+    for (int i = 0; i < index; i++) {
+        CGRect colorFrame = CGRectMake(xOffsetFirstRow, yPos, kCircleHeight, kCircleHeight);
+        [self createViewWithFrame:colorFrame colorIndex:colorCount];
+        xOffsetFirstRow = CGRectGetMaxX(colorFrame) + kOffsetMargin;
+        colorCount--;
     }
 }
 
+- (void)createViewWithFrame:(CGRect)colorFrame colorIndex:(NSUInteger)colorIndex{
+    UIColor *currentColor = [UIColor colorFromText:self.colorsArray[colorIndex]];
+    CRRoundColorView *roundView = [[CRRoundColorView alloc] initWithFrame:colorFrame andColor:currentColor];
+    roundView.alpha = 0.8;
+    roundView.tag = colorIndex;
+    [self addTapGestureToView:roundView];
+    [self addSubview:roundView];
+}
+
+- (void)addTapGestureToView:(CRRoundColorView *)colorView {
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(roundViewPressed:)];
+    [colorView addGestureRecognizer:tapGesture];
+}
+
+#pragma mark - Action Methods
 - (void)roundViewPressed:(UITapGestureRecognizer *)sender {
-    self.selectedRoundView.alpha = 0.5;
+    self.selectedRoundView.alpha = 0.8;
     self.selectedRoundView = (CRRoundColorView *)sender.view;
+    NSString *color = self.colorsArray[self.selectedRoundView.tag];
     self.selectedRoundView.alpha = 1.0;
     if ([self.delegate respondsToSelector:@selector(sendInView:selectedColor:)]) {
-        [self.delegate sendInView:self selectedColor:@"DARK BLUE"];
+        [self.delegate sendInView:self selectedColor:color];
     }
 }
 

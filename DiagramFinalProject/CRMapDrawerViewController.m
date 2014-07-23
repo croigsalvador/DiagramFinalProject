@@ -8,18 +8,22 @@
 
 #import "CRMapDrawerViewController.h"
 #import "CRColoursView.h"
-#import "CRSquareFigureView.h"
+#import "CRCustomFigureView.h"
+#import "CRFiguresView.h"
+#import "CRMap.h"
+#import "CRManagedDocument.h"
 
 #import "CRNodeMap.h"
 #import "Node+Model.h"
 
-static CGSize kScrollViewContainerSize                  = {2024.0f, 2024.0f};
+static CGSize kScrollViewContainerSize                  = {2324.0f, 1500.0f};
 
-@interface CRMapDrawerViewController ()<ColorViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate, CRCustomViewDelegate>
+@interface CRMapDrawerViewController ()<ColorViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate, CRCustomViewDelegate, FigureViewDelegate>
 @property (weak, nonatomic) IBOutlet CRColoursView *colorsView;
 @property (nonatomic, assign) CGPoint currentTouch;
-@property (nonatomic, strong) UIView *selectedView;
+@property (nonatomic, strong) CRCustomFigureView *selectedView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong,nonatomic) NSMutableArray *nodeList;
 
 @property (strong,nonatomic) UIView *containerView;
 @end
@@ -52,12 +56,6 @@ static CGSize kScrollViewContainerSize                  = {2024.0f, 2024.0f};
     [self centerScrollViewContents];
 }
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    self.scrollView = nil;
-    self.containerView = nil;
-}
-
 #pragma mark - Setting up UIElements
 - (void)setupContainerView {
     self.containerView = [[UIView alloc] initWithFrame:(CGRect){.origin=CGPointMake(0.0f, 0.0f), .size=kScrollViewContainerSize}];
@@ -75,8 +73,8 @@ static CGSize kScrollViewContainerSize                  = {2024.0f, 2024.0f};
 }
 
 - (void)setupCurrentMap {
-    NSArray *allNodes = [Node fetchAllNodesFromContext:self.managedDocument.managedObjectContext];
-    for (Node *node in allNodes){
+   self.nodeList = [[Node fetchAllNodesFromContext:self.managedDocument.managedObjectContext] mutableCopy];
+    for (Node *node in self.nodeList){
         [self createFigure:node];
     }
 }
@@ -101,7 +99,7 @@ static CGSize kScrollViewContainerSize                  = {2024.0f, 2024.0f};
     self.containerView.frame = contentsFrame;
 }
 
-#pragma mark - Private Methods
+#pragma mark - UI Methods
 
 - (void)addGesturesToSelectedView {
     UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self
@@ -130,35 +128,46 @@ static CGSize kScrollViewContainerSize                  = {2024.0f, 2024.0f};
     [self lightSelectedView];
 }
 
-- (UIView *)createViewWithFigure:(Node *)node {
+- (CRCustomFigureView *)createViewWithFigure:(Node *)node {
     CGRect figureFrame = CGRectMake([node.xPosition floatValue], [node.yPosition floatValue],[node.width floatValue],[node.height floatValue]);
-    CRCustomFigureView *figureView = [[CRSquareFigureView alloc] initWithFrame:figureFrame andColor:[UIColor blueColor]];
-    figureView.backgroundColor = [UIColor redColor];
-    figureView.titleText = node.title;
+    CRCustomFigureView *figureView = [[CRCustomFigureView alloc] initWithFrame:figureFrame];
+    figureView.backgroundColor = [UIColor colorFromText:node.color];
     figureView.delegate = self;
+    figureView.node = node;
     return figureView;
 }
 
-//- (UITextView *)textViewForFigure:(CGSize)figureSize {
-//    CGRect textFrame = CGRectMake(0, 0, figureSize.width, figureSize.height);
-//    UITextView *figureTextView = [[UITextView alloc] initWithFrame:CGRectInset(textFrame, 10, 20)];
-//    figureTextView.editable = YES;
-//    figureTextView.backgroundColor = [UIColor whiteColor];
-//    NSLog(@"TextView: %@", NSStringFromCGRect(figureTextView.frame));
-//    return figureTextView;
-//}
+#pragma mark - Private Model Methods 
 
-//- (void)addLineBetweenSelectedAndNewView:(CRCustomFigureView *)figureView{
-//    CAShapeLayer *line = [CAShapeLayer layer];
-//    UIBezierPath *linePath=[UIBezierPath bezierPath];
-//    [linePath moveToPoint: self.selectedView.center];
-//    [linePath addLineToPoint:figureView.center];
-//    line.path=linePath.CGPath;
-//    line.fillColor = nil;
-//    line.opacity = 1.0;
-//    line.strokeColor = [UIColor redColor].CGColor;
-//    [self.containerView.layer addSublayer:line];
-//}
+- (void)updateNode:(Node *)node frame:(CGRect)nodeFrame {
+    node.width =   @(nodeFrame.size.width);
+    node.height = @(nodeFrame.size.height);
+    node.xPosition = @(nodeFrame.origin.x);
+    node.yPosition = @(nodeFrame.origin.y);
+
+    [self updateNodeListWithNode:node];
+}
+
+- (void)updateNode:(Node *)node colorText:(NSString *)color{
+    node.color = color;
+    [self updateNodeListWithNode:node];
+}
+
+- (void)updateNodeListWithNode:(Node *)node {
+    self.selectedView.node = node;
+    [self.nodeList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        Node *n = (Node *)obj;
+        if ([node isEqual:n]) {
+            [self.nodeList replaceObjectAtIndex:idx withObject:node];
+        }
+    }];
+}
+
+- (void)createNewNodeForParent:(Node *)parentNode {
+    Node *newNode = [Node createNodeInManagedObjectContext:parentNode.managedObjectContext withParent:parentNode];
+    [self.managedDocument updateChangeCount:UIDocumentChangeDone];
+    [self createFigure:newNode];
+}
 
 #pragma mark - Touch Methods
 
@@ -179,9 +188,10 @@ static CGSize kScrollViewContainerSize                  = {2024.0f, 2024.0f};
     
     CGFloat scale = oldScale - (oldScale - recognizer.scale) + initialDifference;
     self.selectedView.transform = CGAffineTransformScale(self.view.transform, scale, scale);
+    [self updateNode:self.selectedView.node frame:self.selectedView.frame];
+
     oldScale = scale;
 }
-
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)recognizer {
     CGPoint center;
@@ -190,7 +200,7 @@ static CGSize kScrollViewContainerSize                  = {2024.0f, 2024.0f};
             break;
         case UIGestureRecognizerStateBegan:
             [self unLightSelectedView];
-            self.selectedView = recognizer.view;
+            self.selectedView = (CRCustomFigureView *)recognizer.view;
             [self lightSelectedView];
             break;
         case UIGestureRecognizerStateChanged:
@@ -198,6 +208,7 @@ static CGSize kScrollViewContainerSize                  = {2024.0f, 2024.0f};
             self.selectedView.center = center;
             break;
         case UIGestureRecognizerStateEnded:
+            [self updateNode:self.selectedView.node frame:self.selectedView.frame];
             break;
         case UIGestureRecognizerStateCancelled:
             break;
@@ -234,11 +245,16 @@ static CGSize kScrollViewContainerSize                  = {2024.0f, 2024.0f};
     }
 }
 
-
 #pragma mark - ColorView Delegate
 
 - (void)sendInView:(CRColoursView *)colorView selectedColor:(NSString *)color {
-    NSLog(@"Color seleccionado: %@", color);
+    [self updateNode:self.selectedView.node colorText:color];
 }
+
+#pragma mark - Figures Delegate
+- (void)sendTappedView:(CRSquareFigureView *)selectedView {
+    [self createNewNodeForParent:self.selectedView.node];
+}
+
 
 @end

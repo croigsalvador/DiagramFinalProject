@@ -27,5 +27,6 @@ extern NSString * const kNodeIDKey;
 
 - (void)deleteNodesAtIndex:(NSArray *)deleteIndexs;
 
-- (CGPoint)calculateFreeRectForNode:(Node *)node;
+//- (CGPoint)calculateFreeRectForNode:(Node *)node;
+- (CGPoint)calculateFreeRectForNode:(Node *)node point:(CGPoint)point;
 @end

@@ -62,21 +62,21 @@ static NSString * const kAcceptButtonName                   = @"Aceptar";
         .size.height = kButtonSize.height
     };
     
+    UIButton *acceptButton = [[UIButton alloc] initWithFrame:buttonFrame];
+    acceptButton.tag = 2;
+    [acceptButton setTitle:kAcceptButtonName forState:UIControlStateNormal];
+    [acceptButton setBackgroundColor:[UIColor flatAmethystColor]];
+    [acceptButton addTarget:self action:@selector(pressedButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:acceptButton];
+    
+    buttonFrame.origin.x = CGRectGetMaxX(buttonFrame) + 10;
+    
     UIButton *cancelButton = [[UIButton alloc] initWithFrame:buttonFrame];
     [cancelButton setTitle:kCancelButtonName forState:UIControlStateNormal];
     [cancelButton setBackgroundColor:[UIColor flatAmethystColor]];
     [cancelButton addTarget:self action:@selector(pressedButton:) forControlEvents:UIControlEventTouchUpInside];
     cancelButton.tag = 1;
     [self addSubview:cancelButton];
-    
-    buttonFrame.origin.x = CGRectGetMaxX(buttonFrame) + 10;
-    
-    UIButton *acceptButton = [[UIButton alloc] initWithFrame:buttonFrame];
-    acceptButton.tag = 2;
-    [acceptButton setTitle:kCancelButtonName forState:UIControlStateNormal];
-    [acceptButton setBackgroundColor:[UIColor flatAmethystColor]];
-    [acceptButton addTarget:self action:@selector(pressedButton:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:acceptButton];
 }
 
 - (void)pressedButton:(UIButton *)sender {

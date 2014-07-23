@@ -7,6 +7,9 @@
 //
 
 #import "CRCustomFigureView.h"
+#import "Node+Model.h"
+#import "CRSquareFigureView.h"
+#import "CRRoundColorView.h"
 
 @interface CRCustomFigureView ()
 
@@ -14,6 +17,7 @@
 @property (nonatomic, strong) UIView *dragView;
 @property (strong,nonatomic) UILabel * titleLabel;
 @property (strong,nonatomic) UILabel * textLabel;
+@property (strong,nonatomic) UIView * figureView;
 
 @end
 
@@ -30,14 +34,40 @@
     return self;
 }
 
-#pragma mark - Setters
-
-- (void)setTitleText:(NSString *)titleText {
-    _titleText = titleText;
-    self.titleLabel.text = self.titleText;
+- (void)setNode:(Node *)node {
+    _node = node;
+    [self updateFigure];
+    
 }
 
+- (void)updateFigure {
+    UIColor *figureColor =[UIColor colorFromText:self.node.color];
+    self.titleLabel.text = self.node.title;
+    self.textLabel.text = self.node.text;
+    [self setupFigureViewWithColor:figureColor];
+}
+
+
 #pragma mark - Setup Elements
+
+- (void)setupFigureViewWithColor:(UIColor *)figureColor {
+    if (self.figureView) {
+        [self.figureView removeFromSuperview];
+    }
+    switch ([self.node.shapeType intValue]) {
+        case CRNodeTypeShapeSquare:
+            self.figureView = [[CRSquareFigureView alloc] initWithFrame:self.bounds andColor:figureColor];
+            break;
+        case CRNodeTypeShapeCircle:
+            self.figureView = [[CRRoundColorView alloc] initWithFrame:self.bounds andColor:figureColor];
+            break;
+        case CRNodeTypeShapeTriangle:
+            break;
+        case CRNodeTypeShapePolygon:
+            break;
+    }
+    [self addSubview:self.figureView];
+}
 
 - (void)setupTextLabels {
     CGRect labelFrame = CGRectMake(5, 15, self.bounds.size.width - 20, 15);
