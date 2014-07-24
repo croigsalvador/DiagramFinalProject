@@ -7,6 +7,7 @@
 //
 
 #import "CRAddNodeHeaderSection.h"
+#import "UIFont+Common.h"
 
 @interface CRAddNodeHeaderSection ()
 @property (strong,nonatomic) UIButton *addNodeButton;
@@ -27,6 +28,7 @@
     self.addNodeButton = [[UIButton alloc] initWithFrame:self.bounds];
     [self.addNodeButton setTitle:@"Añadir nueva figura" forState:UIControlStateNormal];
     [self.addNodeButton addTarget:self action:@selector(addNodeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.addNodeButton.titleLabel.font = [UIFont montSerratBoldForCollectionCell];
     [self addSubview:self.addNodeButton];
 }
 

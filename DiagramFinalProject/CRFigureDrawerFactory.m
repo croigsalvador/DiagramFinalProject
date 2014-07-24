@@ -61,7 +61,7 @@
     }
     self.color = figureColor;
     self.titleLabel.text = self.node.title;
-    self.titleLabel.font = [UIFont montserratRegular];
+    self.titleLabel.font = [UIFont montserratRegularBiggest];
 }
 
 - (void)hideTextLabels {
@@ -73,7 +73,7 @@
     CGRect labelFrame = CGRectInset(self.bounds, 10, 10);
     self.titleLabel = [[UILabel alloc] initWithFrame:labelFrame];
     self.titleLabel.textColor = [UIColor blackColor];
-    self.titleLabel.font =  [UIFont montserratRegularBig];
+    self.titleLabel.font =  [UIFont montserratRegularBiggest];
     self.titleLabel.backgroundColor = [UIColor clearColor];
     self.titleLabel.numberOfLines = 0;
     self.titleLabel.textAlignment = NSTextAlignmentCenter;

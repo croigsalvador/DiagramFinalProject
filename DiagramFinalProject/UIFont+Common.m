@@ -27,7 +27,12 @@
 }
 
 + (UIFont *)montserratRegularBig {
-    UIFont *font =[UIFont fontWithName:@"Montserrat-Regular" size:20] ;
+    UIFont *font =[UIFont fontWithName:@"Montserrat-Regular" size:25] ;
+    return font;
+}
+
++ (UIFont *)montserratRegularBiggest {
+    UIFont *font =[UIFont fontWithName:@"Montserrat-Regular" size:25] ;
     return font;
 }
 

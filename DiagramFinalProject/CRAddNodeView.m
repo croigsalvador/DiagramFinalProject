@@ -41,7 +41,7 @@ static NSString * const kAcceptButtonName                   = @"Añadir";
 
 - (void)setupNameTextField {
     
-    CGRect labelFrame = CGRectMake(kMarginLeft, kMarginLeft, 130, 30);
+    CGRect labelFrame = CGRectMake(kMarginLeft, 35, 130, 30);
     UILabel *titleLbl = [[UILabel alloc] initWithFrame:labelFrame];
     titleLbl.textColor = [UIColor darkGrayCustom];
     titleLbl.font =  [UIFont montSerratBoldForCollectionCell];
