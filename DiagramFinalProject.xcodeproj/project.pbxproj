@@ -62,6 +62,8 @@
 		1DA0A2C519811DC200BB7D5C /* CRCustomButtonFlat.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA0A2C419811DC200BB7D5C /* CRCustomButtonFlat.m */; };
 		1DA0A2C8198155CD00BB7D5C /* CRAddNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA0A2C7198155CD00BB7D5C /* CRAddNodeView.m */; };
 		1DA0A2CB1981711600BB7D5C /* CRAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA0A2CA1981711600BB7D5C /* CRAlertView.m */; };
+		1DA3A53C1981913900D1A480 /* MapListVCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3A53B1981913900D1A480 /* MapListVCTests.m */; };
+		1DA3A53E1981914E00D1A480 /* MapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3A53D1981914E00D1A480 /* MapTests.m */; };
 		1DB16C381980004400858F3F /* CRLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB16C371980004400858F3F /* CRLineView.m */; };
 		1DC1130B197860F3002F8148 /* CRColoursView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC1130A197860F3002F8148 /* CRColoursView.m */; };
 		1DC1130E197869F2002F8148 /* paleta.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DC1130D197869F2002F8148 /* paleta.png */; };
@@ -168,6 +170,8 @@
 		1DA0A2C7198155CD00BB7D5C /* CRAddNodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAddNodeView.m; sourceTree = "<group>"; };
 		1DA0A2C91981711600BB7D5C /* CRAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRAlertView.h; sourceTree = "<group>"; };
 		1DA0A2CA1981711600BB7D5C /* CRAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAlertView.m; sourceTree = "<group>"; };
+		1DA3A53B1981913900D1A480 /* MapListVCTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapListVCTests.m; sourceTree = "<group>"; };
+		1DA3A53D1981914E00D1A480 /* MapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapTests.m; sourceTree = "<group>"; };
 		1DB16C361980004400858F3F /* CRLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRLineView.h; sourceTree = "<group>"; };
 		1DB16C371980004400858F3F /* CRLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRLineView.m; sourceTree = "<group>"; };
 		1DC11309197860F3002F8148 /* CRColoursView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRColoursView.h; sourceTree = "<group>"; };
@@ -428,6 +432,7 @@
 		1D890A621973DB330038D983 /* DiagramFinalProjectTests */ = {
 			isa = PBXGroup;
 			children = (
+				1DA3A53A1981910F00D1A480 /* MapList */,
 				1D8B2CF719753DAB00C67FB1 /* Model */,
 				1D890A631973DB330038D983 /* Supporting Files */,
 				1D8B2CF819753DB200C67FB1 /* AppDelegate */,
@@ -564,6 +569,7 @@
 			children = (
 				1D8B2CF919753EDB00C67FB1 /* NodeTests.m */,
 				1D103BC31976F4400050F092 /* NodeMapTests.m */,
+				1DA3A53D1981914E00D1A480 /* MapTests.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -595,6 +601,14 @@
 				1DA0A2C419811DC200BB7D5C /* CRCustomButtonFlat.m */,
 			);
 			name = CustomDelete;
+			sourceTree = "<group>";
+		};
+		1DA3A53A1981910F00D1A480 /* MapList */ = {
+			isa = PBXGroup;
+			children = (
+				1DA3A53B1981913900D1A480 /* MapListVCTests.m */,
+			);
+			name = MapList;
 			sourceTree = "<group>";
 		};
 		1DB16C351980000D00858F3F /* Line */ = {
@@ -880,7 +894,9 @@
 			files = (
 				1D103BC41976F4400050F092 /* NodeMapTests.m in Sources */,
 				1D5EA81119753267006C9650 /* CRAppDelegateTests.m in Sources */,
+				1DA3A53C1981913900D1A480 /* MapListVCTests.m in Sources */,
 				1D8B2CFA19753EDB00C67FB1 /* NodeTests.m in Sources */,
+				1DA3A53E1981914E00D1A480 /* MapTests.m in Sources */,
 				1D8B2CFB197540DD00C67FB1 /* DiagramModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

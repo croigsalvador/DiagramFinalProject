@@ -38,40 +38,40 @@
 - (void)testSUTIsNotNil {
     XCTAssertNotNil(self.sut, @"SUT IS NIL");
 }
+//
+//- (void)testNodeListViewControllerGetsManagedDocument {
+//    UIWindow *windowMock = mock([UIWindow class]);
+//    self.sut.window = windowMock;
+//    
+//    UINavigationController *navMock = mock([UINavigationController class]);
+//    [given([windowMock rootViewController]) willReturn:navMock];
+//    
+//    CRNodeListViewController *mockNodeList = mock([CRNodeListViewController class]);
+//    [given([navMock topViewController]) willReturn:mockNodeList];
+//   
+//    [self.sut application:nil didFinishLaunchingWithOptions:nil];
+//    [verify(mockNodeList) setManagedDocument:notNilValue()];
+//}
+//- (void)testNodeListViewControllerGetsNodeMap {
+//    UIWindow *windowMock = mock([UIWindow class]);
+//    self.sut.window = windowMock;
+//    
+//    UINavigationController *navMock = mock([UINavigationController class]);
+//    [given([windowMock rootViewController]) willReturn:navMock];
+//    
+//    CRNodeListViewController *mockNodeList = mock([CRNodeListViewController class]);
+//    [given([navMock topViewController]) willReturn:mockNodeList];
+//   
+//    [self.sut application:nil didFinishLaunchingWithOptions:nil];
+//    [verify(mockNodeList) setNodeMap:notNilValue()];
+//}
+//
+//
+//      
+//      
+//      
+//      
 
-- (void)testNodeListViewControllerGetsManagedDocument {
-    UIWindow *windowMock = mock([UIWindow class]);
-    self.sut.window = windowMock;
-    
-    UINavigationController *navMock = mock([UINavigationController class]);
-    [given([windowMock rootViewController]) willReturn:navMock];
-    
-    CRNodeListViewController *mockNodeList = mock([CRNodeListViewController class]);
-    [given([navMock topViewController]) willReturn:mockNodeList];
-   
-    [self.sut application:nil didFinishLaunchingWithOptions:nil];
-    [verify(mockNodeList) setManagedDocument:notNilValue()];
-}
-- (void)testNodeListViewControllerGetsNodeMap {
-    UIWindow *windowMock = mock([UIWindow class]);
-    self.sut.window = windowMock;
-    
-    UINavigationController *navMock = mock([UINavigationController class]);
-    [given([windowMock rootViewController]) willReturn:navMock];
-    
-    CRNodeListViewController *mockNodeList = mock([CRNodeListViewController class]);
-    [given([navMock topViewController]) willReturn:mockNodeList];
-   
-    [self.sut application:nil didFinishLaunchingWithOptions:nil];
-    [verify(mockNodeList) setNodeMap:notNilValue()];
-}
-
-
-      
-      
-      
-      
-      
       
       
       
