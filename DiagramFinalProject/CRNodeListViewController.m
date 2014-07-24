@@ -74,8 +74,8 @@ static CGSize  const kDocumentViewSize                   = {600.0f, 230.0f};
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.fetchedResultsController.delegate = self;
     self.nodeList = self.nodeMap.mapList;
+    self.fetchedResultsController = self.fetchedResultsController;
     [self.tableView reloadData];
 }
 
@@ -89,6 +89,7 @@ static CGSize  const kDocumentViewSize                   = {600.0f, 230.0f};
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     self.fetchedResultsController.delegate = nil;
+    self.fetchedResultsController = nil;
 }
 
 #pragma mark - Custom Getters
@@ -175,7 +176,7 @@ static CGSize  const kDocumentViewSize                   = {600.0f, 230.0f};
     self.nodeList = self.nodeMap.mapList;
     self.removeNodeViewBlock(self.deletedNodes);
     self.deletedNodes = nil;
-
+    
 }
 
 - (NSIndexPath *)indexPathAfterInsertNewNodeWithObject:(id)anObject {
@@ -192,10 +193,10 @@ static CGSize  const kDocumentViewSize                   = {600.0f, 230.0f};
     NSIndexPath * myIndexPath = [self.nodeMap indexPathNewForNode:self.insertedNode];
     [self.nodeMap addChild:self.insertedNode atIndex:myIndexPath.row];
     self.nodeList = self.nodeMap.mapList;
-
+    
     // Paint node in Map
     self.addNewNodeHandlerBLock(self.insertedNode);
-
+    
     self.insertedNode = nil;
     return myIndexPath;
 }
@@ -342,10 +343,10 @@ static CGSize  const kDocumentViewSize                   = {600.0f, 230.0f};
 #pragma mark - PopApp Add Node Methods
 
 - (void)addNodeAction {
-        if (self.addNodeView.hidden) {
-            self.addNodeView.hidden = NO;
-            [self animatePopUpDisplay];
-        }
+    if (self.addNodeView.hidden) {
+        self.addNodeView.hidden = NO;
+        [self animatePopUpDisplay];
+    }
 }
 
 - (void)animatePopUpDisplay {
@@ -370,7 +371,7 @@ static CGSize  const kDocumentViewSize                   = {600.0f, 230.0f};
             break;
         case 2:
             [self addChildNodeToParentAtIndexPath:self.parentIndexPath andName:name];
-         break;
+            break;
     }
 }
 
