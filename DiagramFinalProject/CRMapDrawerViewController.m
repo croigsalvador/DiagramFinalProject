@@ -13,13 +13,17 @@
 #import "CRFiguresView.h"
 #import "CRMap.h"
 #import "CRManagedDocument.h"
+#import "CRAddNodeView.h"
+#import "UIImage+ImageEffects.h"
 
 #import "CRNodeMap.h"
 #import "Node+Model.h"
 
-static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
+static CGSize kScrollViewContainerSize                   = {5000.0f, 3333.0f};
+static CGPoint const kDocumentViewPoint                  = {212.0f, 64.0f};
+static CGSize  const kDocumentViewSize                   = {600.0f, 230.0f};
 
-@interface CRMapDrawerViewController ()<ColorViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate, CRFigureDrawerDelegate, FigureViewDelegate, NSFetchedResultsControllerDelegate>
+@interface CRMapDrawerViewController ()<ColorViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate, CRFigureDrawerDelegate, FigureViewDelegate, NSFetchedResultsControllerDelegate, AddNodeDelegate>
 
 @property (weak, nonatomic) IBOutlet CRColoursView *colorsView;
 @property (nonatomic, assign) CGPoint currentTouch;
@@ -29,11 +33,13 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
 
 @property (strong,nonatomic) UIView *containerView;
 @property (strong,nonatomic) Node *lastNodeInserted;
+@property (strong,nonatomic) CRAddNodeView *addNodeView;
 
 @property (strong,nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (copy, nonatomic ) NSMutableArray *deleteIndexs;
 @property (copy, nonatomic ) NSMutableArray *deletedNodes;
 @property (assign,nonatomic, getter = isDeleting) BOOL deleting;
+@property (strong,nonatomic) UIImageView *screenShot;
 @end
 
 @implementation CRMapDrawerViewController
@@ -90,6 +96,14 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
     }
     return _deletedNodes;
 }
+- (CRAddNodeView *)addNodeView{
+    if (!_addNodeView) {
+        _addNodeView = [[CRAddNodeView alloc] initWithFrame:CGRectMake(kDocumentViewPoint.x, -kDocumentViewPoint.y , kDocumentViewSize.width, kDocumentViewSize.height)];
+        _addNodeView.delegate = self;
+        _addNodeView.hidden = YES;
+    }
+    return _addNodeView;
+}
 
 #pragma mark - Setting up UIElements
 
@@ -120,6 +134,32 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
     for (Node *node in listOfNodes){
         [self createFigure:node];
     }
+}
+
+- (void) presentBlurredScreenshot {
+    if (!self.screenShot) {
+        CGRect frame = UIEdgeInsetsInsetRect(self.view.bounds, UIEdgeInsetsMake(-100, 0, 0,0));
+        self.screenShot = [[UIImageView alloc]initWithFrame:frame];
+    }
+    self.screenShot.image = [self blurredScreenshot];
+    [self.view addSubview:self.screenShot];
+}
+
+- (UIImage *) blurredScreenshot {
+    // Create the image context
+    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, NO, 0);
+    
+    // Thake the snapshot
+    [self.navigationController.view drawViewHierarchyInRect:self.view.frame afterScreenUpdates:NO];
+    
+    // Get the snapshot
+    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIImage *blurredSnapshotImage = [snapshotImage applyLightEffect];
+
+    UIGraphicsEndImageContext();
+    
+    return blurredSnapshotImage;
 }
 
 #pragma mark - Resizing
@@ -197,6 +237,11 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
 
 - (void)updateNode:(Node *)node colorText:(NSString *)color{
     node.color = color;
+    self.selectedView.node = node;
+}
+
+- (void)updateNode:(Node *)node withTitle:(NSString *)title {
+    node.title = title;
     self.selectedView.node = node;
 }
 
@@ -340,7 +385,12 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
 }
 
 - (void)writeButtonPressed:(CRFiguresView *)figureDrawer {
-    NSLog(@"Typing");
+    if (!self.selectedView) {
+        NSString *message = @"No hay ningún elemento seleccionado";
+        [self showAlertErrorWithTitle:@"Error" message:message andCancelTitle:@"Aceptar"];
+    } else {
+        [self  addNodeAction];
+    }
 }
 
 #pragma mark - FetchedResultsController Methods
@@ -381,6 +431,48 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     if (self.isDeleting) {
         [self removeNodes];
+    }
+}
+
+#pragma mark - PopApp Add Node Methods
+
+- (void)addNodeAction {
+    
+    if (self.addNodeView.hidden) {
+        self.addNodeView.hidden = NO;
+        [self animatePopUpDisplay];
+    }
+}
+
+- (void)animatePopUpDisplay {
+    [self presentBlurredScreenshot];
+    [self.view addSubview:self.addNodeView];
+    [UIView animateWithDuration:.4 animations:^{
+        CGRect popFrmae = CGRectMake(kDocumentViewPoint.x, kDocumentViewPoint.y, kDocumentViewSize.width, kDocumentViewSize.height);
+        self.addNodeView.frame = popFrmae;
+      
+    } completion:^(BOOL finished) {
+        self.addNodeView.textFieldText = self.selectedView.node.title;
+    }];
+}
+
+#pragma mark - AddNode Delegate Methods
+
+- (void)buttonPressedInView:(CRAddNodeView *)addNodeView withTag:(NSUInteger)tag andText:(NSString *)name{
+    [self removeBlurAndHideNodeView];
+    if (tag == 2) {
+        [self updateNode:self.selectedView.node withTitle:name];
+    }
+}
+
+- (void)removeBlurAndHideNodeView {
+    CGRect frame = CGRectMake(kDocumentViewPoint.x, -kDocumentViewSize.height, kDocumentViewSize.width, kDocumentViewSize.height);
+    self.addNodeView.frame = frame;
+    self.addNodeView.hidden = YES;
+    [self.addNodeView removeFromSuperview];
+    if (self.screenShot) {
+        [self.screenShot removeFromSuperview];
+        self.screenShot = nil;
     }
 }
 

@@ -16,9 +16,9 @@
 @property (strong,nonatomic)  Node *node;
 @property (strong,nonatomic) UIColor *color;
 @property (weak,nonatomic) id <CRFigureDrawerDelegate> delegate;
+@property (assign,nonatomic) CGFloat width;
 
 - (void)updateFigure;
-- (void)hideTextLabels;
 
 - (id)initWithFrame:(CGRect)frame andNode:(Node *)node;
 - (id)initWithFrame:(CGRect)frame andShapeType:(CRNodeTypeShape)shapeType andNode:(Node *)node;

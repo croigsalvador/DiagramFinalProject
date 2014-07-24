@@ -27,12 +27,12 @@
 		1D353744197C43080005747F /* CRDocumentNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D353743197C43080005747F /* CRDocumentNameView.m */; };
 		1D353749197C65840005747F /* UIColor+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D353748197C65840005747F /* UIColor+Custom.m */; };
 		1D40CD79197D1415003D6160 /* CRMapParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D40CD78197D1415003D6160 /* CRMapParentViewController.m */; };
-		1D40CD83197D74EF003D6160 /* CRCustomFigureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D40CD82197D74EF003D6160 /* CRCustomFigureView.m */; };
 		1D40CD86197DC774003D6160 /* CRAddNodeHeaderSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D40CD85197DC774003D6160 /* CRAddNodeHeaderSection.m */; };
 		1D40CD8A197E531D003D6160 /* CRFiguresView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D40CD89197E531D003D6160 /* CRFiguresView.m */; };
 		1D40CD97197EC96A003D6160 /* CRMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D40CD96197EC96A003D6160 /* CRMap.m */; };
 		1D40CD9B197F2DA7003D6160 /* CRManagedDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D40CD9A197F2DA7003D6160 /* CRManagedDocument.m */; };
 		1D5EA81119753267006C9650 /* CRAppDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5EA81019753267006C9650 /* CRAppDelegateTests.m */; };
+		1D6535691981819500DA09E3 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D6535681981819500DA09E3 /* UIImage+ImageEffects.m */; };
 		1D890A3E1973DB320038D983 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A3D1973DB320038D983 /* Foundation.framework */; };
 		1D890A401973DB320038D983 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A3F1973DB320038D983 /* CoreGraphics.framework */; };
 		1D890A421973DB320038D983 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A411973DB320038D983 /* UIKit.framework */; };
@@ -63,7 +63,6 @@
 		1DA0A2C8198155CD00BB7D5C /* CRAddNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA0A2C7198155CD00BB7D5C /* CRAddNodeView.m */; };
 		1DA0A2CB1981711600BB7D5C /* CRAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA0A2CA1981711600BB7D5C /* CRAlertView.m */; };
 		1DB16C381980004400858F3F /* CRLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB16C371980004400858F3F /* CRLineView.m */; };
-		1DC113071978444C002F8148 /* CRSquareFigureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC113061978444C002F8148 /* CRSquareFigureView.m */; };
 		1DC1130B197860F3002F8148 /* CRColoursView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC1130A197860F3002F8148 /* CRColoursView.m */; };
 		1DC1130E197869F2002F8148 /* paleta.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DC1130D197869F2002F8148 /* paleta.png */; };
 		1DC113111978818D002F8148 /* UIFont+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC113101978818D002F8148 /* UIFont+Common.m */; };
@@ -118,8 +117,6 @@
 		1D353748197C65840005747F /* UIColor+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Custom.m"; sourceTree = "<group>"; };
 		1D40CD77197D1415003D6160 /* CRMapParentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRMapParentViewController.h; sourceTree = "<group>"; };
 		1D40CD78197D1415003D6160 /* CRMapParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRMapParentViewController.m; sourceTree = "<group>"; };
-		1D40CD81197D74EF003D6160 /* CRCustomFigureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRCustomFigureView.h; sourceTree = "<group>"; };
-		1D40CD82197D74EF003D6160 /* CRCustomFigureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRCustomFigureView.m; sourceTree = "<group>"; };
 		1D40CD84197DC774003D6160 /* CRAddNodeHeaderSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRAddNodeHeaderSection.h; sourceTree = "<group>"; };
 		1D40CD85197DC774003D6160 /* CRAddNodeHeaderSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAddNodeHeaderSection.m; sourceTree = "<group>"; };
 		1D40CD88197E531D003D6160 /* CRFiguresView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRFiguresView.h; sourceTree = "<group>"; };
@@ -129,6 +126,8 @@
 		1D40CD99197F2DA7003D6160 /* CRManagedDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRManagedDocument.h; sourceTree = "<group>"; };
 		1D40CD9A197F2DA7003D6160 /* CRManagedDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRManagedDocument.m; sourceTree = "<group>"; };
 		1D5EA81019753267006C9650 /* CRAppDelegateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAppDelegateTests.m; sourceTree = "<group>"; };
+		1D6535671981819500DA09E3 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		1D6535681981819500DA09E3 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		1D890A3A1973DB320038D983 /* DiagramFinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiagramFinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D890A3D1973DB320038D983 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D890A3F1973DB320038D983 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -171,8 +170,6 @@
 		1DA0A2CA1981711600BB7D5C /* CRAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAlertView.m; sourceTree = "<group>"; };
 		1DB16C361980004400858F3F /* CRLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRLineView.h; sourceTree = "<group>"; };
 		1DB16C371980004400858F3F /* CRLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRLineView.m; sourceTree = "<group>"; };
-		1DC113051978444C002F8148 /* CRSquareFigureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSquareFigureView.h; sourceTree = "<group>"; };
-		1DC113061978444C002F8148 /* CRSquareFigureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSquareFigureView.m; sourceTree = "<group>"; };
 		1DC11309197860F3002F8148 /* CRColoursView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRColoursView.h; sourceTree = "<group>"; };
 		1DC1130A197860F3002F8148 /* CRColoursView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRColoursView.m; sourceTree = "<group>"; };
 		1DC1130D197869F2002F8148 /* paleta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paleta.png; sourceTree = "<group>"; };
@@ -363,17 +360,6 @@
 			name = FiguresView;
 			sourceTree = "<group>";
 		};
-		1D40CD94197EAAC3003D6160 /* Shapes */ = {
-			isa = PBXGroup;
-			children = (
-				1DC113051978444C002F8148 /* CRSquareFigureView.h */,
-				1DC113061978444C002F8148 /* CRSquareFigureView.m */,
-				1D0402ED197C6EFC003932FB /* CRRoundColorView.h */,
-				1D0402EE197C6EFC003932FB /* CRRoundColorView.m */,
-			);
-			name = Shapes;
-			sourceTree = "<group>";
-		};
 		1D40CD98197F2D8F003D6160 /* Document */ = {
 			isa = PBXGroup;
 			children = (
@@ -509,7 +495,6 @@
 				1D353736197C1C160005747F /* MapCell */,
 				1DC11308197860D3002F8148 /* Colors */,
 				1D40CD87197E52BF003D6160 /* FiguresView */,
-				1DC1130419784422002F8148 /* Figures */,
 				1D890A8E19741DE50038D983 /* StoryBoard */,
 				1D890A8D19741DDD0038D983 /* NodeCell */,
 				1D353745197C43110005747F /* DocumentName */,
@@ -624,6 +609,8 @@
 		1DC1130019783F20002F8148 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				1D6535671981819500DA09E3 /* UIImage+ImageEffects.h */,
+				1D6535681981819500DA09E3 /* UIImage+ImageEffects.m */,
 				1DC1130F1978818D002F8148 /* UIFont+Common.h */,
 				1DC113101978818D002F8148 /* UIFont+Common.m */,
 				1D353747197C65840005747F /* UIColor+Custom.h */,
@@ -634,19 +621,11 @@
 			name = Util;
 			sourceTree = "<group>";
 		};
-		1DC1130419784422002F8148 /* Figures */ = {
-			isa = PBXGroup;
-			children = (
-				1D40CD81197D74EF003D6160 /* CRCustomFigureView.h */,
-				1D40CD82197D74EF003D6160 /* CRCustomFigureView.m */,
-				1D40CD94197EAAC3003D6160 /* Shapes */,
-			);
-			name = Figures;
-			sourceTree = "<group>";
-		};
 		1DC11308197860D3002F8148 /* Colors */ = {
 			isa = PBXGroup;
 			children = (
+				1D0402ED197C6EFC003932FB /* CRRoundColorView.h */,
+				1D0402EE197C6EFC003932FB /* CRRoundColorView.m */,
 				1DC11309197860F3002F8148 /* CRColoursView.h */,
 				1DC1130A197860F3002F8148 /* CRColoursView.m */,
 			);
@@ -870,10 +849,10 @@
 				1D353739197C1C6E0005747F /* CRMapCollectionViewCell.m in Sources */,
 				1D1635F01980691A00A61899 /* CRSquareMapView.m in Sources */,
 				1D0402EF197C6EFC003932FB /* CRRoundColorView.m in Sources */,
+				1D6535691981819500DA09E3 /* UIImage+ImageEffects.m in Sources */,
 				1DC113111978818D002F8148 /* UIFont+Common.m in Sources */,
 				1D890A871974143C0038D983 /* CRNodeTableViewCell.m in Sources */,
 				1DA0A2CB1981711600BB7D5C /* CRAlertView.m in Sources */,
-				1D40CD83197D74EF003D6160 /* CRCustomFigureView.m in Sources */,
 				1D8B2D091975D9C900C67FB1 /* CRNodeMap.m in Sources */,
 				1DC1130B197860F3002F8148 /* CRColoursView.m in Sources */,
 				1D890A8A19741DAB0038D983 /* CREditNodeViewController.m in Sources */,
@@ -883,7 +862,6 @@
 				1D40CD8A197E531D003D6160 /* CRFiguresView.m in Sources */,
 				1D353744197C43080005747F /* CRDocumentNameView.m in Sources */,
 				1D890A751973DB510038D983 /* DiagramModel.xcdatamodeld in Sources */,
-				1DC113071978444C002F8148 /* CRSquareFigureView.m in Sources */,
 				1D890A8419740BB00038D983 /* Node+Model.m in Sources */,
 				1D353749197C65840005747F /* UIColor+Custom.m in Sources */,
 				1D35372B197C18D90005747F /* CRBaseViewController.m in Sources */,

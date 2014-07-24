@@ -43,7 +43,7 @@ static CGFloat kMarginTopFigure             = 25.0f;
     CGRect buttonFrame = CGRectMake(kMarginLeftButton, 460, kButttonWidth, kButtonHeight);
     
     __weak typeof(self) weakSelf = self;
-    CRCustomButtonFlat *deleteButton = [[CRCustomButtonFlat alloc] initWithFrame:buttonFrame color:[UIColor flatAlizarinColor] text:@"Eliminar" andBlock:^(BOOL pressed) {
+    CRCustomButtonFlat *deleteButton = [[CRCustomButtonFlat alloc] initWithFrame:buttonFrame color:[UIColor flatAlizarinColor] text:@"Eliminar" andBlock:^() {
         __strong typeof(weakSelf) self = weakSelf;
         [self deleteButtonPressed];
     }];
@@ -51,7 +51,7 @@ static CGFloat kMarginTopFigure             = 25.0f;
     
     buttonFrame.origin.y = CGRectGetMaxY(deleteButton.frame) + kMarginLeftButton;
     
-    CRCustomButtonFlat *writeButton = [[CRCustomButtonFlat alloc] initWithFrame:buttonFrame color:[UIColor flatSilverColor] text:@"Abc" andBlock:^(BOOL pressed) {
+    CRCustomButtonFlat *writeButton = [[CRCustomButtonFlat alloc] initWithFrame:buttonFrame color:[UIColor flatSilverColor] text:@"Abc" andBlock:^() {
         __strong typeof(weakSelf) self = weakSelf;
         [self writeButtonPressed];
     }];

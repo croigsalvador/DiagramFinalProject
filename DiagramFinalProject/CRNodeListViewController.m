@@ -362,17 +362,15 @@ static CGSize  const kDocumentViewSize                   = {600.0f, 230.0f};
 #pragma mark - AddNode Delegate Methods
 
 - (void)buttonPressedInView:(CRAddNodeView *)addNodeView withTag:(NSUInteger)tag andText:(NSString *)name{
+    [self removeAndHideNodeView];
+    if (tag == 2) {
+        [self addChildNodeToParentAtIndexPath:self.parentIndexPath andName:name];
+    }
+}
+- (void)removeAndHideNodeView {
     CGRect frame = CGRectMake(kDocumentViewPoint.x, -kDocumentViewSize.height, kDocumentViewSize.width, kDocumentViewSize.height);
     self.addNodeView.frame = frame;
     self.addNodeView.hidden = YES;
-    switch (tag) {
-        case 1:
-            
-            break;
-        case 2:
-            [self addChildNodeToParentAtIndexPath:self.parentIndexPath andName:name];
-            break;
-    }
 }
 
 

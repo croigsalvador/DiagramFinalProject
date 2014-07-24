@@ -12,6 +12,7 @@
 + (UIFont *)amaticMediumBold;
 + (UIFont *)amaticMedium;
 + (UIFont *)montserratRegular;
++ (UIFont *)montserratRegularBig;
 + (UIFont *)montSerratBoldForCollectionCell;
 + (UIFont *)montSerratBoldForCollectionTitle;
 @end

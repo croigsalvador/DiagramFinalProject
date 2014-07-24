@@ -12,6 +12,7 @@
 
 #pragma mark - View imports
 #import "CRDocumentNameView.h"
+#import "CRCustomButtonFlat.h"
 
 #pragma mark - Collection imports
 #import "CRMapCollectionViewCell.h"
@@ -49,24 +50,24 @@ static CGSize const kDocumentViewSize                     = {600.0f, 200.0f};
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.mapListArray = [self.mapList mapList];
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Colección" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.mapTitle.font = [UIFont montSerratBoldForCollectionTitle];
+    [self setupElements];
     [self setupCollectionView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self setGradient];
     [self.view addSubview:self.documentNameView];
-    
+}
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.documentNameView removeFromSuperview];
 }
 
 #pragma mark - Custom Getters
@@ -88,6 +89,19 @@ static CGSize const kDocumentViewSize                     = {600.0f, 200.0f};
 }
 
 #pragma mark - UIElements Setup
+
+- (void)setupElements {
+    self.mapListArray = [self.mapList mapList];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Mis mapas" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.mapTitle.font = [UIFont montSerratBoldForCollectionTitle];
+    CGRect frame = CGRectMake(900, 40, 90, 40);
+    __weak typeof(self) weakSelf = self;
+    CRCustomButtonFlat *customButton = [[CRCustomButtonFlat alloc] initWithFrame:frame color:[UIColor flatTurquoiseColor] text:@"Añadir" andBlock:^() {
+        [weakSelf addNewDocument];
+    }];
+    
+    [self.view addSubview:customButton];
+}
 
 - (void) setGradient {
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -177,9 +191,8 @@ static CGSize const kDocumentViewSize                     = {600.0f, 200.0f};
     [self.navigationController pushViewController:mapParentViewController animated:YES];
 }
 
-#pragma mark - IBAction Methods
 
-- (IBAction)addNewDocument:(UIButton *)sender {
+- (void)addNewDocument {
     if (self.documentNameView.hidden) {
         self.documentNameView.hidden = NO;
         [self animatePopUpDisplay];

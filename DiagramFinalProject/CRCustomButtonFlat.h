@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^PressedButtonBlock)(BOOL);
+typedef void(^PressedButtonBlock)();
 
 @interface CRCustomButtonFlat : UIView
 @property (strong,nonatomic) UIColor *color;

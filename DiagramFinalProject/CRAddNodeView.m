@@ -34,6 +34,11 @@ static NSString * const kAcceptButtonName                   = @"Añadir";
     return self;
 }
 
+- (void)setTextFieldText:(NSString *)textFieldText {
+    _textFieldText = textFieldText;
+    self.nameTextField.text = self.textFieldText;
+}
+
 - (void)setupNameTextField {
     
     CGRect labelFrame = CGRectMake(kMarginLeft, kMarginLeft, 130, 30);
@@ -53,21 +58,21 @@ static NSString * const kAcceptButtonName                   = @"Añadir";
     self.nameTextField.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.nameTextField];
     
-    labelFrame.origin.y = CGRectGetMaxY(labelFrame) + 20;
-    UILabel *subTitleLbl = [[UILabel alloc] initWithFrame:labelFrame];
-    subTitleLbl.textColor = [UIColor darkGrayCustom];
-    subTitleLbl.font =  [UIFont montSerratBoldForCollectionCell];
-    subTitleLbl.backgroundColor = [UIColor clearColor];
-    subTitleLbl.text = kNameString;
-    [self addSubview:subTitleLbl];
-    
-    textFieldFrame.origin.y = CGRectGetMaxY(textFieldFrame) + 20;
-    textFieldFrame.size.width = self.frame.size.width - (2 * kMarginLeft) - CGRectGetMaxX(labelFrame);
-    textFieldFrame.size.height = kTextFieldHeight;
-    
-    self.subTitleTextField = [[UITextField alloc] initWithFrame:textFieldFrame];
-    self.subTitleTextField.backgroundColor = [UIColor whiteColor];
-    [self addSubview:self.subTitleTextField];
+//    labelFrame.origin.y = CGRectGetMaxY(labelFrame) + 20;
+//    UILabel *subTitleLbl = [[UILabel alloc] initWithFrame:labelFrame];
+//    subTitleLbl.textColor = [UIColor darkGrayCustom];
+//    subTitleLbl.font =  [UIFont montSerratBoldForCollectionCell];
+//    subTitleLbl.backgroundColor = [UIColor clearColor];
+//    subTitleLbl.text = kNameString;
+//    [self addSubview:subTitleLbl];
+//    
+//    textFieldFrame.origin.y = CGRectGetMaxY(textFieldFrame) + 20;
+//    textFieldFrame.size.width = self.frame.size.width - (2 * kMarginLeft) - CGRectGetMaxX(labelFrame);
+//    textFieldFrame.size.height = kTextFieldHeight;
+//    
+//    self.subTitleTextField = [[UITextField alloc] initWithFrame:textFieldFrame];
+//    self.subTitleTextField.backgroundColor = [UIColor whiteColor];
+//    [self addSubview:self.subTitleTextField];
 }
 
 - (void)setupButtons {

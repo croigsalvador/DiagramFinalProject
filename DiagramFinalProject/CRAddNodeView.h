@@ -13,7 +13,7 @@
 @interface CRAddNodeView : UIView
 
 @property (weak,nonatomic) id<AddNodeDelegate> delegate;
-
+@property (nonatomic,copy) NSString *textFieldText;
 @end
 
 @protocol AddNodeDelegate <NSObject>
