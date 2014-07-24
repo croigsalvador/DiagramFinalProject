@@ -18,7 +18,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setupAddNodeButton];
-        self.contentView.backgroundColor = [UIColor flatNephritisColor];
+        self.contentView.backgroundColor = [UIColor darkGrayCustom];
     }
     return self;
 }

@@ -29,18 +29,18 @@
         <scene sceneID="dlw-oQ-tEr">
             <objects>
                 <tableViewController storyboardIdentifier="NodeListViewController" id="Z4o-7E-8ke" customClass="CRNodeListViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="65" sectionHeaderHeight="100" sectionFooterHeight="22" id="s4b-Bq-Hnf">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="65" sectionHeaderHeight="100" sectionFooterHeight="22" id="s4b-Bq-Hnf">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                        <color key="sectionIndexBackgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.5999525785446167" green="0.60002672672271729" blue="0.59992736577987671" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NodeCellIdentifier" rowHeight="65" id="cc7-Zb-nVU" customClass="CRNodeTableViewCell">
+                            <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NodeCellIdentifier" rowHeight="65" id="cc7-Zb-nVU" customClass="CRNodeTableViewCell">
                                 <rect key="frame" x="0.0" y="100" width="1024" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cc7-Zb-nVU" id="PnS-H3-txM">
-                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="64"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="65"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J1Y-DH-V4b">
@@ -66,6 +66,11 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fmj-OO-ijp">
+                                                    <rect key="frame" x="0.0" y="63" width="1024" height="3"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
@@ -85,7 +90,9 @@
                                         <constraint firstAttribute="trailing" secondItem="J1Y-DH-V4b" secondAttribute="trailing" id="nQu-H5-0wN" userLabel="RightConstraint"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.5999525785446167" green="0.60002672672271729" blue="0.59992736577987671" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
+                                    <outlet property="backCellView" destination="J1Y-DH-V4b" id="SfF-w4-xEd"/>
                                     <outlet property="colorView" destination="ahB-g2-8M1" id="Ojn-79-wth"/>
                                     <outlet property="containerMainView" destination="J1Y-DH-V4b" id="L1a-NL-8nP"/>
                                     <outlet property="leftTabLevelConstraint" destination="e50-WG-v65" id="XhG-sQ-gMD"/>

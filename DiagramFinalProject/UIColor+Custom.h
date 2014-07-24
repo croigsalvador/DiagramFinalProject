@@ -10,6 +10,10 @@
 
 @interface UIColor (Custom)
 + (UIColor *)flatBlue;
++ (UIColor *)darkGrayCustom;
++ (UIColor *)lightGrayCustom;
++ (UIColor *)grayCustomForGradient1;
++ (UIColor *)grayCustomForGradient2;
 + (UIColor *)colorFromText:(NSString *)colorText;
 + (NSArray *)flatColorsArray;
 @end

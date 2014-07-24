@@ -17,7 +17,7 @@
 #import "CRNodeMap.h"
 #import "Node+Model.h"
 
-static CGSize kScrollViewContainerSize                  = {2324.0f, 2000.0f};
+static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
 
 @interface CRMapDrawerViewController ()<ColorViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate, CRFigureDrawerDelegate, FigureViewDelegate>
 
@@ -54,7 +54,7 @@ static CGSize kScrollViewContainerSize                  = {2324.0f, 2000.0f};
     
     self.scrollView.minimumZoomScale = minScale;
     self.scrollView.maximumZoomScale = 1.0f;
-    self.scrollView.zoomScale = minScale;
+    self.scrollView.zoomScale = minScale * 1.3f;
     
     [self centerScrollViewContents];
 }
@@ -64,10 +64,23 @@ static CGSize kScrollViewContainerSize                  = {2324.0f, 2000.0f};
     self.scrollView.contentSize = kScrollViewContainerSize;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self setGradient];
+}
+
 #pragma mark - Setting up UIElements
+
+- (void) setGradient {
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.view.bounds;
+    gradient.colors = @[(id)[UIColor grayCustomForGradient2].CGColor, (id)[UIColor grayCustomForGradient1].CGColor,(id)[UIColor grayCustomForGradient2].CGColor];
+    [self.view.layer insertSublayer:gradient atIndex:0];
+}
+
 - (void)setupContainerView {
     self.containerView = [[UIView alloc] initWithFrame:(CGRect){.origin=CGPointMake(0.0f, 0.0f), .size=kScrollViewContainerSize}];
-    self.containerView.backgroundColor = [UIColor whiteColor];
+    self.containerView.backgroundColor = [UIColor clearColor];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTapGesture:)];
     tapGesture.numberOfTapsRequired = 1;

@@ -7,12 +7,13 @@
 //
 
 #import "CRDocumentNameView.h"
+#import "UIFont+Common.h"
 
-static CGFloat const kMarginLeft                            = 20.0f;
-static CGFloat const kTextFieldHeight                       = 30.0f;
+static CGFloat const kMarginLeft                            = 30.0f;
+static CGFloat const kTextFieldHeight                       = 40.0f;
 static CGSize  const kButtonSize                            = { 100.0f, 40.0f };
 
-static NSString * const kNameString                         = @"Nombre";
+static NSString * const kNameString                         = @"Nombre:";
 static NSString * const kCancelButtonName                   = @"Cancelar";
 static NSString * const kAcceptButtonName                   = @"Aceptar";
 
@@ -25,7 +26,7 @@ static NSString * const kAcceptButtonName                   = @"Aceptar";
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor redColor];
+        self.backgroundColor = [UIColor grayCustomForGradient1];
         [self setupNameTextField];
         [self setupButtons];
     }
@@ -34,11 +35,11 @@ static NSString * const kAcceptButtonName                   = @"Aceptar";
 
 - (void)setupNameTextField {
     
-    CGRect labelFrame = CGRectMake(kMarginLeft, kMarginLeft, 100, 20);
+    CGRect labelFrame = CGRectMake(kMarginLeft, kMarginLeft, 130, 30);
     UILabel *titleLbl = [[UILabel alloc] initWithFrame:labelFrame];
-    titleLbl.textColor = [UIColor blackColor];
-    titleLbl.font =  [UIFont systemFontOfSize:16];
-    titleLbl.backgroundColor = [UIColor blueColor];
+    titleLbl.textColor = [UIColor darkGrayCustom];
+    titleLbl.font =  [UIFont montSerratBoldForCollectionCell];
+    titleLbl.backgroundColor = [UIColor clearColor];
     titleLbl.text = kNameString;
     [self addSubview:titleLbl];
     
@@ -48,7 +49,6 @@ static NSString * const kAcceptButtonName                   = @"Aceptar";
     textFieldFrame.size.height = kTextFieldHeight;
     
     self.nameTextField = [[UITextField alloc] initWithFrame:textFieldFrame];
-    self.nameTextField.placeholder = kNameString;
     self.nameTextField.backgroundColor = [UIColor whiteColor];
     
     [self addSubview:self.nameTextField];
@@ -56,8 +56,8 @@ static NSString * const kAcceptButtonName                   = @"Aceptar";
 
 - (void)setupButtons {
     CGRect buttonFrame =  {
-        .origin.x = self.frame.size.width/2,
-        .origin.y = CGRectGetMaxY(self.nameTextField.frame) + kMarginLeft,
+        .origin.x = self.frame.size.width/1.8,
+        .origin.y = CGRectGetMaxY(self.nameTextField.frame) + 80,
         .size.width = kButtonSize.width ,
         .size.height = kButtonSize.height
     };
@@ -65,7 +65,7 @@ static NSString * const kAcceptButtonName                   = @"Aceptar";
     UIButton *acceptButton = [[UIButton alloc] initWithFrame:buttonFrame];
     acceptButton.tag = 2;
     [acceptButton setTitle:kAcceptButtonName forState:UIControlStateNormal];
-    [acceptButton setBackgroundColor:[UIColor flatAmethystColor]];
+    [acceptButton setBackgroundColor:[UIColor darkGrayCustom]];
     [acceptButton addTarget:self action:@selector(pressedButton:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:acceptButton];
     
@@ -73,7 +73,7 @@ static NSString * const kAcceptButtonName                   = @"Aceptar";
     
     UIButton *cancelButton = [[UIButton alloc] initWithFrame:buttonFrame];
     [cancelButton setTitle:kCancelButtonName forState:UIControlStateNormal];
-    [cancelButton setBackgroundColor:[UIColor flatAmethystColor]];
+    [cancelButton setBackgroundColor:[UIColor darkGrayCustom]];
     [cancelButton addTarget:self action:@selector(pressedButton:) forControlEvents:UIControlEventTouchUpInside];
     cancelButton.tag = 1;
     [self addSubview:cancelButton];
@@ -81,9 +81,11 @@ static NSString * const kAcceptButtonName                   = @"Aceptar";
 
 - (void)pressedButton:(UIButton *)sender {
     [self.nameTextField resignFirstResponder];
+
     if ([self.delegate respondsToSelector:@selector(buttonPressedInDocument:withTag:andText:)]) {
         [self.delegate buttonPressedInDocument:self withTag:sender.tag andText:self.nameTextField.text];
     }
+    self.nameTextField.text = @"";
 }
 
 @end

@@ -15,14 +15,28 @@
 + (UIColor *)flatBlue {
     return UIColorFromRGB(0x1D5B8C);
 }
++ (UIColor *)darkGrayCustom {
+    return UIColorFromRGB(0x333333);
+}
++ (UIColor *)lightGrayCustom {
+    return UIColorFromRGB(0x999999);
+}
+
++ (UIColor *)grayCustomForGradient1 {
+    return UIColorFromRGB(0xEEEEEE);
+}
++ (UIColor *)grayCustomForGradient2{
+    return UIColorFromRGB(0xDDDDDD);
+}
 
 + (UIColor *)colorFromText:(NSString *)colorText {
     UIColor *colorFromText =[UIColor performSelector: NSSelectorFromString(colorText)];
     return colorFromText;
 }
 
+
 + (NSArray *)flatColorsArray {
-    NSArray *colorsArray = @[@"flatTurquoiseColor",@"flatGreenSeaColor",@"flatEmeraldColor",@"flatNephritisColor",@"flatPeterRiverColor",@"flatBelizeHoleColor",@"flatAmethystColor",@"flatWisteriaColor",@"flatWetAsphaltColor",@"flatMidnightBlueColor",@"flatSunFlowerColor",@"flatOrangeColor",@"flatCarrotColor",@"flatPumpkinColor",@"flatAlizarinColor",@"flatPomegranateColor", @"flatCloudsColor", @"flatSilverColor", @"flatConcreteColor", @"flatAsbestosColor", @"blueColor", @"redColor",@"blackColor"];
+    NSArray *colorsArray = @[@"flatTurquoiseColor",@"flatEmeraldColor",@"flatPeterRiverColor",@"flatAmethystColor",@"flatMidnightBlueColor",@"flatSunFlowerColor",@"flatCarrotColor",@"flatAlizarinColor",@"flatSilverColor", @"flatAsbestosColor"];
     return colorsArray;
 }
 

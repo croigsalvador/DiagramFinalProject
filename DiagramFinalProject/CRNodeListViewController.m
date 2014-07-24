@@ -53,6 +53,7 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(populateNodeList:) name:UIDocumentStateChangedNotification object:self.managedDocument];
+    self.tableView.backgroundColor = [UIColor lightGrayCustom];
 }
 
 /**

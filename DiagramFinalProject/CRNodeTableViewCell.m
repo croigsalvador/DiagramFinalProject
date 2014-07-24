@@ -12,9 +12,10 @@
 #import "Node+Model.h"
 #import "CRSquareFigureView.h"
 
-static CGFloat const kTabMarginForCell           = 40.0f;
+static CGFloat const kTabMarginForCell           = 65.0f;
 
 @interface CRNodeTableViewCell ()
+@property (weak, nonatomic) IBOutlet UIView *backCellView;
 @property (weak, nonatomic) IBOutlet UIView *colorView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftTabLevelConstraint;
 @property (weak, nonatomic) IBOutlet UIView *figureView;
@@ -27,16 +28,17 @@ static CGFloat const kTabMarginForCell           = 40.0f;
 }
 
 - (void)awakeFromNib {
-    self.contentView.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor clearColor];
 }
 #pragma mark - Public Methods
 
 - (void)configureCellWithColor:(NSString *)color figure:(NSUInteger)CRNodeType andLevel:(NSInteger)level{
     UIColor *colorFromText=[UIColor colorFromText:color];
     self.colorView.backgroundColor = colorFromText;
-    [self paintFigureInCell:CRNodeType withColor:colorFromText] ;
+    const CGFloat* colors = CGColorGetComponents(colorFromText.CGColor );
+    UIColor *backColor = [UIColor colorWithRed:colors[0] green:colors[1] blue:colors[2] alpha:0.4];
+    self.backCellView.backgroundColor = backColor;
     [self paintCellWithLevel:level];
-//    [self setNeedsDisplay];
 }
 
 #pragma mark - Private Methods
@@ -46,21 +48,6 @@ static CGFloat const kTabMarginForCell           = 40.0f;
     [self layoutIfNeeded];
 }
 
-- (void)paintFigureInCell:(CRNodeTypeShape)crNodeType withColor:(UIColor *)color {
-    UIView *figureView;
-    switch (crNodeType) {
-        case CRNodeTypeShapeSquare:
-             figureView = [[CRSquareFigureView alloc] initWithFrame:self.figureView.bounds andColor:color];
-            break;
-        case CRNodeTypeShapeCircle:
-            break;
-        case CRNodeTypeShapeTriangle:
-            break;
-        case CRNodeTypeShapePolygon:
-            break;
-    }
-    [self.figureView addSubview:figureView];
-}
 
 /*
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

@@ -30,6 +30,9 @@ static NSString * const kMapParentViewControllerID        = @"MapParentViewContr
 static UIEdgeInsets const kCollectionInsets               = {100.0, 0.0 , 0.0 ,0.0};
 static UIEdgeInsets kFlowLayoutInsets                     = {30.0, 127.0, 70.0, 127.0};
 
+static CGPoint const kDocumentViewPoint                   = {212.0f, 100.0f};
+static CGSize const kDocumentViewSize                     = {600.0f, 200.0f};
+
 
 @interface CRMapListViewController ()<DocumentNameViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *mapTitle;
@@ -77,7 +80,7 @@ static UIEdgeInsets kFlowLayoutInsets                     = {30.0, 127.0, 70.0, 
 
 - (CRDocumentNameView *)documentNameView {
     if (!_documentNameView) {
-        _documentNameView = [[CRDocumentNameView alloc] initWithFrame:CGRectMake(312, 64, 400, 200)];
+        _documentNameView = [[CRDocumentNameView alloc] initWithFrame:CGRectMake(212, -200 , 600, 200)];
         _documentNameView.delegate = self;
         _documentNameView.hidden = YES;
     }
@@ -138,7 +141,9 @@ static UIEdgeInsets kFlowLayoutInsets                     = {30.0, 127.0, 70.0, 
 
 - (void)configCell:(CRMapCollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     NSArray *colorArray = [UIColor flatColorsArray];
-    cell.backgroundColor = [UIColor colorFromText:colorArray[indexPath.row]];
+    NSUInteger index = indexPath.row;
+    NSUInteger colorIndex = index%10;
+    cell.backgroundColor = [UIColor colorFromText:colorArray[colorIndex]];
     
     cell.cellText = self.mapListArray[indexPath.row];
 }
@@ -173,18 +178,32 @@ static UIEdgeInsets kFlowLayoutInsets                     = {30.0, 127.0, 70.0, 
 - (IBAction)addNewDocument:(UIButton *)sender {
     if (self.documentNameView.hidden) {
         self.documentNameView.hidden = NO;
+        [self animatePopUpDisplay];
     }
+}
+
+- (void)animatePopUpDisplay {
+    [UIView animateWithDuration:.4 animations:^{
+        CGRect popFrmae = CGRectMake(kDocumentViewPoint.x, kDocumentViewPoint.y, kDocumentViewSize.width, kDocumentViewSize.height);
+        self.documentNameView.frame = popFrmae;
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 #pragma mark - DocumentNameView Delegate Methods
 
 - (void)buttonPressedInDocument:(CRDocumentNameView *)documentNameView withTag:(NSUInteger)tag andText:(NSString *)name{
+  CGRect frame = CGRectMake(kDocumentViewPoint.x, -kDocumentViewSize.height, kDocumentViewSize.width, kDocumentViewSize.height);
+    self.documentNameView.frame = frame;
     switch (tag) {
         case 1:
             self.documentNameView.hidden = YES;
             break;
         case 2:
-            [self createManagedDocumentAndLaunchNextControllerWithName:name];
+            if (name || ![name isEqualToString:@""]) {
+                [self createManagedDocumentAndLaunchNextControllerWithName:name];
+            }
             break;
     }
 }
@@ -228,7 +247,6 @@ static UIEdgeInsets kFlowLayoutInsets                     = {30.0, 127.0, 70.0, 
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
-    [self buttonPressedInDocument:nil withTag:1 andText:nil];
 }
 
 

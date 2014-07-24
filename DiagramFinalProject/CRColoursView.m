@@ -45,7 +45,7 @@ static CGFloat const kOffsetMargin                = 16.0f;
 //}
 
 - (void)setupColorPalette {
-    [self setupRowColorWithXPosition:40.0f yPosition:10.0f anIndex:10 colorIndex:10];
+    [self setupRowColorWithXPosition:40.0f yPosition:10.0f anIndex:10 colorIndex:9];
 }
 
 - (void)setupRowColorWithXPosition:(CGFloat)xPos yPosition:(CGFloat)yPos anIndex:(NSUInteger)index colorIndex:(NSUInteger)colorIndex{
