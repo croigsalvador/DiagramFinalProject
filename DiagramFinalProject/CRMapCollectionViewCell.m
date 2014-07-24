@@ -32,6 +32,12 @@
 
 - (void)setupNameLabel {
     
+    CGFloat borderWidth = 2.5f;
+    self.frame = CGRectInset(self.frame, -borderWidth, -borderWidth);
+    self.layer.borderColor = [UIColor clearColor].CGColor;
+    self.layer.borderWidth = borderWidth;
+
+    
     CGRect labelFrame = CGRectInset(self.bounds, 10, 0);
     
     self.nameLabel = [[UILabel alloc] initWithFrame:labelFrame];
@@ -43,4 +49,5 @@
     [self addSubview:self.nameLabel];
 }
 
+        
 @end

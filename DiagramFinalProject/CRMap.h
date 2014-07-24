@@ -12,7 +12,6 @@
 
 @interface CRMap : NSObject
 
-@property (strong,nonatomic) NSMutableArray *nodeList;
 - (id)initWithManagedObjectContext:(NSManagedObjectContext *)context;
 - (void)calculateNewNodePositionFromParent:(Node *)parentNode withCompletionBlock:(void(^)(CGRect))completionBlock;
 

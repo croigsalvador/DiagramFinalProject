@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Node" representedClassName="Node" syncable="YES">
-        <attribute name="color" optional="YES" attributeType="String" defaultValueString="redColor" syncable="YES"/>
-        <attribute name="height" attributeType="Float" defaultValueString="100" syncable="YES"/>
+        <attribute name="color" optional="YES" attributeType="String" defaultValueString="flatEmeraldColor" syncable="YES"/>
+        <attribute name="height" attributeType="Float" defaultValueString="150" syncable="YES"/>
         <attribute name="imagePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="level" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="shapeType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
-        <attribute name="width" attributeType="Float" defaultValueString="100" syncable="YES"/>
+        <attribute name="width" attributeType="Float" defaultValueString="150" syncable="YES"/>
         <attribute name="xPosition" attributeType="Float" defaultValueString="100" syncable="YES"/>
         <attribute name="yPosition" attributeType="Float" defaultValueString="100" syncable="YES"/>
         <relationship name="childs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Node" inverseName="parent" inverseEntity="Node" syncable="YES"/>

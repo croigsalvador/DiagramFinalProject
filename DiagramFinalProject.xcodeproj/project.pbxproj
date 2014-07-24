@@ -32,7 +32,6 @@
 		1D40CD8A197E531D003D6160 /* CRFiguresView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D40CD89197E531D003D6160 /* CRFiguresView.m */; };
 		1D40CD97197EC96A003D6160 /* CRMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D40CD96197EC96A003D6160 /* CRMap.m */; };
 		1D40CD9B197F2DA7003D6160 /* CRManagedDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D40CD9A197F2DA7003D6160 /* CRManagedDocument.m */; };
-		1D40CD9E197F30FB003D6160 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D40CD9D197F30FB003D6160 /* Node.m */; };
 		1D5EA81119753267006C9650 /* CRAppDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5EA81019753267006C9650 /* CRAppDelegateTests.m */; };
 		1D890A3E1973DB320038D983 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A3D1973DB320038D983 /* Foundation.framework */; };
 		1D890A401973DB320038D983 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D890A3F1973DB320038D983 /* CoreGraphics.framework */; };
@@ -59,6 +58,7 @@
 		1D9BCAA919801B1E007EE965 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D9BCAA6198014A6007EE965 /* Montserrat-Bold.ttf */; };
 		1D9BCAAA19801B21007EE965 /* AmaticSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1DC1131519788212002F8148 /* AmaticSC-Regular.ttf */; };
 		1D9BCAAB19801B24007EE965 /* Amatic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1DC1131419788212002F8148 /* Amatic-Bold.ttf */; };
+		1DA0A2C11981135800BB7D5C /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA0A2C01981135800BB7D5C /* Node.m */; };
 		1DB16C381980004400858F3F /* CRLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB16C371980004400858F3F /* CRLineView.m */; };
 		1DC113071978444C002F8148 /* CRSquareFigureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC113061978444C002F8148 /* CRSquareFigureView.m */; };
 		1DC1130B197860F3002F8148 /* CRColoursView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC1130A197860F3002F8148 /* CRColoursView.m */; };
@@ -125,8 +125,6 @@
 		1D40CD96197EC96A003D6160 /* CRMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRMap.m; sourceTree = "<group>"; };
 		1D40CD99197F2DA7003D6160 /* CRManagedDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRManagedDocument.h; sourceTree = "<group>"; };
 		1D40CD9A197F2DA7003D6160 /* CRManagedDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRManagedDocument.m; sourceTree = "<group>"; };
-		1D40CD9C197F30FB003D6160 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
-		1D40CD9D197F30FB003D6160 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		1D5EA81019753267006C9650 /* CRAppDelegateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAppDelegateTests.m; sourceTree = "<group>"; };
 		1D890A3A1973DB320038D983 /* DiagramFinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiagramFinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D890A3D1973DB320038D983 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -160,6 +158,8 @@
 		1D9BCAA41980100B007EE965 /* CRFigureDrawerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRFigureDrawerFactory.m; sourceTree = "<group>"; };
 		1D9BCAA6198014A6007EE965 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		1D9BCAA7198014A6007EE965 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		1DA0A2BF1981135800BB7D5C /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		1DA0A2C01981135800BB7D5C /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		1DB16C361980004400858F3F /* CRLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRLineView.h; sourceTree = "<group>"; };
 		1DB16C371980004400858F3F /* CRLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRLineView.m; sourceTree = "<group>"; };
 		1DC113051978444C002F8148 /* CRSquareFigureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSquareFigureView.h; sourceTree = "<group>"; };
@@ -452,9 +452,9 @@
 			children = (
 				1D8B2D071975D9C900C67FB1 /* CRNodeMap.h */,
 				1D8B2D081975D9C900C67FB1 /* CRNodeMap.m */,
-				1D40CD9C197F30FB003D6160 /* Node.h */,
-				1D40CD9D197F30FB003D6160 /* Node.m */,
 				1D890A731973DB510038D983 /* DiagramModel.xcdatamodeld */,
+				1DA0A2BF1981135800BB7D5C /* Node.h */,
+				1DA0A2C01981135800BB7D5C /* Node.m */,
 				1D890A8219740BB00038D983 /* Node+Model.h */,
 				1D890A8319740BB00038D983 /* Node+Model.m */,
 				1D353732197C1A8E0005747F /* CRMapList.h */,
@@ -836,7 +836,6 @@
 				1D353723197C182B0005747F /* CRMapDrawerViewController.m in Sources */,
 				1D0402FA197C8EB1003932FB /* CRPopAnimationController.m in Sources */,
 				1D890A4E1973DB320038D983 /* CRAppDelegate.m in Sources */,
-				1D40CD9E197F30FB003D6160 /* Node.m in Sources */,
 				1D1635F719806B7C00A61899 /* CRTriangleMapView.m in Sources */,
 				1D9BCAA51980100B007EE965 /* CRFigureDrawerFactory.m in Sources */,
 				1D40CD86197DC774003D6160 /* CRAddNodeHeaderSection.m in Sources */,
@@ -855,6 +854,7 @@
 				1D890A8A19741DAB0038D983 /* CREditNodeViewController.m in Sources */,
 				1D0402F2197C8D13003932FB /* CRCustomNavigationController.m in Sources */,
 				1D1635FE1980753D00A61899 /* CRPolygonMapView.m in Sources */,
+				1DA0A2C11981135800BB7D5C /* Node.m in Sources */,
 				1D40CD8A197E531D003D6160 /* CRFiguresView.m in Sources */,
 				1D353744197C43080005747F /* CRDocumentNameView.m in Sources */,
 				1D890A751973DB510038D983 /* DiagramModel.xcdatamodeld in Sources */,

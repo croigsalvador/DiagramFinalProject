@@ -122,37 +122,35 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
 
 #pragma mark - UI Methods
 
-- (void)addGesturesToSelectedView {
+- (void)addGesturesToNewView:(CRFigureDrawerFactory *)newView {
     UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self
                                                                                        action:@selector(handlePinchGesture:)];
     [pinchGesture setDelegate:self];
-    [self.selectedView addGestureRecognizer:pinchGesture];
+    [newView addGestureRecognizer:pinchGesture];
     
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-    [self.selectedView addGestureRecognizer:panGesture];
+    [newView addGestureRecognizer:panGesture];
 }
 
 - (void)lightSelectedView {
-    self.selectedView.alpha = 0.6;
-}
-
-- (void)unLightSelectedView {
     self.selectedView.alpha = 1.0;
 }
 
+- (void)unLightSelectedView {
+    self.selectedView.alpha = 0.6;
+    self.selectedView = nil;
+}
+
 - (void)createFigure:(Node *)node {
-    
-    [self unLightSelectedView];
-    self.selectedView = [self createViewWithFigure:node];
-    [self.containerView addSubview:self.selectedView];
-    [self addGesturesToSelectedView];
-    [self lightSelectedView];
+    [self.containerView addSubview:[self createViewWithFigure:node]];
 }
 
 - (CRFigureDrawerFactory *)createViewWithFigure:(Node *)node {
     CGRect figureFrame = CGRectMake([node.xPosition floatValue], [node.yPosition floatValue],[node.width floatValue],[node.height floatValue]);
     CRFigureDrawerFactory *figureView = [[CRFigureDrawerFactory alloc] initWithFrame:figureFrame andNode:node];
     figureView.delegate = self;
+    figureView.alpha = 0.6;
+    [self addGesturesToNewView:figureView];
     return figureView;
 }
 
@@ -175,7 +173,7 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
 }
 
 - (void)createNewNodeForParent:(Node *)parentNode andShapeType:(NSUInteger)shapeType {
-    Node *node = [Node createNodeInManagedObjectContext:parentNode.managedObjectContext withParent:parentNode];
+    Node *node = [Node createNodeInManagedObjectContext:self.managedDocument.managedObjectContext withParent:parentNode];
     node.shapeType = @(shapeType);
     [self insertNewNode:node];
     [self.managedDocument updateChangeCount:UIDocumentChangeDone];
@@ -246,6 +244,7 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
 
 - (void)handleTapGesture:(UITapGestureRecognizer *) recognizer {
     [self.view endEditing:YES];
+    [self unLightSelectedView];
 }
 
 #pragma mark - Delegate Methods

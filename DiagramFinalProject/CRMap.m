@@ -26,33 +26,46 @@
 
 #pragma mark - Custom Getter
 
-- (NSMutableArray *)nodeList {
-    if (!_nodeList) {
-        _nodeList = [[NSMutableArray alloc] init];
-        _nodeList = [[Node fetchAllNodesFromContext:self.context] mutableCopy];
-    }
-    return _nodeList;
-}
+
 
 #pragma mark - Public Methods
 - (void)calculateNewNodePositionFromParent:(Node *)parentNode withCompletionBlock:(void(^)(CGRect))completionBlock {
     if (parentNode.parent) {
+        
         CGRect parentFrame = [self frameForNode:parentNode.parent];
-        CGRect newNodeFrame = CGRectMake(parentFrame.origin.x - 200, parentFrame.origin.y + parentFrame.size.height + 50, 100,100);
+        CGRect newNodeFrame = CGRectMake(parentFrame.origin.x - 300, parentFrame.origin.y + parentFrame.size.height + 150, 150,150);
+        
         for (Node *node in parentNode.parent.childs) {
             CGRect childFrame = [self frameForNode:node];
-            if (!CGRectIntersectsRect(newNodeFrame, childFrame)) {
-                completionBlock(newNodeFrame);
-            } else {
-                newNodeFrame.origin.x += 200.0f;
+            if (CGRectIntersectsRect(newNodeFrame, childFrame)) {
+                newNodeFrame.origin.x += 300.0f;
             }
         }
+        
         completionBlock(newNodeFrame);
+        
     } else {
-        CGRect newNodeParentFrame = CGRectMake(1000, 250, 100,100);
+        
+        CGRect newNodeParentFrame = CGRectMake(700, 250, 150,150);
+        NSArray *parents = [self fetchAllParents];
+        for (Node *node in parents) {
+            CGRect parentFrame = [self frameForNode:node];
+            if (CGRectIntersectsRect(newNodeParentFrame, parentFrame)) {
+                newNodeParentFrame.origin.x += 700.0f;
+            }
+        }
+        
         completionBlock(newNodeParentFrame);
     }
 }
+
+#pragma mark - Private Methods
+
+- (NSArray *)fetchAllParents {
+    NSArray *parents = [Node rootNodeListInContext:self.context];
+    return parents;
+}
+
 
 - (CGRect)frameForNode:(Node *)node {
     return CGRectMake([node.xPosition floatValue], [node.yPosition floatValue], [node.width floatValue],[node.width floatValue]);

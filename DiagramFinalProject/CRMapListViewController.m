@@ -119,6 +119,10 @@ static CGSize const kDocumentViewSize                     = {600.0f, 200.0f};
 
 #pragma mark - CollectionView Delegate Methods
 
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [self setupNextViewControllerWithName:self.mapListArray[indexPath.row]];
 }
