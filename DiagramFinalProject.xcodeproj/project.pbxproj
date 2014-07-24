@@ -61,6 +61,7 @@
 		1DA0A2C11981135800BB7D5C /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA0A2C01981135800BB7D5C /* Node.m */; };
 		1DA0A2C519811DC200BB7D5C /* CRCustomButtonFlat.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA0A2C419811DC200BB7D5C /* CRCustomButtonFlat.m */; };
 		1DA0A2C8198155CD00BB7D5C /* CRAddNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA0A2C7198155CD00BB7D5C /* CRAddNodeView.m */; };
+		1DA0A2CB1981711600BB7D5C /* CRAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA0A2CA1981711600BB7D5C /* CRAlertView.m */; };
 		1DB16C381980004400858F3F /* CRLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB16C371980004400858F3F /* CRLineView.m */; };
 		1DC113071978444C002F8148 /* CRSquareFigureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC113061978444C002F8148 /* CRSquareFigureView.m */; };
 		1DC1130B197860F3002F8148 /* CRColoursView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC1130A197860F3002F8148 /* CRColoursView.m */; };
@@ -166,6 +167,8 @@
 		1DA0A2C419811DC200BB7D5C /* CRCustomButtonFlat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRCustomButtonFlat.m; sourceTree = "<group>"; };
 		1DA0A2C6198155CD00BB7D5C /* CRAddNodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRAddNodeView.h; sourceTree = "<group>"; };
 		1DA0A2C7198155CD00BB7D5C /* CRAddNodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAddNodeView.m; sourceTree = "<group>"; };
+		1DA0A2C91981711600BB7D5C /* CRAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRAlertView.h; sourceTree = "<group>"; };
+		1DA0A2CA1981711600BB7D5C /* CRAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAlertView.m; sourceTree = "<group>"; };
 		1DB16C361980004400858F3F /* CRLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRLineView.h; sourceTree = "<group>"; };
 		1DB16C371980004400858F3F /* CRLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRLineView.m; sourceTree = "<group>"; };
 		1DC113051978444C002F8148 /* CRSquareFigureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSquareFigureView.h; sourceTree = "<group>"; };
@@ -625,6 +628,8 @@
 				1DC113101978818D002F8148 /* UIFont+Common.m */,
 				1D353747197C65840005747F /* UIColor+Custom.h */,
 				1D353748197C65840005747F /* UIColor+Custom.m */,
+				1DA0A2C91981711600BB7D5C /* CRAlertView.h */,
+				1DA0A2CA1981711600BB7D5C /* CRAlertView.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -867,6 +872,7 @@
 				1D0402EF197C6EFC003932FB /* CRRoundColorView.m in Sources */,
 				1DC113111978818D002F8148 /* UIFont+Common.m in Sources */,
 				1D890A871974143C0038D983 /* CRNodeTableViewCell.m in Sources */,
+				1DA0A2CB1981711600BB7D5C /* CRAlertView.m in Sources */,
 				1D40CD83197D74EF003D6160 /* CRCustomFigureView.m in Sources */,
 				1D8B2D091975D9C900C67FB1 /* CRNodeMap.m in Sources */,
 				1DC1130B197860F3002F8148 /* CRColoursView.m in Sources */,

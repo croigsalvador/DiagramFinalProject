@@ -74,7 +74,7 @@ static CGFloat kMarginTopFigure             = 25.0f;
 
 - (void)setupSquareViewWithFrame:(CGRect)figureFrame shapeType:(NSUInteger)shapeType {
     CRFigureDrawerFactory *squareView = [[CRFigureDrawerFactory alloc] initWithFrame:figureFrame andShapeType:shapeType andNode:nil];
-    squareView.color = [UIColor redColor];
+    squareView.color = [UIColor lightGrayCustomDDD];
     squareView.tag = shapeType;
     [self addTapGestureToView:squareView];
     [self addSubview:squareView];

@@ -21,6 +21,12 @@
 + (UIColor *)lightGrayCustom {
     return UIColorFromRGB(0x999999);
 }
++ (UIColor *)lightGrayCustomAAA {
+    return UIColorFromRGB(0xAAAAAA);
+}
++ (UIColor *)lightGrayCustomDDD {
+    return UIColorFromRGB(0xCCCCCC);
+}
 
 + (UIColor *)grayCustomForGradient1 {
     return UIColorFromRGB(0xEEEEEE);

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CRBaseViewController : UIViewController
-
+- (void)showAlertErrorWithTitle:(NSString *)title message:(NSString *)message andCancelTitle:(NSString *)cancelTitle;
 @end

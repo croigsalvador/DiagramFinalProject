@@ -62,6 +62,7 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
     self.scrollView.zoomScale = minScale * 1.3f;
     
     [self centerScrollViewContents];
+    self.fetchedResultsController.delegate = self;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -115,7 +116,7 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
 }
 
 - (void)setupCurrentMap {
-   NSArray *listOfNodes = [Node fetchAllNodesFromContext:self.managedDocument.managedObjectContext];
+    NSArray *listOfNodes = [Node fetchAllNodesFromContext:self.managedDocument.managedObjectContext];
     for (Node *node in listOfNodes){
         [self createFigure:node];
     }
@@ -175,7 +176,7 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
     return figureView;
 }
 
-#pragma mark - Private Model Methods 
+#pragma mark - Private Model Methods
 - (void)addNewNodeFromList:(Node *)node {
     self.lastNodeInserted = node;
     [self createFigure:node];
@@ -209,15 +210,15 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
 - (void)insertNewNode:(Node *)node {
     if (![node isEqual:self.lastNodeInserted]) {
         self.lastNodeInserted = node;
-    CRMap *map = [[CRMap alloc] initWithManagedObjectContext:node.managedObjectContext];
-    [map calculateNewNodePositionFromParent:node withCompletionBlock:^(CGRect frame) {
-        node.xPosition = @(frame.origin.x) ;
-        node.yPosition = @(frame.origin.y) ;
-    }];
-    NSIndexPath * myIndexPath = [self.nodeMap indexPathNewForNode:node];
-    [self.nodeMap addChild:node atIndex:myIndexPath.row];
-//    self.nodeList = self.nodeMap.mapList;
-    [self addNewNodeFromList:node];
+        CRMap *map = [[CRMap alloc] initWithManagedObjectContext:node.managedObjectContext];
+        [map calculateNewNodePositionFromParent:node withCompletionBlock:^(CGRect frame) {
+            node.xPosition = @(frame.origin.x) ;
+            node.yPosition = @(frame.origin.y) ;
+        }];
+        NSIndexPath * myIndexPath = [self.nodeMap indexPathNewForNode:node];
+        [self.nodeMap addChild:node atIndex:myIndexPath.row];
+        //    self.nodeList = self.nodeMap.mapList;
+        [self addNewNodeFromList:node];
     }
 }
 
@@ -226,7 +227,6 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
     self.deleting = NO;
     self.deleteIndexs = nil;
     self.nodeList = self.nodeMap.mapList;
-    self.deletedNodes = nil;
     [self removeFiguresWithOutNode:self.deletedNodes];
 }
 
@@ -239,6 +239,7 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
             }
         }
     }
+    self.deletedNodes = nil;
 }
 
 #pragma mark - Touch Methods
@@ -261,7 +262,7 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
     CGFloat scale = oldScale - (oldScale - recognizer.scale) + initialDifference;
     self.selectedView.transform = CGAffineTransformScale(self.view.transform, scale, scale);
     [self updateNode:self.selectedView.node frame:self.selectedView.frame];
-
+    
     oldScale = scale;
 }
 
@@ -330,7 +331,12 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
 }
 
 - (void)deleteButtonPressed:(CRFiguresView *)figureDrawer {
-    [self  removeFigure];
+    if (!self.selectedView) {
+        NSString *message = @"No hay ningún elemento seleccionado";
+        [self showAlertErrorWithTitle:@"Error" message:message andCancelTitle:@"Aceptar"];
+    } else {
+        [self  removeFigure];
+    }
 }
 
 - (void)writeButtonPressed:(CRFiguresView *)figureDrawer {

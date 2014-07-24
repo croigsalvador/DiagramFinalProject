@@ -12,6 +12,8 @@
 + (UIColor *)flatBlue;
 + (UIColor *)darkGrayCustom;
 + (UIColor *)lightGrayCustom;
++ (UIColor *)lightGrayCustomAAA;
++ (UIColor *)lightGrayCustomDDD;
 + (UIColor *)grayCustomForGradient1;
 + (UIColor *)grayCustomForGradient2;
 + (UIColor *)colorFromText:(NSString *)colorText;

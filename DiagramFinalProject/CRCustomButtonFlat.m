@@ -54,7 +54,7 @@
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     self.shadow.frame = self.bounds;
-    self.pressedBlock(YES);
+    
 }
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -63,6 +63,7 @@
                                    self.bounds.size.height - shadowHeight,
                                    self.bounds.size.width,
                                    shadowHeight);
+    self.pressedBlock(YES);
 }
 
 

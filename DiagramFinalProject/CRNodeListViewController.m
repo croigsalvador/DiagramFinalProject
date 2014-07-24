@@ -173,8 +173,9 @@ static CGSize  const kDocumentViewSize                   = {600.0f, 230.0f};
     self.deleting = NO;
     self.deleteIndexs = nil;
     self.nodeList = self.nodeMap.mapList;
-    self.deletedNodes = nil;
     self.removeNodeViewBlock(self.deletedNodes);
+    self.deletedNodes = nil;
+
 }
 
 - (NSIndexPath *)indexPathAfterInsertNewNodeWithObject:(id)anObject {

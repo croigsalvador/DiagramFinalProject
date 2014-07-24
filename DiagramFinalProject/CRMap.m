@@ -28,7 +28,7 @@
     if (parentNode.parent) {
         
         CGRect parentFrame = [self frameForNode:parentNode.parent];
-        CGRect newNodeFrame = CGRectMake(parentFrame.origin.x - 300, parentFrame.origin.y + parentFrame.size.height + 150, 150,150);
+        CGRect newNodeFrame = CGRectMake(parentFrame.origin.x - 400, parentFrame.origin.y + parentFrame.size.height + 150, 150,150);
         
         for (Node *node in parentNode.parent.childs) {
             CGRect childFrame = [self frameForNode:node];
