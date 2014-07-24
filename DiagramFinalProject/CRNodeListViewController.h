@@ -19,5 +19,6 @@
 
 // Block from ParentViewController
 @property (copy,nonatomic)AddNewNodeHandlerBlock  addNewNodeHandlerBLock;
+@property (copy,nonatomic)RemoveNodeViewBlock  removeNodeViewBlock;
 
 @end

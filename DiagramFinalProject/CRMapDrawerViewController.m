@@ -19,7 +19,7 @@
 
 static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
 
-@interface CRMapDrawerViewController ()<ColorViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate, CRFigureDrawerDelegate, FigureViewDelegate>
+@interface CRMapDrawerViewController ()<ColorViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate, CRFigureDrawerDelegate, FigureViewDelegate, NSFetchedResultsControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet CRColoursView *colorsView;
 @property (nonatomic, assign) CGPoint currentTouch;
@@ -29,6 +29,11 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
 
 @property (strong,nonatomic) UIView *containerView;
 @property (strong,nonatomic) Node *lastNodeInserted;
+
+@property (strong,nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (copy, nonatomic ) NSMutableArray *deleteIndexs;
+@property (copy, nonatomic ) NSMutableArray *deletedNodes;
+@property (assign,nonatomic, getter = isDeleting) BOOL deleting;
 @end
 
 @implementation CRMapDrawerViewController
@@ -62,11 +67,27 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.scrollView.contentSize = kScrollViewContainerSize;
+    self.fetchedResultsController.delegate = nil;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self setGradient];
+}
+
+#pragma mark - Custom Getters
+
+- (NSMutableArray *)deleteIndexs {
+    if (!_deleteIndexs) {
+        _deleteIndexs = [[NSMutableArray alloc] init];
+    }
+    return _deleteIndexs;
+}
+- (NSMutableArray *)deletedNodes {
+    if (!_deletedNodes) {
+        _deletedNodes = [[NSMutableArray alloc] init];
+    }
+    return _deletedNodes;
 }
 
 #pragma mark - Setting up UIElements
@@ -160,6 +181,12 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
     [self createFigure:node];
 }
 
+- (void)removeFigure {
+    Node *node = self.selectedView.node;
+    [self.managedDocument.managedObjectContext deleteObject:node];
+    [self unLightSelectedView];
+}
+
 - (void)updateNode:(Node *)node frame:(CGRect)nodeFrame {
     node.width =   @(nodeFrame.size.width);
     node.height = @(nodeFrame.size.height);
@@ -191,6 +218,26 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
     [self.nodeMap addChild:node atIndex:myIndexPath.row];
 //    self.nodeList = self.nodeMap.mapList;
     [self addNewNodeFromList:node];
+    }
+}
+
+- (void)removeNodes {
+    [self.nodeMap deleteNodesAtIndex:[self.deleteIndexs copy]];
+    self.deleting = NO;
+    self.deleteIndexs = nil;
+    self.nodeList = self.nodeMap.mapList;
+    self.deletedNodes = nil;
+    [self removeFiguresWithOutNode:self.deletedNodes];
+}
+
+-  (void)removeFiguresWithOutNode:(NSArray *)deletingNodes {
+    NSArray *viewsArray = [self.containerView subviews];
+    for (CRFigureDrawerFactory *view in viewsArray) {
+        for (int i = 0; i < [deletingNodes count]; i++) {
+            if ( [view.node isEqual:deletingNodes[i]]) {
+                [view removeFromSuperview];
+            }
+        }
     }
 }
 
@@ -280,6 +327,55 @@ static CGSize kScrollViewContainerSize                  = {5000.0f, 3333.0f};
 #pragma mark - Figures Delegate
 - (void)sendTappedView:(CRFigureDrawerFactory *)selectedView withTag:(NSUInteger)tag {
     [self createNewNodeForParent:self.selectedView.node andShapeType:tag];
+}
+
+- (void)deleteButtonPressed:(CRFiguresView *)figureDrawer {
+    [self  removeFigure];
+}
+
+- (void)writeButtonPressed:(CRFiguresView *)figureDrawer {
+    NSLog(@"Typing");
+}
+
+#pragma mark - FetchedResultsController Methods
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    if (!_fetchedResultsController) {
+        _fetchedResultsController = [[NSFetchedResultsController  alloc] initWithFetchRequest:[Node fetchAllNodes] managedObjectContext:self.managedDocument.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        _fetchedResultsController.delegate = self;
+        if (![_fetchedResultsController performFetch:nil]){
+        }
+    }
+    return _fetchedResultsController;
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    switch(type) {
+        case NSFetchedResultsChangeInsert:{
+            break;
+        }
+        case NSFetchedResultsChangeDelete:{
+            NSIndexPath *delIndexPath = [self.nodeMap indexPathForCurrentNode:anObject];
+            [self.deletedNodes addObject:anObject];
+            [self.deleteIndexs addObject:@(delIndexPath.row)];
+            self.deleting = YES;
+            break;
+        }
+        case NSFetchedResultsChangeUpdate: {
+            break;
+        }
+        case NSFetchedResultsChangeMove:
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    if (self.isDeleting) {
+        [self removeNodes];
+    }
 }
 
 @end

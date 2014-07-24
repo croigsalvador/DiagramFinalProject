@@ -16,5 +16,6 @@
 //- (instancetype)initWithDocument:(UIManagedDocument *)document andNodeMap:(CRNodeMap *)nodeMap;
 
 - (void)addNewNodeFromList:(Node *)node;
+-  (void)removeFiguresWithOutNode:(NSArray *)deletingNodes;
 
 @end

@@ -33,7 +33,13 @@ static CGFloat const kTabMarginForCell           = 65.0f;
 #pragma mark - Public Methods
 
 - (void)configureCellWithColor:(NSString *)color figure:(NSUInteger)CRNodeType andLevel:(NSInteger)level{
-    UIColor *colorFromText=[UIColor colorFromText:color];
+    UIColor *colorFromText;
+    if (!color) {
+        colorFromText  =[UIColor colorFromText:@"redColor"];
+    }else {
+        colorFromText  =[UIColor colorFromText:color];
+    }
+    
     self.colorView.backgroundColor = colorFromText;
     const CGFloat* colors = CGColorGetComponents(colorFromText.CGColor );
     UIColor *backColor = [UIColor colorWithRed:colors[0] green:colors[1] blue:colors[2] alpha:0.4];

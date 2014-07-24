@@ -15,6 +15,7 @@
 #import "Node+Model.h"
 #import "CRMap.h"
 #import "CRManagedDocument.h"
+#import "CRAddNodeView.h"
 
 static NSString * const NodeCellIdentifier               = @"NodeCellIdentifier";
 static NSString * const AddNodeCellIdentifier            = @"AddNodeCellIdentifier";
@@ -24,7 +25,10 @@ static NSString *const kMainStoryBoardNameID             = @"Main";
 static NSString *const kEditViewControllerID             = @"EditNavViewController";
 static NSString *const kDeletingActionName               = @"DeleteAction";
 
-@interface CRNodeListViewController ()<NSFetchedResultsControllerDelegate, SWTableViewCellDelegate, EditNodeDelegate, AddNodeHeaderDelegate>
+static CGPoint const kDocumentViewPoint                  = {212.0f, 100.0f};
+static CGSize  const kDocumentViewSize                   = {600.0f, 230.0f};
+
+@interface CRNodeListViewController ()<NSFetchedResultsControllerDelegate, SWTableViewCellDelegate, AddNodeHeaderDelegate, AddNodeDelegate>
 
 @property (strong,nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (copy,nonatomic) NSArray * nodeList;
@@ -33,7 +37,11 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
 @property (assign,nonatomic, getter = isAlreadyNotificated) BOOL alreadyNotificated;
 @property (strong,nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (copy, nonatomic ) NSMutableArray *deleteIndexs;
+@property (copy, nonatomic ) NSMutableArray *deletedNodes;
+@property (strong,nonatomic) CRAddNodeView *addNodeView;
+@property (strong,nonatomic) NSIndexPath *parentIndexPath;
 @property (assign,nonatomic, getter = isDeleting) BOOL deleting;
+
 @end
 
 @implementation CRNodeListViewController
@@ -54,6 +62,7 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(populateNodeList:) name:UIDocumentStateChangedNotification object:self.managedDocument];
     self.tableView.backgroundColor = [UIColor lightGrayCustom];
+    [self.view addSubview:self.addNodeView];
 }
 
 /**
@@ -97,6 +106,21 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
     }
     return _deleteIndexs;
 }
+- (NSMutableArray *)deletedNodes {
+    if (!_deletedNodes) {
+        _deletedNodes = [[NSMutableArray alloc] init];
+    }
+    return _deletedNodes;
+}
+
+- (CRAddNodeView *)addNodeView{
+    if (!_addNodeView) {
+        _addNodeView = [[CRAddNodeView alloc] initWithFrame:CGRectMake(kDocumentViewPoint.x, -kDocumentViewPoint.y , kDocumentViewSize.width, kDocumentViewSize.height)];
+        _addNodeView.delegate = self;
+        _addNodeView.hidden = YES;
+    }
+    return _addNodeView;
+}
 
 #pragma mark - Private Methods
 
@@ -114,22 +138,16 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
     }
 }
 
-- (void)prepareViewControllerFromStoryBoardWithNewNode:(Node *)node {
-    UIStoryboard *mapStoryboard = [UIStoryboard storyboardWithName:kMainStoryBoardNameID bundle:[NSBundle mainBundle]];
-    
-    UINavigationController *nextVC = [mapStoryboard instantiateViewControllerWithIdentifier:kEditViewControllerID];
-    CREditNodeViewController *editViewController =(CREditNodeViewController *) [nextVC topViewController];
-    editViewController.delegate = self;
-    editViewController.node = node;
-    
-    [self presentViewController:nextVC animated:YES completion:nil];
-}
-
-- (void)addChildNodeToParentAtIndexPath:(NSIndexPath *)indexPath {
+- (void)addChildNodeToParentAtIndexPath:(NSIndexPath *)indexPath andName:(NSString *)title {
     [self.managedObjectContext.undoManager beginUndoGrouping];
-    Node *parentNode = [self nodeFromFetchedResultsControllerAtIndexPath:indexPath];
+    Node *parentNode  = nil;
+    if (self.parentIndexPath) {
+        parentNode = [self nodeFromFetchedResultsControllerAtIndexPath:indexPath];
+    }
     self.insertedNode = [Node createNodeInManagedObjectContext:self.managedObjectContext withParent:parentNode];
-    [self prepareViewControllerFromStoryBoardWithNewNode:self.insertedNode];
+    self.insertedNode.title = title;
+    self.parentIndexPath = nil;
+    [self.managedObjectContext.undoManager endUndoGrouping];
 }
 
 - (void)deleteItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -155,6 +173,8 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
     self.deleting = NO;
     self.deleteIndexs = nil;
     self.nodeList = self.nodeMap.mapList;
+    self.deletedNodes = nil;
+    self.removeNodeViewBlock(self.deletedNodes);
 }
 
 - (NSIndexPath *)indexPathAfterInsertNewNodeWithObject:(id)anObject {
@@ -179,40 +199,12 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
     return myIndexPath;
 }
 
-#pragma mark - Navigation Methods
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:kSegueAddNode]) {
-        CREditNodeViewController *nodeEditViewController = (CREditNodeViewController *)[segue.destinationViewController topViewController];
-        [self prepareEditNodeViewController:nodeEditViewController withNode:nil];
-    } else if ([[segue identifier] isEqualToString:kSegueEditNode]) {
-        UINavigationController *navViewController = [segue destinationViewController];
-        CREditNodeViewController *nodeEditViewControlle=  [navViewController.viewControllers lastObject];
-        NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
-        Node *node = [self nodeFromFetchedResultsControllerAtIndexPath:selectedIndexPath];
-        [self prepareEditNodeViewController:nodeEditViewControlle withNode:node];
-    }
-}
-
-- (void)prepareEditNodeViewController:(CREditNodeViewController *)editNodetViewController withNode:(Node *)node {
-    [self.managedObjectContext.undoManager beginUndoGrouping];
-    if (!node) {
-        Node *newNode = [Node createNodeInManagedObjectContext:self.managedObjectContext withParent:nil];
-        self.insertedNode = newNode;
-        editNodetViewController.node = newNode;
-    } else {
-        editNodetViewController.node = node;
-    }
-    editNodetViewController.delegate = self;
-}
 
 #pragma mark - TableView Delegate Methods
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        [self performSegueWithIdentifier:kSegueEditNode sender:nil];
-    }
+    // Edit node
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -265,21 +257,9 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
 #pragma mark - HeaderSection Delegate
 
 - (void)addNodeButtonPressed:(CRAddNodeHeaderSection *)headerSection {
-    [self performSegueWithIdentifier:kSegueAddNode sender:nil];
+    [self addNodeAction];
 }
 
-#pragma mark - EditNode Delegate Methods
-
-- (void)dismissEditNodeViewController:(CREditNodeViewController *)editNodeViewController modifiedData:(BOOL)modifiedData {
-    [self.managedObjectContext.undoManager setActionName:@"Bad Action"];
-    [self.managedObjectContext.undoManager endUndoGrouping];
-    if (!modifiedData) {
-        [self.managedObjectContext.undoManager undo];
-    } else {
-        // TODO SAVE DATA
-    }
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 #pragma mark - SWTableView Delegate Methods
 
@@ -287,7 +267,8 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
     NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
     switch (index) {
         case 0:
-            [self addChildNodeToParentAtIndexPath:cellIndexPath];
+            [self addNodeAction];
+            self.parentIndexPath = cellIndexPath;
             [cell hideUtilityButtonsAnimated:YES];
             break;
         case 1:{
@@ -337,6 +318,7 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
         }
         case NSFetchedResultsChangeDelete:{
             NSIndexPath *delIndexPath = [self.nodeMap indexPathForCurrentNode:anObject];
+            [self.deletedNodes addObject:anObject];
             [self.deleteIndexs addObject:@(delIndexPath.row)];
             self.deleting = YES;
             break;
@@ -354,6 +336,41 @@ static NSString *const kDeletingActionName               = @"DeleteAction";
         [self removeNodes];
     }
     [self.tableView reloadData];
+}
+
+#pragma mark - PopApp Add Node Methods
+
+- (void)addNodeAction {
+        if (self.addNodeView.hidden) {
+            self.addNodeView.hidden = NO;
+            [self animatePopUpDisplay];
+        }
+}
+
+- (void)animatePopUpDisplay {
+    
+    [UIView animateWithDuration:.4 animations:^{
+        CGRect popFrmae = CGRectMake(kDocumentViewPoint.x, kDocumentViewPoint.y, kDocumentViewSize.width, kDocumentViewSize.height);
+        self.addNodeView.frame = popFrmae;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+#pragma mark - AddNode Delegate Methods
+
+- (void)buttonPressedInView:(CRAddNodeView *)addNodeView withTag:(NSUInteger)tag andText:(NSString *)name{
+    CGRect frame = CGRectMake(kDocumentViewPoint.x, -kDocumentViewSize.height, kDocumentViewSize.width, kDocumentViewSize.height);
+    self.addNodeView.frame = frame;
+    self.addNodeView.hidden = YES;
+    switch (tag) {
+        case 1:
+            
+            break;
+        case 2:
+            [self addChildNodeToParentAtIndexPath:self.parentIndexPath andName:name];
+         break;
+    }
 }
 
 

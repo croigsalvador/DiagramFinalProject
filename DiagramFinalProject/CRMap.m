@@ -23,11 +23,6 @@
     return self;
 }
 
-
-#pragma mark - Custom Getter
-
-
-
 #pragma mark - Public Methods
 - (void)calculateNewNodePositionFromParent:(Node *)parentNode withCompletionBlock:(void(^)(CGRect))completionBlock {
     if (parentNode.parent) {

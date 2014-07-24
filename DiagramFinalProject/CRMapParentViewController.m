@@ -13,14 +13,10 @@
 #import "CRNodeMap.h"
 
 
-
-
-
 static UIEdgeInsets kViewControllerInsets                  = {64.0f, 0.0f, 0.0f , 0.0f};
 static NSString * const kMainStoryBoardNameID              = @"Main";
 static NSString * const kMapDrawerViewControllerID         = @"MapDrawerViewController";
 static NSString * const kNodeListViewControllerID          = @"NodeListViewController";
-
 
 
 @interface CRMapParentViewController ()
@@ -29,6 +25,7 @@ static NSString * const kNodeListViewControllerID          = @"NodeListViewContr
 @property (strong,nonatomic) CRMapDrawerViewController *mapDrawerViewController;
 
 @property (copy,nonatomic) AddNewNodeHandlerBlock addNewNodeHandlerBlock;
+@property (copy,nonatomic) RemoveNodeViewBlock removeNodeViewBlock;
 
 @end
 
@@ -64,6 +61,7 @@ static NSString * const kNodeListViewControllerID          = @"NodeListViewContr
         _nodeListViewController.nodeMap = self.nodeMap;
         _nodeListViewController.managedDocument = self.managedDocument;
         _nodeListViewController.addNewNodeHandlerBLock = self.addNewNodeHandlerBlock;
+        _nodeListViewController.removeNodeViewBlock = self.removeNodeViewBlock;
     }
     return _nodeListViewController;
 }
@@ -82,11 +80,19 @@ static NSString * const kNodeListViewControllerID          = @"NodeListViewContr
     if (!_addNewNodeHandlerBlock) {
         __weak typeof(self) weakSelf = self;
         _addNewNodeHandlerBlock = ^(Node *node){
-            NSLog(@"Añadiendo Nodo");
             [weakSelf.mapDrawerViewController addNewNodeFromList:node];
         };
     }
     return _addNewNodeHandlerBlock;
+}
+- (RemoveNodeViewBlock)removeNodeViewBlock {
+    if (!_removeNodeViewBlock) {
+        __weak typeof(self) weakSelf = self;
+        _removeNodeViewBlock = ^(NSArray *deletingNodes){
+            [weakSelf.mapDrawerViewController removeFiguresWithOutNode:deletingNodes];
+        };
+    }
+    return _removeNodeViewBlock;
 }
 
 #pragma mark - Action Methods

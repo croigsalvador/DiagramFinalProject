@@ -59,6 +59,8 @@
 		1D9BCAAA19801B21007EE965 /* AmaticSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1DC1131519788212002F8148 /* AmaticSC-Regular.ttf */; };
 		1D9BCAAB19801B24007EE965 /* Amatic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1DC1131419788212002F8148 /* Amatic-Bold.ttf */; };
 		1DA0A2C11981135800BB7D5C /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA0A2C01981135800BB7D5C /* Node.m */; };
+		1DA0A2C519811DC200BB7D5C /* CRCustomButtonFlat.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA0A2C419811DC200BB7D5C /* CRCustomButtonFlat.m */; };
+		1DA0A2C8198155CD00BB7D5C /* CRAddNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA0A2C7198155CD00BB7D5C /* CRAddNodeView.m */; };
 		1DB16C381980004400858F3F /* CRLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB16C371980004400858F3F /* CRLineView.m */; };
 		1DC113071978444C002F8148 /* CRSquareFigureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC113061978444C002F8148 /* CRSquareFigureView.m */; };
 		1DC1130B197860F3002F8148 /* CRColoursView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC1130A197860F3002F8148 /* CRColoursView.m */; };
@@ -160,6 +162,10 @@
 		1D9BCAA7198014A6007EE965 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		1DA0A2BF1981135800BB7D5C /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		1DA0A2C01981135800BB7D5C /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
+		1DA0A2C319811DC200BB7D5C /* CRCustomButtonFlat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRCustomButtonFlat.h; sourceTree = "<group>"; };
+		1DA0A2C419811DC200BB7D5C /* CRCustomButtonFlat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRCustomButtonFlat.m; sourceTree = "<group>"; };
+		1DA0A2C6198155CD00BB7D5C /* CRAddNodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRAddNodeView.h; sourceTree = "<group>"; };
+		1DA0A2C7198155CD00BB7D5C /* CRAddNodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAddNodeView.m; sourceTree = "<group>"; };
 		1DB16C361980004400858F3F /* CRLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRLineView.h; sourceTree = "<group>"; };
 		1DB16C371980004400858F3F /* CRLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRLineView.m; sourceTree = "<group>"; };
 		1DC113051978444C002F8148 /* CRSquareFigureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSquareFigureView.h; sourceTree = "<group>"; };
@@ -334,13 +340,15 @@
 			name = MapParent;
 			sourceTree = "<group>";
 		};
-		1D40CD7A197D29DD003D6160 /* AddNodeHeader */ = {
+		1D40CD7A197D29DD003D6160 /* AddNode */ = {
 			isa = PBXGroup;
 			children = (
 				1D40CD84197DC774003D6160 /* CRAddNodeHeaderSection.h */,
 				1D40CD85197DC774003D6160 /* CRAddNodeHeaderSection.m */,
+				1DA0A2C6198155CD00BB7D5C /* CRAddNodeView.h */,
+				1DA0A2C7198155CD00BB7D5C /* CRAddNodeView.m */,
 			);
-			name = AddNodeHeader;
+			name = AddNode;
 			sourceTree = "<group>";
 		};
 		1D40CD87197E52BF003D6160 /* FiguresView */ = {
@@ -491,9 +499,10 @@
 		1D890A7E1973E5010038D983 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1DA0A2C219811D8700BB7D5C /* CustomDelete */,
 				1D9BCAA219800FC6007EE965 /* FigureDrawer */,
 				1DB16C351980000D00858F3F /* Line */,
-				1D40CD7A197D29DD003D6160 /* AddNodeHeader */,
+				1D40CD7A197D29DD003D6160 /* AddNode */,
 				1D353736197C1C160005747F /* MapCell */,
 				1DC11308197860D3002F8148 /* Colors */,
 				1D40CD87197E52BF003D6160 /* FiguresView */,
@@ -589,6 +598,15 @@
 				1D1635F219806B4B00A61899 /* Square */,
 			);
 			name = FigureDrawer;
+			sourceTree = "<group>";
+		};
+		1DA0A2C219811D8700BB7D5C /* CustomDelete */ = {
+			isa = PBXGroup;
+			children = (
+				1DA0A2C319811DC200BB7D5C /* CRCustomButtonFlat.h */,
+				1DA0A2C419811DC200BB7D5C /* CRCustomButtonFlat.m */,
+			);
+			name = CustomDelete;
 			sourceTree = "<group>";
 		};
 		1DB16C351980000D00858F3F /* Line */ = {
@@ -842,6 +860,7 @@
 				1D353731197C199D0005747F /* CRMapListViewController.m in Sources */,
 				1D40CD79197D1415003D6160 /* CRMapParentViewController.m in Sources */,
 				1D890A541973DB320038D983 /* CRNodeListViewController.m in Sources */,
+				1DA0A2C8198155CD00BB7D5C /* CRAddNodeView.m in Sources */,
 				1D353734197C1A8E0005747F /* CRMapList.m in Sources */,
 				1D353739197C1C6E0005747F /* CRMapCollectionViewCell.m in Sources */,
 				1D1635F01980691A00A61899 /* CRSquareMapView.m in Sources */,
@@ -866,6 +885,7 @@
 				1D35373F197C1F980005747F /* CRMapCollectionFlowLayout.m in Sources */,
 				1DB16C381980004400858F3F /* CRLineView.m in Sources */,
 				1D0402F9197C8EB1003932FB /* CRPushAnimationController.m in Sources */,
+				1DA0A2C519811DC200BB7D5C /* CRCustomButtonFlat.m in Sources */,
 				1D40CD9B197F2DA7003D6160 /* CRManagedDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

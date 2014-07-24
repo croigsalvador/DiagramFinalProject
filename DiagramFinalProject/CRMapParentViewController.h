@@ -10,6 +10,7 @@
 #import "Node.h"
 
 typedef void(^AddNewNodeHandlerBlock)(Node *node);
+typedef void(^RemoveNodeViewBlock)(NSArray *nodes);
 
 @class CRNodeMap, CRManagedDocument;
 

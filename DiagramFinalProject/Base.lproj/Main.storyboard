@@ -252,7 +252,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w7m-qt-K33" customClass="CRFiguresView">
-                                <rect key="frame" x="915" y="0.0" width="120" height="625"/>
+                                <rect key="frame" x="904" y="0.0" width="120" height="625"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.5999525785446167" green="0.60002672672271729" blue="0.59992736577987671" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -260,14 +260,14 @@
                                 </connections>
                             </view>
                             <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZiG-mV-hbw">
-                                <rect key="frame" x="0.0" y="0.0" width="914" height="605"/>
+                                <rect key="frame" x="0.0" y="0.0" width="906" height="605"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="LHn-kj-Yhn" id="acy-pF-UXI"/>
                                 </connections>
                             </scrollView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3RJ-xv-dAj" customClass="CRColoursView">
-                                <rect key="frame" x="0.0" y="602" width="1024" height="120"/>
+                                <rect key="frame" x="0.0" y="590" width="1024" height="120"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.19998148083686829" green="0.20001035928726196" blue="0.19997167587280273" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>

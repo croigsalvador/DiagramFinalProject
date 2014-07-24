@@ -14,11 +14,12 @@
 
 @interface CRFiguresView : UIView
 @property (weak,nonatomic)IBOutlet id<FigureViewDelegate> delegate;
-
 @end
 
 @protocol FigureViewDelegate <NSObject>
 
 - (void)sendTappedView:(CRFigureDrawerFactory *)selectedView withTag:(NSUInteger)tag;
+- (void)deleteButtonPressed:(CRFiguresView *)figureDrawer;
+- (void)writeButtonPressed:(CRFiguresView *)figureDrawer;
 
 @end

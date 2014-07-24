@@ -1,12 +1,12 @@
 //
-//  CRDocumentNameView.m
+//  CRAddNodeView.m
 //  DiagramFinalProject
 //
-//  Created by Carlos Roig Salvador on 20/07/14.
+//  Created by Carlos Roig Salvador on 24/07/14.
 //  Copyright (c) 2014 CRoigSalvador. All rights reserved.
 //
 
-#import "CRDocumentNameView.h"
+#import "CRAddNodeView.h"
 #import "UIFont+Common.h"
 
 static CGFloat const kMarginLeft                            = 30.0f;
@@ -15,13 +15,14 @@ static CGSize  const kButtonSize                            = { 100.0f, 40.0f };
 
 static NSString * const kNameString                         = @"Nombre:";
 static NSString * const kCancelButtonName                   = @"Cancelar";
-static NSString * const kAcceptButtonName                   = @"Aceptar";
+static NSString * const kAcceptButtonName                   = @"Añadir";
 
-@interface CRDocumentNameView ()
+@interface CRAddNodeView ()
 @property (strong,nonatomic) UITextField *nameTextField;
+@property (strong,nonatomic) UITextField *subTitleTextField;
 @end
 
-@implementation CRDocumentNameView
+@implementation CRAddNodeView
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -50,14 +51,29 @@ static NSString * const kAcceptButtonName                   = @"Aceptar";
     
     self.nameTextField = [[UITextField alloc] initWithFrame:textFieldFrame];
     self.nameTextField.backgroundColor = [UIColor whiteColor];
-    
     [self addSubview:self.nameTextField];
+    
+    labelFrame.origin.y = CGRectGetMaxY(labelFrame) + 20;
+    UILabel *subTitleLbl = [[UILabel alloc] initWithFrame:labelFrame];
+    subTitleLbl.textColor = [UIColor darkGrayCustom];
+    subTitleLbl.font =  [UIFont montSerratBoldForCollectionCell];
+    subTitleLbl.backgroundColor = [UIColor clearColor];
+    subTitleLbl.text = kNameString;
+    [self addSubview:subTitleLbl];
+    
+    textFieldFrame.origin.y = CGRectGetMaxY(textFieldFrame) + 20;
+    textFieldFrame.size.width = self.frame.size.width - (2 * kMarginLeft) - CGRectGetMaxX(labelFrame);
+    textFieldFrame.size.height = kTextFieldHeight;
+    
+    self.subTitleTextField = [[UITextField alloc] initWithFrame:textFieldFrame];
+    self.subTitleTextField.backgroundColor = [UIColor whiteColor];
+    [self addSubview:self.subTitleTextField];
 }
 
 - (void)setupButtons {
     CGRect buttonFrame =  {
         .origin.x = self.frame.size.width/1.8,
-        .origin.y = CGRectGetMaxY(self.nameTextField.frame) + 80,
+        .origin.y = CGRectGetMaxY(self.nameTextField.frame) + 100,
         .size.width = kButtonSize.width ,
         .size.height = kButtonSize.height
     };
@@ -81,9 +97,10 @@ static NSString * const kAcceptButtonName                   = @"Aceptar";
 
 - (void)pressedButton:(UIButton *)sender {
     [self.nameTextField resignFirstResponder];
+    [self.subTitleTextField resignFirstResponder];
     
-    if ([self.delegate respondsToSelector:@selector(buttonPressedInDocument:withTag:andText:)]) {
-        [self.delegate buttonPressedInDocument:self withTag:sender.tag andText:self.nameTextField.text];
+    if ([self.delegate respondsToSelector:@selector(buttonPressedInView:withTag:andText:)]) {
+        [self.delegate buttonPressedInView:self withTag:sender.tag andText:self.nameTextField.text];
     }
     self.nameTextField.text = @"";
 }
