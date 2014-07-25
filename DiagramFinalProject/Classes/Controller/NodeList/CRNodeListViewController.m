@@ -7,7 +7,6 @@
 //
 
 #import "CRNodeListViewController.h"
-#import "CREditNodeViewController.h"
 #import "CRNodeTableViewCell.h"
 #import "CRAddNodeHeaderSection.h"
 #import "SWTableViewCell.h"

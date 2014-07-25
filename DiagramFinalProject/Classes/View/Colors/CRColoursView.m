@@ -50,7 +50,7 @@ static CGFloat const kOffsetMargin                = 16.0f;
 
 - (void)setupRowColorWithXPosition:(CGFloat)xPos yPosition:(CGFloat)yPos anIndex:(NSUInteger)index colorIndex:(NSUInteger)colorIndex{
     CGFloat xOffsetFirstRow = xPos;
-    int colorCount = colorIndex;
+    NSUInteger colorCount = colorIndex;
     for (int i = 0; i < index; i++) {
         CGRect colorFrame = CGRectMake(xOffsetFirstRow, yPos, kCircleHeight, kCircleHeight);
         [self createViewWithFrame:colorFrame colorIndex:colorCount];

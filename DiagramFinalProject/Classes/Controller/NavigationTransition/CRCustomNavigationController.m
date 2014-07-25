@@ -8,7 +8,6 @@
 
 #import "CRCustomNavigationController.h"
 #import "CRNodeListViewController.h"
-#import "CREditNodeViewController.h"
 
 @interface CRCustomNavigationController ()<UINavigationControllerDelegate>
 
@@ -24,11 +23,7 @@
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
     
     
-    if ([fromVC isKindOfClass:[CRNodeListViewController class]]) {
  
-    } else if([fromVC isKindOfClass:[CREditNodeViewController class]]) {
- 
-    }
     return nil;
 }
 

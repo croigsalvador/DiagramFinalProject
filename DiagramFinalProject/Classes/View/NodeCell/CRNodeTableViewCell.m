@@ -10,7 +10,6 @@
 
 #import "CRNodeTableViewCell.h"
 #import "Node+Model.h"
-#import "CRSquareFigureView.h"
 
 static CGFloat const kTabMarginForCell           = 65.0f;
 
